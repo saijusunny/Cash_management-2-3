@@ -92,7 +92,7 @@ stn_img=ImageTk.PhotoImage(stn)
 
 
 cash_fl =PIL.Image.open("images/bank-building-on-the-background-of-the-city-white-car-near-the-bank-free-vector.jpg")
-resized_flow= cash_fl.resize((620,680))
+resized_flow= cash_fl.resize((620,400))
 cash_flow=ImageTk.PhotoImage(resized_flow)
 
 logo =PIL.Image.open("images\logo-icon.png")
@@ -2475,7 +2475,7 @@ def main_sign_in():
                         x1 = dwidth/63
                         x2 = dwidth/1.021
                         y1 = dheight/1.68
-                        y2 = dheight/.10
+                        y2 = dheight/.42
 
 
                         dcanvas.coords("bg_polygen_anal3",x1 + r1,y1,
@@ -2565,7 +2565,7 @@ def main_sign_in():
                     fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11))
                     fgth.configure("Treeview.Heading",background="#1b3857",activeforeground="black",foreground="white",font=(None,11))  
 
-                    pro_tree = ttk.Treeview(frm_analiz, columns = (1,2,3,4,5,6,7,8),show = "headings")
+                    pro_tree = ttk.Treeview(frm_analiz, columns = (1,2,3,4,5,6,7,8),show = "headings", heigh=25)
                     # pro_tree.pack(side = 'top')
                     pro_tree.heading(1)
                     pro_tree.heading(2, text="[Month]")
@@ -2584,13 +2584,20 @@ def main_sign_in():
                     pro_tree.column(6, width = 125)
                     pro_tree.column(7, width = 125)
                     pro_tree.column(8, width = 200)
+                    
+                    # pro_tree.insert('', 'end', text="1", values=('1',))
+                    # pro_tree.insert('', 'end', text="1", values=('','jk'))
+                    # pro_tree.insert('', 'end', text="2", values=('2', 'Hyundai'))
+                    # pro_tree.insert('', 'end', text="3", values=('3', 'Tesla'))
+                    # pro_tree.insert('', 'end', text="4", values=('4', 'Wolkswagon'))
+                    # pro_tree.insert('', 'end', text="5", values=('5', 'Tata Motors'))
+                    # pro_tree.insert('', 'end', text="6", values=('6', 'Renault'))
                     window_label_4 = frm_analiz.create_window(0, 0, anchor="nw", window=pro_tree,tags=('ptree1'))
 
 
                     #******************************************************************Check Cash flow
                     tab10_3.grid_columnconfigure(0,weight=1)
                     tab10_3.grid_rowconfigure(0,weight=1)
-
 
                     fin_cash_flow=Frame(tab10_3,bg="#2f516f",)
                     fin_cash_flow.grid(row=0,column=0,sticky='nsew')
@@ -2637,7 +2644,7 @@ def main_sign_in():
                         x1 = dwidth/63
                         x2 = dwidth/1.021
                         y1 = dheight/3.5
-                        y2 = dheight/.55
+                        y2 = dheight/.42
 
                         dcanvas.coords("bg_polygen_flow2",x1 + r1,y1,
                         x1 + r1,y1,
@@ -2682,13 +2689,15 @@ def main_sign_in():
                         
                         dcanvas.coords("nm_nm241",dwidth/1.2 ,dheight/1.25)
                         dcanvas.coords("lb_nm241",dwidth/1.15 ,dheight/1.3)
-                
+                        dcanvas.coords("cash_hd",dwidth/2 ,dheight/.85)
+                        dcanvas.coords("tree_flow",dwidth/33 ,dheight/.80)
+                        dcanvas.coords("btn_flow",dwidth/1.45 ,dheight/1)
                         
 
                     fin_cash_flow.grid_rowconfigure(0,weight=1)
                     fin_cash_flow.grid_columnconfigure(0,weight=1)
 
-                    frm_flow = Canvas(fin_cash_flow,height=700,bg='#2f516f',scrollregion=(0,0,700,1200))
+                    frm_flow = Canvas(fin_cash_flow,height=700,bg='#2f516f',scrollregion=(0,0,700,1500))
                     flow_scrl = Scrollbar(fin_cash_flow,orient=VERTICAL)
                     flow_scrl.grid(row=0,column=1,sticky='ns')
                     flow_scrl.config(command=frm_flow.yview)
@@ -2749,6 +2758,34 @@ def main_sign_in():
                     nm_nm241 = Entry(frm_flow,width=15 , font=('Calibri 16'),borderwidth=2)
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=nm_nm241, tag=("nm_nm241"))
 
+
+                    but_gl = customtkinter.CTkButton(master=frm_flow,command=main_sign_in,text="Run",bg="#213b52")
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=but_gl, tag=("btn_flow"))
+
+
+                    lv_name=Label(frm_flow, text="Cash Flow Details",bg="#213b52", fg="White", anchor="center",font=('Calibri 24 bold'))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("cash_hd"))
+                    #table
+
+                    fgth = ttk.Style()
+                    fgth.theme_use("default")
+                    fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11))
+                    fgth.configure("Treeview.Heading",background="#1b3857",activeforeground="black",foreground="white",font=(None,11))  
+
+                    flow_tree = ttk.Treeview(frm_flow, columns = (1,2,3,4),show = "headings", heigh=25)
+                    # flow_tree.pack(side = 'top')
+                    flow_tree.heading(1, text="NAME")
+                    flow_tree.heading(2, text="TYPE")
+                    flow_tree.heading(3, text="DETAIL TYPE")
+                    flow_tree.heading(4, text="FINSYS BALANCE")
+                    
+                    
+                    flow_tree.column(1, width = 312)
+                    flow_tree.column(2, width = 312)
+                    flow_tree.column(3, width = 312)
+                    flow_tree.column(4, width = 312)
+                    
+                    window_label_4 = frm_flow.create_window(0, 0, anchor="nw", window=flow_tree,tags=('tree_flow'))
 
                     
                     #3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
