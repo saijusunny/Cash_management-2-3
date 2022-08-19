@@ -2515,11 +2515,231 @@ def main_sign_in():
                         
                         dcanvas.coords("button25",dwidth/1.25,dheight/2.2)
                         
-     
+                        #table section
+                        dcanvas.coords("r1x1",dwidth/6.8,dheight/1.50)
+                        dcanvas.coords("r1c2",dwidth/3.1,dheight/1.50)
+                        dcanvas.coords("r1c3",dwidth/2.4,dheight/1.50)
+                        dcanvas.coords("r1c4",dwidth/1.955,dheight/1.50)
+                        dcanvas.coords("r1c5",dwidth/1.65,dheight/1.50)
+                        dcanvas.coords("r1c6",dwidth/1.425,dheight/1.50)
+                        dcanvas.coords("r1c7",dwidth/1.255,dheight/1.50)
+                        dcanvas.coords("r1c8",dwidth/1.1,dheight/1.50)
+
+                        #---------------------------------second row
+
+                        dcanvas.coords("r2c1",dwidth/6.8,dheight/1.38)
+                        dcanvas.coords("r2c2",dwidth/3.6,dheight/1.42)
+                        dcanvas.coords("r2c3",dwidth/2.688,dheight/1.42)
+                        dcanvas.coords("r2c4",dwidth/2.15,dheight/1.42)
+                        dcanvas.coords("r2c5",dwidth/1.785,dheight/1.42)
+                        dcanvas.coords("r2c6",dwidth/1.18,dheight/1.42)
+                        dcanvas.coords("r2c7",dwidth/1.525,dheight/1.42)
+                        dcanvas.coords("r2c8",dwidth/1.329,dheight/1.42)
+
+                        
+                        #---------------------------------3rd row
+                        dcanvas.coords("r3c1",dwidth/6.8,dheight/1.28)
+
+                        dcanvas.coords("r3c2",dwidth/3.6,dheight/1.313)
+                        dcanvas.coords("r3c3",dwidth/2.688,dheight/1.313)
+                        dcanvas.coords("r3c4",dwidth/2.15,dheight/1.313)
+                        dcanvas.coords("r3c5",dwidth/1.785,dheight/1.313)
+                        dcanvas.coords("r3c6",dwidth/1.525,dheight/1.313)
+                        dcanvas.coords("r3c7",dwidth/1.329,dheight/1.313)
+                        dcanvas.coords("r3c8",dwidth/1.18,dheight/1.313)
+
+                        #---------------------------------4th row
+                        dcanvas.coords("r4c1",dwidth/6.8,dheight/1.2)
+
+                        dcanvas.coords("r4c2",dwidth/3.6,dheight/1.227)
+                        dcanvas.coords("r4c3",dwidth/2.688,dheight/1.227)
+                        dcanvas.coords("r4c4",dwidth/2.15,dheight/1.227)
+                        dcanvas.coords("r4c5",dwidth/1.785,dheight/1.227)
+                        dcanvas.coords("r4c6",dwidth/1.525,dheight/1.227)
+                        dcanvas.coords("r4c7",dwidth/1.329,dheight/1.227)
+                        dcanvas.coords("r4c8",dwidth/1.18,dheight/1.227)
+
+                        #---------------------------------5th row
+                        dcanvas.coords("r5c1",dwidth/6.8,dheight/1.126)
+
+                        dcanvas.coords("r5c2",dwidth/3.6,dheight/1.153)
+                        dcanvas.coords("r5c3",dwidth/2.688,dheight/1.153)
+                        dcanvas.coords("r5c4",dwidth/2.15,dheight/1.153)
+                        dcanvas.coords("r5c5",dwidth/1.785,dheight/1.153)
+                        dcanvas.coords("r5c6",dwidth/1.525,dheight/1.153)
+                        dcanvas.coords("r5c7",dwidth/1.329,dheight/1.153)
+                        dcanvas.coords("r5c8",dwidth/1.18,dheight/1.153)
+
+                        #---------------------------------6th row
+                        dcanvas.coords("r6c1",dwidth/6.8,dheight/1.06)
+
+                        dcanvas.coords("r6c2",dwidth/3.6,dheight/1.083)
+                        dcanvas.coords("r6c3",dwidth/2.688,dheight/1.083)
+                        dcanvas.coords("r6c4",dwidth/2.15,dheight/1.083)
+                        dcanvas.coords("r6c5",dwidth/1.785,dheight/1.083)
+                        dcanvas.coords("r6c6",dwidth/1.525,dheight/1.083)
+                        dcanvas.coords("r6c7",dwidth/1.329,dheight/1.083)
+                        dcanvas.coords("r6c8",dwidth/1.18,dheight/1.083)
+
+                        #---------------------------------7th row
+                        dcanvas.coords("r7c1",dwidth/6.8,dheight/1.005)
+
+                        dcanvas.coords("r7c2",dwidth/3.6,dheight/1.025)
+                        dcanvas.coords("r7c3",dwidth/2.688,dheight/1.025)
+                        dcanvas.coords("r7c4",dwidth/2.15,dheight/1.025)
+                        dcanvas.coords("r7c5",dwidth/1.785,dheight/1.025)
+                        dcanvas.coords("r7c6",dwidth/1.525,dheight/1.025)
+                        dcanvas.coords("r7c7",dwidth/1.329,dheight/1.025)
+                        dcanvas.coords("r7c8",dwidth/1.18,dheight/1.025)
+
+                        #---------------------------------8th row
+                        dcanvas.coords("r8c1",dwidth/6.8,dheight/.955)
+
+                        dcanvas.coords("r8c2",dwidth/3.6,dheight/.973)
+                        dcanvas.coords("r8c3",dwidth/2.688,dheight/.973)
+                        dcanvas.coords("r8c4",dwidth/2.15,dheight/.973)
+                        dcanvas.coords("r8c5",dwidth/1.785,dheight/.973)
+                        dcanvas.coords("r8c6",dwidth/1.525,dheight/.973)
+                        dcanvas.coords("r8c7",dwidth/1.329,dheight/.973)
+                        dcanvas.coords("r8c8",dwidth/1.18,dheight/.973)
+
+                        #---------------------------------9th row
+                        dcanvas.coords("r9c1",dwidth/6.8,dheight/.909)
+
+                        dcanvas.coords("r9c2",dwidth/3.6,dheight/.925)
+                        dcanvas.coords("r9c3",dwidth/2.688,dheight/.925)
+                        dcanvas.coords("r9c4",dwidth/2.15,dheight/.925)
+                        dcanvas.coords("r9c5",dwidth/1.785,dheight/.925)
+                        dcanvas.coords("r9c6",dwidth/1.525,dheight/.925)
+                        dcanvas.coords("r9c7",dwidth/1.329,dheight/.925)
+                        dcanvas.coords("r9c8",dwidth/1.18,dheight/.925)
+
+                        #---------------------------------10th row
+                        dcanvas.coords("r10c1",dwidth/6.8,dheight/.866)
+
+                        dcanvas.coords("r10c2",dwidth/3.6,dheight/.881)
+                        dcanvas.coords("r10c3",dwidth/2.688,dheight/.881)
+                        dcanvas.coords("r10c4",dwidth/2.15,dheight/.881)
+                        dcanvas.coords("r10c5",dwidth/1.785,dheight/.881)
+                        dcanvas.coords("r10c6",dwidth/1.525,dheight/.881)
+                        dcanvas.coords("r10c7",dwidth/1.329,dheight/.881)
+                        dcanvas.coords("r10c8",dwidth/1.18,dheight/.881)
+
+                        #---------------------------------11th row
+                        dcanvas.coords("r11c1",dwidth/6.8,dheight/.828)
+
+                        dcanvas.coords("r11c2",dwidth/3.6,dheight/.841)
+                        dcanvas.coords("r11c3",dwidth/2.688,dheight/.841)
+                        dcanvas.coords("r11c4",dwidth/2.15,dheight/.841)
+                        dcanvas.coords("r11c5",dwidth/1.785,dheight/.841)
+                        dcanvas.coords("r11c6",dwidth/1.525,dheight/.841)
+                        dcanvas.coords("r11c7",dwidth/1.329,dheight/.841)
+                        dcanvas.coords("r11c8",dwidth/1.18,dheight/.841)
+
+                        #---------------------------------12th row
+                        dcanvas.coords("r12c1",dwidth/6.8,dheight/.793)
+
+                        dcanvas.coords("r12c2",dwidth/3.6,dheight/.805)
+                        dcanvas.coords("r12c3",dwidth/2.688,dheight/.805)
+                        dcanvas.coords("r12c4",dwidth/2.15,dheight/.805)
+                        dcanvas.coords("r12c5",dwidth/1.785,dheight/.805)
+                        dcanvas.coords("r12c6",dwidth/1.525,dheight/.805)
+                        dcanvas.coords("r12c7",dwidth/1.329,dheight/.805)
+                        dcanvas.coords("r12c8",dwidth/1.18,dheight/.805)
+
+                        #---------------------------------13th row
+                        dcanvas.coords("r13c1",dwidth/6.8,dheight/.760)
+
+                        dcanvas.coords("r13c2",dwidth/3.6,dheight/.772)
+                        dcanvas.coords("r13c3",dwidth/2.688,dheight/.772)
+                        dcanvas.coords("r13c4",dwidth/2.15,dheight/.772)
+                        dcanvas.coords("r13c5",dwidth/1.785,dheight/.772)
+                        dcanvas.coords("r13c6",dwidth/1.525,dheight/.772)
+                        dcanvas.coords("r13c7",dwidth/1.329,dheight/.772)
+                        dcanvas.coords("r13c8",dwidth/1.18,dheight/.772)
+                        #---------------------------------14th row
+                        dcanvas.coords("r14c1",dwidth/6.8,dheight/.730)
+
+                        dcanvas.coords("r14c2",dwidth/3.6,dheight/.741)
+                        dcanvas.coords("r14c3",dwidth/2.688,dheight/.741)
+                        dcanvas.coords("r14c4",dwidth/2.15,dheight/.741)
+                        dcanvas.coords("r14c5",dwidth/1.785,dheight/.741)
+                        dcanvas.coords("r14c6",dwidth/1.525,dheight/.741)
+                        dcanvas.coords("r14c7",dwidth/1.329,dheight/.741)
+                        dcanvas.coords("r14c8",dwidth/1.18,dheight/.741)
+
+                        #---------------------------------15th row
+                        dcanvas.coords("r15c1",dwidth/6.8,dheight/.703)
+
+                        dcanvas.coords("r15c2",dwidth/3.6,dheight/.713)
+                        dcanvas.coords("r15c3",dwidth/2.688,dheight/.713)
+                        dcanvas.coords("r15c4",dwidth/2.15,dheight/.713)
+                        dcanvas.coords("r15c5",dwidth/1.785,dheight/.713)
+                        dcanvas.coords("r15c6",dwidth/1.525,dheight/.713)
+                        dcanvas.coords("r15c7",dwidth/1.329,dheight/.713) 
+                        dcanvas.coords("r15c8",dwidth/1.18,dheight/.713)
+
+                        #---------------------------------16th row
+                        dcanvas.coords("r16c1",dwidth/6.8,dheight/.677)
+
+                        dcanvas.coords("r16c2",dwidth/3.6,dheight/.687)
+                        dcanvas.coords("r16c3",dwidth/2.688,dheight/.687)
+                        dcanvas.coords("r16c4",dwidth/2.15,dheight/.687)
+                        dcanvas.coords("r16c5",dwidth/1.785,dheight/.687)
+                        dcanvas.coords("r16c6",dwidth/1.525,dheight/.687)
+                        dcanvas.coords("r16c7",dwidth/1.329,dheight/.687) 
+                        dcanvas.coords("r16c8",dwidth/1.18,dheight/.687)
+
+                        #---------------------------------17th row
+                        dcanvas.coords("r17c1",dwidth/6.8,dheight/.654)
+
+                        dcanvas.coords("r17c2",dwidth/3.6,dheight/.663)
+                        dcanvas.coords("r17c3",dwidth/2.688,dheight/.663)
+                        dcanvas.coords("r17c4",dwidth/2.15,dheight/.663)
+                        dcanvas.coords("r17c5",dwidth/1.785,dheight/.663)
+                        dcanvas.coords("r17c6",dwidth/1.525,dheight/.663)
+                        dcanvas.coords("r17c7",dwidth/1.329,dheight/.663) 
+                        dcanvas.coords("r17c8",dwidth/1.18,dheight/.663)
+
+                        #---------------------------------18th row
+                        dcanvas.coords("r18c1",dwidth/6.8,dheight/.633)
+
+                        dcanvas.coords("r18c2",dwidth/3.6,dheight/.640)
+                        dcanvas.coords("r18c3",dwidth/2.688,dheight/.640)
+                        dcanvas.coords("r18c4",dwidth/2.15,dheight/.640)
+                        dcanvas.coords("r18c5",dwidth/1.785,dheight/.640)
+                        dcanvas.coords("r18c6",dwidth/1.525,dheight/.640)
+                        dcanvas.coords("r18c7",dwidth/1.329,dheight/.640) 
+                        dcanvas.coords("r18c8",dwidth/1.18,dheight/.640)
+
+                        #---------------------------------19th row
+                        dcanvas.coords("r19c1",dwidth/6.8,dheight/.6115)
+
+                        dcanvas.coords("r19c2",dwidth/3.6,dheight/.619)
+                        dcanvas.coords("r19c3",dwidth/2.688,dheight/.619)
+                        dcanvas.coords("r19c4",dwidth/2.15,dheight/.619)
+                        dcanvas.coords("r19c5",dwidth/1.785,dheight/.619)
+                        dcanvas.coords("r19c6",dwidth/1.525,dheight/.619)
+                        dcanvas.coords("r19c7",dwidth/1.329,dheight/.619) 
+                        dcanvas.coords("r19c8",dwidth/1.18,dheight/.619)
+
+                        #---------------------------------20th row
+                        dcanvas.coords("r20c1",dwidth/6.8,dheight/.592)
+
+                        dcanvas.coords("r20c2",dwidth/3.6,dheight/.599)
+                        dcanvas.coords("r20c3",dwidth/2.688,dheight/.599)
+                        dcanvas.coords("r20c4",dwidth/2.15,dheight/.599)
+                        dcanvas.coords("r20c5",dwidth/1.785,dheight/.599)
+                        dcanvas.coords("r20c6",dwidth/1.525,dheight/.599)
+                        dcanvas.coords("r20c7",dwidth/1.329,dheight/.599) 
+                        dcanvas.coords("r20c8",dwidth/1.18,dheight/.599)
+
+
+
                     fin_cash_analiz.grid_rowconfigure(0,weight=1)
                     fin_cash_analiz.grid_columnconfigure(0,weight=1)
 
-                    frm_analiz = Canvas(fin_cash_analiz,height=700,bg='#2f516f',scrollregion=(0,0,700,1200))
+                    frm_analiz = Canvas(fin_cash_analiz,height=700,bg='#2f516f',scrollregion=(0,0,700,1500))
                     analiz_scrl = Scrollbar(fin_cash_analiz,orient=VERTICAL)
                     analiz_scrl.grid(row=0,column=1,sticky='ns')
                     analiz_scrl.config(command=frm_analiz.yview)
@@ -2557,43 +2777,589 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=button25, tag=("button25"))
 
                     
-
                     rth2 = frm_analiz.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_anal3"),smooth=True,)
+                    #-----------------------------------------------------------------------------table section
+                    lv_name=Label(frm_analiz, text="",bg="#213b52", width=37, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1x1"))
 
-                    fgth = ttk.Style()
-                    fgth.theme_use("default")
-                    fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11))
-                    fgth.configure("Treeview.Heading",background="#1b3857",activeforeground="black",foreground="white",font=(None,11))  
+                    lv_name=Label(frm_analiz, text="Jan",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c2"))
 
-                    pro_tree = ttk.Treeview(frm_analiz, columns = (1,2,3,4,5,6,7,8),show = "headings", heigh=25)
-                    # pro_tree.pack(side = 'top')
-                    pro_tree.heading(1)
-                    pro_tree.heading(2, text="[Month]")
-                    pro_tree.heading(3, text="[Month]")
-                    pro_tree.heading(4, text="[Month]")
-                    pro_tree.heading(5, text="[Month]")
-                    pro_tree.heading(6, text="[Month]")
-                    pro_tree.heading(7, text="[Month]")
-                    pro_tree.heading(8, text="TOTAL")
+                    lv_name=Label(frm_analiz, text="Feb",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c3"))
+
+                    lv_name=Label(frm_analiz, text="Mar",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c4"))
+
+                    lv_name=Label(frm_analiz, text="Apr",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c5"))
+
+                    lv_name=Label(frm_analiz, text="May",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c6"))
+
+                    lv_name=Label(frm_analiz, text="June",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c7"))
+
+                    lv_name=Label(frm_analiz, text="Julay",bg="#213b52", width=18, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c8"))
                     
-                    pro_tree.column(1, width = 300)
-                    pro_tree.column(2, width = 125)
-                    pro_tree.column(3, width = 125)
-                    pro_tree.column(4, width = 125)
-                    pro_tree.column(5, width = 125)
-                    pro_tree.column(6, width = 125)
-                    pro_tree.column(7, width = 125)
-                    pro_tree.column(8, width = 200)
-                    
-                    # pro_tree.insert('', 'end', text="1", values=('1',))
-                    # pro_tree.insert('', 'end', text="1", values=('','jk'))
-                    # pro_tree.insert('', 'end', text="2", values=('2', 'Hyundai'))
-                    # pro_tree.insert('', 'end', text="3", values=('3', 'Tesla'))
-                    # pro_tree.insert('', 'end', text="4", values=('4', 'Wolkswagon'))
-                    # pro_tree.insert('', 'end', text="5", values=('5', 'Tata Motors'))
-                    # pro_tree.insert('', 'end', text="6", values=('6', 'Renault'))
-                    window_label_4 = frm_analiz.create_window(0, 0, anchor="nw", window=pro_tree,tags=('ptree1'))
+                    #----------------------------------------------------------second row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r2c1"))
 
+                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c2"))
+
+                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+
+                    r2c2.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c3"))
+
+
+                    r2c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c4"))
+
+
+                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c5"))
+
+                    
+
+
+                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c7"))
+
+                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c8"))
+
+                    r2c2 = Entry(frm_analiz, width=18 ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c6"))
+                    #----------------------------------------------------------3rd row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r3c1"))
+
+                    r3c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c2"))
+
+                    r3c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+
+                    r3c2.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c3"))
+
+
+                    r3c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c4"))
+
+
+                    r3c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c5"))
+
+                    r3c2 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c6"))
+
+
+                    r3c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c7"))
+
+                    r3c2 = Entry(frm_analiz, width=18, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r3c2, tag=("r3c8"))
+
+                    #----------------------------------------------------------4 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r4c1"))
+
+                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c2"))
+
+                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+
+                    r4c2.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c3"))
+
+
+                    r4c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c4"))
+
+
+                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c5"))
+
+                    r4c2 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c6"))
+
+
+                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c7"))
+
+                    r4c2 = Entry(frm_analiz, width=18, font=('Calibri 13'))
+                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c8"))
+
+                    #----------------------------------------------------------5 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r5c1"))
+
+                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c2"))
+
+                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r5c2.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c3"))
+
+                    r5c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c4"))
+
+
+                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c5"))
+
+                    r5c2 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c6"))
+
+
+                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c7"))
+
+                    r5c2 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c8"))
+
+                    #----------------------------------------------------------6 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r6c1"))
+
+                    r6c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c2, tag=("r6c2"))
+
+                    r6c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r6c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c3, tag=("r6c3"))
+
+                    r6c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c4, tag=("r6c4"))
+
+
+                    r6c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c5, tag=("r6c5"))
+
+                    r6c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c6, tag=("r6c6"))
+
+
+                    r6c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c7, tag=("r6c7"))
+
+                    r6c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c8, tag=("r6c8"))
+
+                    #----------------------------------------------------------7 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r7c1"))
+
+                    r7c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c2, tag=("r7c2"))
+
+                    r7c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r7c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c3, tag=("r7c3"))
+
+                    r7c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c4, tag=("r7c4"))
+
+
+                    r7c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c5, tag=("r7c5"))
+
+                    r7c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c6, tag=("r7c6"))
+
+
+                    r7c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c7, tag=("r7c7"))
+
+                    r7c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c8, tag=("r7c8"))
+
+                    #----------------------------------------------------------8 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r8c1"))
+
+                    r8c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c2, tag=("r8c2"))
+
+                    r8c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r8c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c3, tag=("r8c3"))
+
+                    r8c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c4, tag=("r8c4"))
+
+
+                    r8c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c5, tag=("r8c5"))
+
+                    r8c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c6, tag=("r8c6"))
+
+
+                    r8c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c7, tag=("r8c7"))
+
+                    r8c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c8, tag=("r8c8"))
+
+                    #----------------------------------------------------------9 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r9c1"))
+
+                    r9c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c2, tag=("r9c2"))
+
+                    r9c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r9c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c3, tag=("r9c3"))
+
+                    r9c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c4, tag=("r9c4"))
+
+
+                    r9c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c5, tag=("r9c5"))
+
+                    r9c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c6, tag=("r9c6"))
+
+
+                    r9c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c7, tag=("r9c7"))
+
+                    r9c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c8, tag=("r9c8"))
+
+                    #----------------------------------------------------------10 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r10c1"))
+
+                    r10c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c2, tag=("r10c2"))
+
+                    r10c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r10c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c3, tag=("r10c3"))
+
+                    r10c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c4, tag=("r10c4"))
+
+
+                    r10c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c5, tag=("r10c5"))
+
+                    r10c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c6, tag=("r10c6"))
+
+
+                    r10c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c7, tag=("r10c7"))
+
+                    r10c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c8, tag=("r10c8"))
+
+                    #----------------------------------------------------------11 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r11c1"))
+
+                    r11c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c2, tag=("r11c2"))
+
+                    r11c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r11c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c3, tag=("r11c3"))
+
+                    r11c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c4, tag=("r11c4"))
+
+
+                    r11c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c5, tag=("r11c5"))
+
+                    r11c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c6, tag=("r11c6"))
+
+
+                    r11c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c7, tag=("r11c7"))
+
+                    r11c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c8, tag=("r11c8"))
+
+                    #----------------------------------------------------------12 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r12c1"))
+
+                    r12c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c2, tag=("r12c2"))
+
+                    r12c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r12c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c3, tag=("r12c3"))
+
+                    r12c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c4, tag=("r12c4"))
+
+
+                    r12c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c5, tag=("r12c5"))
+
+                    r12c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c6, tag=("r12c6"))
+
+
+                    r12c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c7, tag=("r12c7"))
+
+                    r12c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c8, tag=("r12c8"))
+
+                    #----------------------------------------------------------13 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r13c1"))
+
+                    r13c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c2, tag=("r13c2"))
+
+                    r13c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r13c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c3, tag=("r13c3"))
+
+                    r13c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c4, tag=("r13c4"))
+
+
+                    r13c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c5, tag=("r13c5"))
+
+                    r13c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c6, tag=("r13c6"))
+
+
+                    r13c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c7, tag=("r13c7"))
+
+                    r13c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c8, tag=("r13c8"))
+
+                    #----------------------------------------------------------14 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r14c1"))
+
+                    r14c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c2, tag=("r14c2"))
+
+                    r14c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r14c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c3, tag=("r14c3"))
+
+                    r14c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c4, tag=("r14c4"))
+
+
+                    r14c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c5, tag=("r14c5"))
+
+                    r14c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c6, tag=("r14c6"))
+
+
+                    r14c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c7, tag=("r14c7"))
+
+                    r14c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c8, tag=("r14c8"))
+
+                    #----------------------------------------------------------15 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r15c1"))
+
+                    r15c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c2, tag=("r15c2"))
+
+                    r15c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r15c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c3, tag=("r15c3"))
+
+                    r15c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c4, tag=("r15c4"))
+
+
+                    r15c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c5, tag=("r15c5"))
+
+                    r15c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c6, tag=("r15c6"))
+
+
+                    r15c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c7, tag=("r15c7"))
+
+                    r15c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c8, tag=("r15c8"))
+
+                    #----------------------------------------------------------16 th row
+                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r16c1"))
+
+                    r16c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c2, tag=("r16c2"))
+
+                    r16c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r16c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c3, tag=("r16c3"))
+
+                    r16c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c4, tag=("r16c4"))
+
+
+                    r16c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c5, tag=("r16c5"))
+
+                    r16c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c6, tag=("r16c6"))
+
+
+                    r16c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c7, tag=("r16c7"))
+
+                    r16c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r16c8, tag=("r16c8"))
+
+                    #----------------------------------------------------------17 th row
+                    lv_name=Label(frm_analiz, text="January",bg="red", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r17c1"))
+
+                    r17c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c2, tag=("r17c2"))
+
+                    r17c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r17c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c3, tag=("r17c3"))
+
+                    r17c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c4, tag=("r17c4"))
+
+
+                    r17c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c5, tag=("r17c5"))
+
+                    r17c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c6, tag=("r17c6"))
+
+
+                    r17c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c7, tag=("r17c7"))
+
+                    r17c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c8, tag=("r17c8"))
+
+                    #----------------------------------------------------------18 th row
+                    lv_name=Label(frm_analiz, text="January",bg="red", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r18c1"))
+
+                    r18c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c2, tag=("r18c2"))
+
+                    r18c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r18c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c3, tag=("r18c3"))
+
+                    r18c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c4, tag=("r18c4"))
+
+
+                    r18c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c5, tag=("r18c5"))
+
+                    r18c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c6, tag=("r18c6"))
+
+
+                    r18c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c7, tag=("r18c7"))
+
+                    r18c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c8, tag=("r18c8"))
+
+                    #----------------------------------------------------------19 th row
+                    lv_name=Label(frm_analiz, text="January",bg="red", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r19c1"))
+
+                    r19c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c2, tag=("r19c2"))
+
+                    r19c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r19c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c3, tag=("r19c3"))
+
+                    r19c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c4, tag=("r19c4"))
+
+
+                    r19c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c5, tag=("r19c5"))
+
+                    r19c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c6, tag=("r19c6"))
+
+
+                    r19c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c7, tag=("r19c7"))
+
+                    r19c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c8, tag=("r19c8"))
+
+                    #----------------------------------------------------------20 th row
+                    lv_name=Label(frm_analiz, text="January",bg="red", width=42, fg="White", anchor="center",font=('Calibri 12 bold'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r20c1"))
+
+                    r20c2 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c2, tag=("r20c2"))
+
+                    r20c3 = Entry(frm_analiz, width=13, font=('Calibri 13'))
+                    r20c3.insert(0,"$11111111111")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c3, tag=("r20c3"))
+
+                    r20c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'))                    
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c4, tag=("r20c4"))
+
+
+                    r20c5 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c5, tag=("r20c5"))
+
+                    r20c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c6, tag=("r20c6"))
+
+
+                    r20c7 = Entry(frm_analiz, width=13, font=('Calibri 13'))                   
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c7, tag=("r20c7"))
+
+                    r20c8 = Entry(frm_analiz, width=18, font=('Calibri 13'))                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c8, tag=("r20c8"))
+                    
 
                     #******************************************************************Check Cash flow
                     tab10_3.grid_columnconfigure(0,weight=1)
