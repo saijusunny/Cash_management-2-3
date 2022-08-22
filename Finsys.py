@@ -52,6 +52,8 @@ from datetime import date,datetime, timedelta
 from array import *
 from forex_python.converter import CurrencyRates
 
+from dateutil.relativedelta import relativedelta
+
 finsysdb = mysql.connector.connect(
     host="localhost", user="root", password="", database="newfinsys", port="3306"
 )
@@ -1367,7 +1369,7 @@ def main_sign_in():
                     # #----------------------------------------------------------------------------------------------------------------grid 1
                     rth1 = canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_dash1"),smooth=True,)
                     #-------------------------------------------------------Income
-                    sql_incomes="select sum(balance) from app1_accounts1 where cid_id=%s and detype='Income'"
+                    sql_incomes="select sum(balance) from app1_accounts1 where cid_id=%s and acctype='Income'"
                     sql_incomes_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_incomes,sql_incomes_val,)
                     incom_dtls=fbcursor.fetchone()
@@ -1379,7 +1381,7 @@ def main_sign_in():
                     
                 
                     #-----------------------------------------------------expense
-                    sql_pro="select sum(balance) from app1_accounts1 where cid_id=%s and detype='Expenses'"
+                    sql_pro="select sum(balance) from app1_accounts1 where cid_id=%s and acctype='Expenses'"
                     sql_pro_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_pro,sql_pro_val,)
                     exp_tot=fbcursor.fetchone()
@@ -1454,7 +1456,7 @@ def main_sign_in():
                     
                     rth2 = canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_dash2"),smooth=True,)
 
-                    sql_pro="select sum(balance) from app1_accounts1 where cid_id=%s and detype='Expenses'"
+                    sql_pro="select sum(balance) from app1_accounts1 where cid_id=%s and acctype='Expenses'"
                     sql_pro_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_pro,sql_pro_val,)
                     exp_tots=fbcursor.fetchone()
@@ -1473,12 +1475,12 @@ def main_sign_in():
                     canvas.create_line(0, 0, 0, 0,fill="gray" ,tag=("exp_hr"))
                     fig, ax = plt.subplots(figsize=(8, 4), dpi=50)
 
-                    sql_typ="select balance from app1_accounts1 where cid_id=%s and detype='Expenses'"
+                    sql_typ="select balance from app1_accounts1 where cid_id=%s and acctype='Expenses'"
                     sql_typ_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_typ,sql_typ_val,)
                     exp_typ=fbcursor.fetchall()
 
-                    sql_typs="select name from app1_accounts1 where cid_id=%s and detype='Expenses'"
+                    sql_typs="select name from app1_accounts1 where cid_id=%s and acctype='Expenses'"
                     sql_typs_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_typs,sql_typs_val,)
                     exp_typs=fbcursor.fetchall()
@@ -1613,7 +1615,7 @@ def main_sign_in():
                     # #----------------------------------------------------------------------------------------------------------------grid 4
                     rth4 = canvas.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_dash4"),smooth=True,)
 
-                    sql_income="select sum(balance) from app1_accounts1 where cid_id=%s and detype='Income'"
+                    sql_income="select sum(balance) from app1_accounts1 where cid_id=%s and acctype='Income'"
                     sql_income_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_income,sql_pro_val,)
                     incom_dtls=fbcursor.fetchone()
@@ -1627,7 +1629,7 @@ def main_sign_in():
                     win_inv1 = canvas.create_window(0, 0, anchor="nw", window=incom_lb,tag=("incom_lb"))
                     canvas.create_line(0, 0, 0, 0,fill="gray",tag=("incom_hr") )
 
-                    sql_income_chart="select balance,name from app1_accounts1 where cid_id=%s and detype='Income'"
+                    sql_income_chart="select balance,name from app1_accounts1 where cid_id=%s and acctype='Income'"
                     sql_income_chart_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_income_chart,sql_income_chart_val,)
                     incom_chart=fbcursor.fetchall()
@@ -1638,7 +1640,7 @@ def main_sign_in():
                             sizes.append(i[0])
                     except:
                         sizes=0
-                    sql_lb_chart="select name from app1_accounts1 where cid_id=%s and detype='Income'"
+                    sql_lb_chart="select name from app1_accounts1 where cid_id=%s and acctype='Income'"
                     sql_lb_chart_val=(dtl_cmp_pro[0],)
                     fbcursor.execute(sql_lb_chart,sql_lb_chart_val,)
                     incom_chart_lb=fbcursor.fetchall()
@@ -3306,25 +3308,205 @@ def main_sign_in():
                     
                     rth2 = frm_analiz.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_anal3"),smooth=True,)
                     #-----------------------------------------------------------------------------table section
+
+                    dat_td=date.today()
+                    
+        
+                    if dat_td.month==1:
+                        daat_mnt="January"
+                    elif dat_td.month==2:
+                        daat_mnt="February"
+                    elif dat_td.month==3:
+                        daat_mnt="March"
+                    elif dat_td.month==4:
+                        daat_mnt="April"
+                    elif dat_td.month==5:
+                        daat_mnt="May"
+                    elif dat_td.month==6:
+                        daat_mnt="June"
+                    elif dat_td.month==7:
+                        daat_mnt="July"
+                    elif dat_td.month==8:
+                        daat_mnt="August"
+                    elif dat_td.month==9:
+                        daat_mnt="September"
+                    elif dat_td.month==10:
+                        daat_mnt="October"
+                    elif dat_td.month==11:
+                        daat_mnt="November"
+                    elif dat_td.month==12:
+                        daat_mnt="December"
+                    else:
+                        pass
+                    #previous date
+                    last_month = dat_td - relativedelta(months=1)
+
+                    if last_month.month==1:
+                        pr_mnt="January"
+                    elif last_month.month==2:
+                        pr_mnt="February"
+                    elif last_month.month==3:
+                        pr_mnt="March"
+                    elif last_month.month==4:
+                        pr_mnt="April"
+                    elif last_month.month==5:
+                        pr_mnt="May"
+                    elif last_month.month==6:
+                        pr_mnt="June"
+                    elif last_month.month==7:
+                        pr_mnt="July"
+                    elif last_month.month==8:
+                        pr_mnt="August"
+                    elif last_month.month==9:
+                        pr_mnt="September"
+                    elif last_month.month==10:
+                        pr_mnt="October"
+                    elif last_month.month==11:
+                        pr_mnt="November"
+                    elif last_month.month==12:
+                        pr_mnt="December"
+                    else:
+                        pass
+
+                    #today month -2
+                    mnt_2 = dat_td - relativedelta(months=2)
+
+                    if mnt_2.month==1:
+                        pr_mnt2="January"
+                    elif mnt_2.month==2:
+                        pr_mnt2="February"
+                    elif mnt_2.month==3:
+                        pr_mnt2="March"
+                    elif mnt_2.month==4:
+                        pr_mnt2="April"
+                    elif mnt_2.month==5:
+                        pr_mnt2="May"
+                    elif mnt_2.month==6:
+                        pr_mnt2="June"
+                    elif mnt_2.month==7:
+                        pr_mnt2="July"
+                    elif mnt_2.month==8:
+                        pr_mnt2="August"
+                    elif mnt_2.month==9:
+                        pr_mnt2="September"
+                    elif mnt_2.month==10:
+                        pr_mnt2="October"
+                    elif mnt_2.month==11:
+                        pr_mnt2="November"
+                    elif mnt_2.month==12:
+                        pr_mnt2="December"
+                    else:
+                        pass
+
+                    #today month -3
+                    mnt_3 = dat_td - relativedelta(months=3)
+
+                    if mnt_3.month==1:
+                        pr_mnt3="January"
+                    elif mnt_3.month==2:
+                        pr_mnt3="February"
+                    elif mnt_3.month==3:
+                        pr_mnt3="March"
+                    elif mnt_3.month==4:
+                        pr_mnt3="April"
+                    elif mnt_3.month==5:
+                        pr_mnt3="May"
+                    elif mnt_3.month==6:
+                        pr_mnt3="June"
+                    elif mnt_3.month==7:
+                        pr_mnt3="July"
+                    elif mnt_3.month==8:
+                        pr_mnt3="August"
+                    elif mnt_3.month==9:
+                        pr_mnt3="September"
+                    elif mnt_3.month==10:
+                        pr_mnt3="October"
+                    elif mnt_3.month==11:
+                        pr_mnt3="November"
+                    elif mnt_3.month==12:
+                        pr_mnt3="December"
+                    else:
+                        pass
+
+                    #today month -4
+                    mnt_4 = dat_td - relativedelta(months=4)
+
+                    if mnt_4.month==1:
+                        pr_mnt4="January"
+                    elif mnt_4.month==2:
+                        pr_mnt4="February"
+                    elif mnt_4.month==3:
+                        pr_mnt4="March"
+                    elif mnt_4.month==4:
+                        pr_mnt4="April"
+                    elif mnt_4.month==5:
+                        pr_mnt4="May"
+                    elif mnt_4.month==6:
+                        pr_mnt4="June"
+                    elif mnt_4.month==7:
+                        pr_mnt4="July"
+                    elif mnt_4.month==8:
+                        pr_mnt4="August"
+                    elif mnt_4.month==9:
+                        pr_mnt4="September"
+                    elif mnt_4.month==10:
+                        pr_mnt4="October"
+                    elif mnt_4.month==11:
+                        pr_mnt4="November"
+                    elif mnt_4.month==12:
+                        pr_mnt4="December"
+                    else:
+                        pass
+
+                    #today month -5
+                    mnt_5 = dat_td - relativedelta(months=5)
+
+                    if mnt_5.month==1:
+                        pr_mnt5="January"
+                    elif mnt_5.month==2:
+                        pr_mnt5="February"
+                    elif mnt_5.month==3:
+                        pr_mnt5="March"
+                    elif mnt_5.month==4:
+                        pr_mnt5="April"
+                    elif mnt_5.month==5:
+                        pr_mnt5="May"
+                    elif mnt_5.month==6:
+                        pr_mnt5="June"
+                    elif mnt_5.month==7:
+                        pr_mnt5="July"
+                    elif mnt_5.month==8:
+                        pr_mnt5="August"
+                    elif mnt_5.month==9:
+                        pr_mnt5="September"
+                    elif mnt_5.month==10:
+                        pr_mnt5="October"
+                    elif mnt_5.month==11:
+                        pr_mnt5="November"
+                    elif mnt_5.month==12:
+                        pr_mnt5="December"
+                    else:
+                        pass
+                    
                     lv_name=Label(frm_analiz, text="",bg="#213b52", width=37, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1x1"))
 
-                    lv_name=Label(frm_analiz, text="Jan",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=pr_mnt5,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c2"))
 
-                    lv_name=Label(frm_analiz, text="Feb",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=pr_mnt4,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c3"))
 
-                    lv_name=Label(frm_analiz, text="Mar",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=pr_mnt3,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c4"))
 
-                    lv_name=Label(frm_analiz, text="Apr",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=pr_mnt2,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c5"))
 
-                    lv_name=Label(frm_analiz, text="May",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=pr_mnt,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c6"))
 
-                    lv_name=Label(frm_analiz, text="June",bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
+                    lv_name=Label(frm_analiz, text=daat_mnt,bg="#213b52", width=13, fg="White", anchor="center",font=('Calibri 13 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r1c7"))
 
                     lv_name=Label(frm_analiz, text="Total",bg="#213b52", width=18, fg="White", anchor="center",font=('Calibri 13 bold'))
@@ -3335,38 +3517,37 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r2c1"))
 
                     r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
+                    r2c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c2"))
-
-                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-
-                    r2c2.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c3"))
-
-
-                    r2c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c4"))
-
-
-                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c5"))
-
                     
 
+                    r2c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c3.insert(0,"$11111111111")
+                    r2c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c3, tag=("r2c3"))
 
-                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c7"))
 
-                    r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c8"))
+                    r2c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c4, tag=("r2c4"))
 
-                    r2c2 = Entry(frm_analiz, width=18 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+
+                    r2c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c5, tag=("r2c5"))
+
                     
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c6"))
+                    r2c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c7, tag=("r2c7"))
+
+                    r2c8 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c8, tag=("r2c8"))
+
+                    r2c6 = Entry(frm_analiz, width=18 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r2c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c6, tag=("r2c6"))
                     #----------------------------------------------------------3rd row
                     lv_name=Label(frm_analiz, text="Cash Inflows (Income):",bg="#506579", width=159, fg="white", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r3c1"))
@@ -3378,91 +3559,106 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r4c1"))
 
                     r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
+                    r4c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c2"))
 
-                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
 
-                    r4c2.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c3"))
-
-
-                    r4c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c4"))
+                    r4c3.insert(0,"$11111111111")
+                    r4c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c3, tag=("r4c3"))
 
 
-                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c5"))
-
-                    r4c2 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c6"))
+                    r4c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c4, tag=("r4c4"))
 
 
-                    r4c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c7"))
+                    r4c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c5, tag=("r4c5"))
 
-                    r4c2 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c2, tag=("r4c8"))
+                    r4c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c6, tag=("r4c6"))
+
+
+                    r4c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c7, tag=("r4c7"))
+
+                    r4c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r4c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r4c8, tag=("r4c8"))
 
                     #----------------------------------------------------------5 th row
                     lv_name=Label(frm_analiz, text="Consulting Income",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r5c1"))
 
                     r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r5c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c2"))
 
-                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r5c2.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c3"))
+                    r5c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r5c3.insert(0,"$11111111111")
+                    r5c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c3, tag=("r5c3"))
 
-                    r5c2 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c4"))
-
-
-                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c5"))
-
-                    r5c2 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c6"))
+                    r5c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r5c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c4, tag=("r5c4"))
 
 
-                    r5c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c7"))
+                    r5c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r5c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c5, tag=("r5c5"))
 
-                    r5c2 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c2, tag=("r5c8"))
+                    r5c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r4c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c6, tag=("r5c6"))
+
+
+                    r5c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r5c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c7, tag=("r5c7"))
+
+                    r5c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r5c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
+                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r5c8, tag=("r5c8"))
 
                     #----------------------------------------------------------6 th row
                     lv_name=Label(frm_analiz, text="Product Sales",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r6c1"))
 
                     r6c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r6c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c2, tag=("r6c2"))
 
                     r6c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r6c3.insert(0,"$11111111111")
+                    r6c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c3, tag=("r6c3"))
 
                     r6c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r6c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c4, tag=("r6c4"))
 
 
-                    r6c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r6c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r6c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c5, tag=("r6c5"))
 
-                    r6c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r6c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r6c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c6, tag=("r6c6"))
 
 
-                    r6c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r6c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r6c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c7, tag=("r6c7"))
 
-                    r6c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r6c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r6c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r6c8, tag=("r6c8"))
 
                     #----------------------------------------------------------7 th row
@@ -3470,27 +3666,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r7c1"))
 
                     r7c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r7c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c2, tag=("r7c2"))
 
                     r7c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r7c3.insert(0,"$11111111111")
+                    r7c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c3, tag=("r7c3"))
 
                     r7c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r7c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c4, tag=("r7c4"))
 
 
-                    r7c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r7c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r7c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                     
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c5, tag=("r7c5"))
 
-                    r7c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r7c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r7c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c6, tag=("r7c6"))
 
 
-                    r7c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r7c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r7c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c7, tag=("r7c7"))
 
-                    r7c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r7c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r7c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r7c8, tag=("r7c8"))
 
                     #----------------------------------------------------------8 th row
@@ -3498,27 +3701,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r8c1"))
 
                     r8c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r8c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c2, tag=("r8c2"))
 
                     r8c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r8c3.insert(0,"$11111111111")
+                    r8c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c3, tag=("r8c3"))
 
                     r8c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r8c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c4, tag=("r8c4"))
 
 
-                    r8c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r8c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r8c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c5, tag=("r8c5"))
 
-                    r8c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r8c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r8c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c6, tag=("r8c6"))
 
 
-                    r8c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r8c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r8c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c7, tag=("r8c7"))
 
-                    r8c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r8c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r8c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r8c8, tag=("r8c8"))
 
                     #----------------------------------------------------------9 th row
@@ -3526,27 +3736,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r9c1"))
 
                     r9c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r9c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c2, tag=("r9c2"))
 
                     r9c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r9c3.insert(0,"$11111111111")
+                    r9c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c3, tag=("r9c3"))
 
                     r9c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r9c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c4, tag=("r9c4"))
 
 
-                    r9c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r9c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r9c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c5, tag=("r9c5"))
 
-                    r9c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r9c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r9c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c6, tag=("r9c6"))
 
 
-                    r9c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r9c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r9c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c7, tag=("r9c7"))
 
-                    r9c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r9c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r9c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r9c8, tag=("r9c8"))
 
                     #----------------------------------------------------------10 th row
@@ -3554,27 +3771,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r10c1"))
 
                     r10c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r10c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c2, tag=("r10c2"))
 
                     r10c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r10c3.insert(0,"$11111111111")
+                    r10c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c3, tag=("r10c3"))
 
                     r10c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r10c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c4, tag=("r10c4"))
 
 
-                    r10c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r10c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r10c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c5, tag=("r10c5"))
 
-                    r10c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r10c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r10c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")              
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c6, tag=("r10c6"))
 
 
-                    r10c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r10c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r10c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c7, tag=("r10c7"))
 
-                    r10c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r10c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r10c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r10c8, tag=("r10c8"))
 
                     #----------------------------------------------------------11 th row
@@ -3582,27 +3806,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r11c1"))
 
                     r11c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r11c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c2, tag=("r11c2"))
 
                     r11c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r11c3.insert(0,"$11111111111")
+                    r11c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c3, tag=("r11c3"))
 
                     r11c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r11c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c4, tag=("r11c4"))
 
 
-                    r11c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r11c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r11c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c5, tag=("r11c5"))
 
-                    r11c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r11c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r11c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c6, tag=("r11c6"))
 
 
-                    r11c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r11c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r11c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c7, tag=("r11c7"))
 
-                    r11c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r11c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r11c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r11c8, tag=("r11c8"))
 
                     #----------------------------------------------------------12 th row
@@ -3610,27 +3841,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r12c1"))
 
                     r12c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r12c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c2, tag=("r12c2"))
 
                     r12c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r12c3.insert(0,"$11111111111")
+                    r12c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c3, tag=("r12c3"))
 
                     r12c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r12c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c4, tag=("r12c4"))
 
 
-                    r12c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r12c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r12c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c5, tag=("r12c5"))
 
-                    r12c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r12c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r12c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c6, tag=("r12c6"))
 
 
-                    r12c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r12c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r12c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c7, tag=("r12c7"))
 
-                    r12c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r12c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r12c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r12c8, tag=("r12c8"))
 
                     #----------------------------------------------------------13 th row
@@ -3638,27 +3876,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r13c1"))
 
                     r13c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r13c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c2, tag=("r13c2"))
 
                     r13c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r13c3.insert(0,"$11111111111")
+                    r13c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c3, tag=("r13c3"))
 
                     r13c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r13c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c4, tag=("r13c4"))
 
 
-                    r13c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r13c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)   
+                    r13c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c5, tag=("r13c5"))
 
-                    r13c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r13c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r13c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c6, tag=("r13c6"))
 
 
-                    r13c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r13c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r13c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c7, tag=("r13c7"))
 
-                    r13c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r13c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r13c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r13c8, tag=("r13c8"))
 
                     #----------------------------------------------------------14 th row
@@ -3666,27 +3911,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r14c1"))
 
                     r14c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r14c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c2, tag=("r14c2"))
 
                     r14c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r14c3.insert(0,"$11111111111")
+                    r14c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c3, tag=("r14c3"))
 
                     r14c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r14c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c4, tag=("r14c4"))
 
 
-                    r14c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r14c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r14c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c5, tag=("r14c5"))
 
-                    r14c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r14c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)     
+                    r14c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")              
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c6, tag=("r14c6"))
 
 
-                    r14c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r14c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r14c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c7, tag=("r14c7"))
 
-                    r14c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r14c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r14c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r14c8, tag=("r14c8"))
 
                     #----------------------------------------------------------15 th row
@@ -3694,27 +3946,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r15c1"))
 
                     r15c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r15c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c2, tag=("r15c2"))
 
                     r15c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r15c3.insert(0,"$11111111111")
+                    r15c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c3, tag=("r15c3"))
 
                     r15c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r15c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c4, tag=("r15c4"))
 
 
-                    r15c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r15c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r15c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c5, tag=("r15c5"))
 
-                    r15c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r15c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r15c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c6, tag=("r15c6"))
 
 
-                    r15c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r15c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r15c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                     
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c7, tag=("r15c7"))
 
-                    r15c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r15c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r15c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r15c8, tag=("r15c8"))
 
                     #----------------------------------------------------------16 th row
@@ -3728,27 +3987,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r17c1"))
 
                     r17c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r17c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c2, tag=("r17c2"))
 
                     r17c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r17c3.insert(0,"$11111111111")
+                    r17c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c3, tag=("r17c3"))
 
                     r17c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r17c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c4, tag=("r17c4"))
 
 
-                    r17c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r17c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r17c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                      
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c5, tag=("r17c5"))
 
-                    r17c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r17c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r17c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c6, tag=("r17c6"))
 
 
-                    r17c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r17c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r17c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                      
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c7, tag=("r17c7"))
 
-                    r17c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r17c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r17c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r17c8, tag=("r17c8"))
 
                     #----------------------------------------------------------18 th row
@@ -3756,27 +4022,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r18c1"))
 
                     r18c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r18c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c2, tag=("r18c2"))
 
                     r18c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r18c3.insert(0,"$11111111111")
+                    r18c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c3, tag=("r18c3"))
 
                     r18c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r18c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c4, tag=("r18c4"))
 
 
-                    r18c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r18c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r18c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c5, tag=("r18c5"))
 
-                    r18c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r18c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r18c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c6, tag=("r18c6"))
 
 
-                    r18c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r18c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r18c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c7, tag=("r18c7"))
 
-                    r18c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r18c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r18c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r18c8, tag=("r18c8"))
 
                     #----------------------------------------------------------19 th row
@@ -3784,27 +4057,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r19c1"))
 
                     r19c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r19c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c2, tag=("r19c2"))
 
                     r19c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r19c3.insert(0,"$11111111111")
+                    r19c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c3, tag=("r19c3"))
 
                     r19c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r19c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c4, tag=("r19c4"))
 
 
-                    r19c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r19c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r19c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c5, tag=("r19c5"))
 
-                    r19c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r19c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r19c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c6, tag=("r19c6"))
 
 
-                    r19c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r19c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r19c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c7, tag=("r19c7"))
 
-                    r19c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r19c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r19c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r19c8, tag=("r19c8"))
 
                     #----------------------------------------------------------20 th row
@@ -3812,27 +4092,34 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r20c1"))
 
                     r20c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    r20c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c2, tag=("r20c2"))
 
                     r20c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
                     r20c3.insert(0,"$11111111111")
+                    r20c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c3, tag=("r20c3"))
 
                     r20c4 = Entry(frm_analiz, width=13,text="$11111111111" ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    r20c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c4, tag=("r20c4"))
 
 
-                    r20c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r20c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)  
+                    r20c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c5, tag=("r20c5"))
 
-                    r20c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r20c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r20c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c6, tag=("r20c6"))
 
 
-                    r20c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    r20c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)    
+                    r20c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                 
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c7, tag=("r20c7"))
 
-                    r20c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    r20c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1) 
+                    r20c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r20c8, tag=("r20c8"))
 
                     #----------------------------------------------------------21 th row
@@ -5309,16 +5596,23 @@ def main_sign_in():
                         dcanvas.coords("hd_fl_hde",dwidth/1.9 ,dheight/2.1) 
                         dcanvas.coords("hd_fl_hds",dwidth/1.35 ,dheight/1.5) 
                         dcanvas.coords("hd_fl_hrs",dwidth/2 ,dheight/1.4,dwidth/1.03 ,dheight/1.4) 
+
                         dcanvas.coords("nm_nm21",dwidth/2 ,dheight/1.25) 
-                        dcanvas.coords("hd_lb_hds",dwidth/1.8 ,dheight/1.3) 
+                        dcanvas.coords("hd_lb_hds",dwidth/1.87 ,dheight/1.3) 
+
                         dcanvas.coords("nm_nm251",dwidth/1.5 ,dheight/1.25) 
-                        dcanvas.coords("hd_fl_lb",dwidth/1.41 ,dheight/1.3) 
+                        dcanvas.coords("hd_fl_lb",dwidth/1.392 ,dheight/1.3) 
                         
+
                         dcanvas.coords("nm_nm241",dwidth/1.2 ,dheight/1.25)
-                        dcanvas.coords("lb_nm241",dwidth/1.15 ,dheight/1.3)
+                        dcanvas.coords("lb_nm241",dwidth/1.138 ,dheight/1.3)
+
+                        
+
                         dcanvas.coords("cash_hd",dwidth/2 ,dheight/.85)
                         dcanvas.coords("tree_flow",dwidth/33 ,dheight/.80)
                         dcanvas.coords("btn_flow",dwidth/1.45 ,dheight/1)
+                        dcanvas.coords("scrollbary",dwidth/1.04 ,dheight/.80)
                         
 
                     fin_cash_flow.grid_rowconfigure(0,weight=1)
@@ -5354,12 +5648,50 @@ def main_sign_in():
                     img = Label(frm_flow, image = cash_flow,bg="#213b52",  justify=RIGHT)
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=img, tag=("img_flow"))
 
+                    def qry_run():
+
+                        sql_qryent='select sum(balance) from app1_accounts1 where cid_id =%s and acctype=%s and asof <= %s'
+                        sql_qryent_val=(dtl_cmp_pro[0],date_frt.get(),dt_entry.get_date(),)
+                        fbcursor.execute(sql_qryent,sql_qryent_val)
+                        flow_ent_val=fbcursor.fetchone() 
+                        end_bal.delete(0,END)
+                        end_bal.insert(0,"$"+str(flow_ent_val[0]))
+                        
+                        sql_qryrn='select * from app1_accounts1 where cid_id =%s and acctype=%s and asof <= %s'
+                        sql_qryrn_val=(dtl_cmp_pro[0],date_frt.get(),dt_entry.get_date(),)
+                        fbcursor.execute(sql_qryrn,sql_qryrn_val)
+                        flow_tb_val=fbcursor.fetchall()
+                        
+                        for record in flow_tree.get_children():
+                            flow_tree.delete(record)
+                        if flow_tb_val is not None:
+                        
+                            count_qry=0
+
+                            for i in flow_tb_val:
+                                flow_tree.insert(parent='', index='end', iid=count_qry, text='hello', values=(i[0],i[3],i[1],i[2],i[8],"$"+str(i[7])))
+                                count_qry +=1
+                        else:
+                            flow_tree.insert(parent='', index='end', iid=count_qry, text='hello', values=("-","-","-","No Data","-","-"))
+                        # for i in range(100):
+                        #     flow_tree.insert(parent='', index='end', iid=i, text='hello', values=("-","-","No Data","-"))
+                                
+
                     lv_name=Label(frm_flow, text="Account",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
                     win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_fl_hde"))
 
-                    chrt_flow= StringVar()
-                    glt_type = ttk.Combobox(frm_flow,textvariable=chrt_flow,width=55,font=('Calibri 16'))
-                    glt_type['values'] = ('All Dates','Custom', 'Today', 'This Month','This Financial Year')
+                    date_frt= StringVar()
+                    glt_type = ttk.Combobox(frm_flow,textvariable=date_frt,width=55,font=('Calibri 16'))
+
+                    sql_qrycmp='select DISTINCT acctype from app1_accounts1 where cid_id =%s'
+                    sql_qrycmp_val=(dtl_cmp_pro[0],)
+                    fbcursor.execute(sql_qrycmp,sql_qrycmp_val)
+                    flow_cmb_val=fbcursor.fetchall()
+                    cmp_ls=[]
+                    for i in flow_cmb_val:
+                                cmp_ls.append(i[0])
+                    
+                    glt_type['values'] = cmp_ls
                     glt_type.bind('<<ComboboxSelected>>', "chart_tp_slt")
                     glt_type.current(0)
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=glt_type, tag=("cmb_bx_fl"))
@@ -5370,49 +5702,62 @@ def main_sign_in():
                     frm_flow.create_line(0, 0, 0, 0,fill="gray", tag=("hd_fl_hrs") )
 
                     lv_name=Label(frm_flow, text="Beginning balance",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_lb_hds"))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_fl_lb")) 
+                    
+                    bg_bal= Spinbox(frm_flow, width=15 ,from_=0,to=1000000, font=('Calibri 16'),borderwidth=2)
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=bg_bal, tag=("nm_nm251")) 
 
-                    nm_nm21 = Spinbox(frm_flow, width=15 ,from_=1,to=1000000, font=('Calibri 16'),borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=nm_nm21, tag=("nm_nm21"))
+                    
 
                     lv_name=Label(frm_flow, text="Ending balance",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_fl_lb"))
-                    nm_nm251 = Spinbox(frm_flow, width=15 ,from_=1,to=1000000, font=('Calibri 16'),borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=nm_nm251, tag=("nm_nm251"))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("lb_nm241"))
+
+                    end_bal = Spinbox(frm_flow, width=15 ,from_=0,to=1000000, font=('Calibri 16'),borderwidth=2)
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=end_bal, tag=("nm_nm241"))
                     
                     lv_name=Label(frm_flow, text="Ending date",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("lb_nm241"))
-                    nm_nm241 = Entry(frm_flow,width=15 , font=('Calibri 16'),borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=nm_nm241, tag=("nm_nm241"))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_lb_hds"))
+                    
 
 
-                    but_gl = customtkinter.CTkButton(master=frm_flow,command=main_sign_in,text="Run",bg="#213b52")
+                    but_gl = customtkinter.CTkButton(master=frm_flow,command=qry_run,text="Run",bg="#213b52")
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=but_gl, tag=("btn_flow"))
 
 
                     lv_name=Label(frm_flow, text="Cash Flow Details",bg="#213b52", fg="White", anchor="center",font=('Calibri 24 bold'))
                     win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("cash_hd"))
                     #table
-
+            
+                    scrollbary = Scrollbar(frm_flow, orient=VERTICAL)
                     fgth = ttk.Style()
                     fgth.theme_use("default")
-                    fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11))
-                    fgth.configure("Treeview.Heading",background="#1b3857",activeforeground="black",foreground="white",font=(None,11))  
-
-                    flow_tree = ttk.Treeview(frm_flow, columns = (1,2,3,4),show = "headings", heigh=25)
+                    fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11),)
+                    fgth.configure("Treeview.Heading",background="#1b3857",activeforeground="black",foreground="white",font=(None,11), justify="center")  
+                    global flow_tree
+                    flow_tree = ttk.Treeview(frm_flow, columns = (1,2,3,4,5,6),show = "headings", heigh=25, yscrollcommand=scrollbary.set)
                     # flow_tree.pack(side = 'top')
-                    flow_tree.heading(1, text="NAME")
-                    flow_tree.heading(2, text="TYPE")
-                    flow_tree.heading(3, text="DETAIL TYPE")
-                    flow_tree.heading(4, text="FINSYS BALANCE")
+                    flow_tree.heading(1, text="ID")
+                    flow_tree.heading(2, text="NAME")
+                    flow_tree.heading(3, text="TYPE")
+                    flow_tree.heading(4, text="DETAIL TYPE")
+                    flow_tree.heading(5, text="DATE")
+                    flow_tree.heading(6, text="FINSYS BALANCE")
                     
-                    
-                    flow_tree.column(1, width = 312)
+                    flow_tree.column(1, width = 112)
                     flow_tree.column(2, width = 312)
-                    flow_tree.column(3, width = 312)
+                    flow_tree.column(3, width = 200)
                     flow_tree.column(4, width = 312)
+                    flow_tree.column(5, width = 112)
+                    flow_tree.column(6, width = 200)
                     
+                    scrollbary.config(command=flow_tree.yview)
+                    
+                    window_label_4 = frm_flow.create_window(0, 0, anchor="nw", window=scrollbary,tags=('scrollbary'))
                     window_label_4 = frm_flow.create_window(0, 0, anchor="nw", window=flow_tree,tags=('tree_flow'))
+
+                    dt_entry = DateEntry(frm_flow,width=15 , font=('Calibri 16'),date_pattern='Y-mm-dd',borderwidth=2)
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=dt_entry, tag=("nm_nm21"))
+
 
                     
                     #3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
