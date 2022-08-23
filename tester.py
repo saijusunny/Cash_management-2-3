@@ -1,33 +1,36 @@
-# Import the required libraries
-from tkinter import *
-from tkinter import ttk
+import datetime
+from dateutil.relativedelta import relativedelta
+from datetime import date,datetime, timedelta
+# today = date.today()
+# first = today.replace(day=1)
+# last_month = first -relativedelta(months=6)
+# print(last_month)
 
-# Create an instance of tkinter frame
-win = Tk()
 
-# Set the size of the tkinter window
-win.geometry("700x300")
+# today = date.today()
+# first = today.replace(day=1)
+# last_month = first -relativedelta(months=1)
+# print(last_month.strftime("%Y-%m-%d"))
 
-# Create an instance of Style widget
-style = ttk.Style()
-style.theme_use('clam')
+# def last_day_of_month(any_day):
+#     # The day 28 exists in every month. 4 days later, it's always next month
+#     next_month = any_day.replace(day=28) + timedelta(days=4)
+#     # subtracting the number of the current day brings us back one month
+#     return next_month - timedelta(days=next_month.day)
 
-# Add a Treeview widget
-tree = ttk.Treeview(win, column=("c1", "c2"), show='headings', height=8)
-tree.column("# 1", anchor=CENTER)
-tree.heading("# 1", text="ID")
-tree.column("# 2", anchor=CENTER)
-tree.heading("# 2", text="Company")
+# month=date.today().strftime("%m")
+# yr=date.today().strftime("%Y")
+# print(type(datetime(month)))
+# print(yr)
+# in_dat=last_day_of_month(date(yr, month, 1))
+# print(in_dat) today6 = date.today()
+today1 = date.today()
+first1 = today1.replace(day=1)
+last_month1 = first1 -relativedelta(months=5)
 
-# Insert the data in Treeview widget
-tree.insert('', 'end', text="1", values=('1',))
-tree.insert('', 'end', text="1", values=('','jk'))
-tree.insert('', 'end', text="2", values=('2', 'Hyundai'))
-tree.insert('', 'end', text="3", values=('3', 'Tesla'))
-tree.insert('', 'end', text="4", values=('4', 'Wolkswagon'))
-tree.insert('', 'end', text="5", values=('5', 'Tata Motors'))
-tree.insert('', 'end', text="6", values=('6', 'Renault'))
+end_today1 = date.today()
+end_first1 = end_today1.replace(day=1)
+end_month1 = end_first1 -relativedelta(days=1)+relativedelta(months=1)
 
-tree.pack()
-
-win.mainloop()
+print(first1)
+print(end_month1)
