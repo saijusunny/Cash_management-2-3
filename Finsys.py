@@ -3293,7 +3293,7 @@ def main_sign_in():
                     chrt_ana= StringVar()
                     dat_type = ttk.Combobox(frm_analiz,textvariable=chrt_ana,width=20,font=('Calibri 16'))
                     
-                    dat_type['values'] = ('All Dates','Custom', 'Today', 'This Month','This Financial Year')
+                    dat_type['values'] = ('Last 6 Months','All Dates','Custom', 'Today', 'This Month',)
                     dat_type.bind('<<ComboboxSelected>>', "chart_tp_slt")
                     dat_type.current(0)
                 
@@ -3519,37 +3519,178 @@ def main_sign_in():
                     
 
                     r2c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+               
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c2, tag=("r2c2"))
                     
 
                     r2c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c3.insert(0,"$11111111111")
-                    r2c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c3, tag=("r2c3"))
 
 
                     r2c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c4, tag=("r2c4"))
 
 
                     r2c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c5, tag=("r2c5"))
 
                     
                     r2c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c7, tag=("r2c7"))
 
                     r2c8 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c8, tag=("r2c8"))
 
                     r2c6 = Entry(frm_analiz, width=18 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r2c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r2c6, tag=("r2c6"))
+
+                    
+
+                    #-----------------------------------------------------------------------------
+                    today_gt2 = date.today()
+                    firsty_gt2= today_gt2.replace(day=1)
+                    last_monthy_gt2 = firsty_gt2 -relativedelta(months=6)
+                    
+                    end_todayy_gt2 = last_monthy_gt2
+                    end_firsty_gt2 = end_todayy_gt2.replace(day=1)
+                    end_monthy_gt2 = end_firsty_gt2 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sqly_gt2_val=(last_monthy_gt2,end_monthy_gt2,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt2,sqly_gt2_val)
+                    mnty_gt2=fbcursor.fetchone()
+                    
+
+
+                    today25 = date.today()
+                    first25 = today25.replace(day=1)
+                    last_month25 = first25 -relativedelta(months=5)
+                    
+                    end_today25 = last_month25
+                    end_first25 = end_today25.replace(day=1)
+                    end_month25 = end_first25 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql25='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sql25_val=(last_month25,end_month25,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql25,sql25_val)
+                    mnt25=fbcursor.fetchone()
+
+                    today24 = date.today()
+                    first24 = today24.replace(day=1)
+                    last_month24 = first24 -relativedelta(months=4)
+                    
+                    end_today24 = last_month24
+                    end_first24 = end_today24.replace(day=1)
+                    end_month24 = end_first24 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql24='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sql24_val=(last_month24,end_month24,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql24,sql24_val)
+                    mnt24=fbcursor.fetchone()
+
+                    today32 = date.today()
+                    first32 = today32.replace(day=1)
+                    last_month32 = first32 -relativedelta(months=3)
+                    
+                    end_today32 = last_month32
+                    end_first32 = end_today32.replace(day=1)
+                    end_month32 = end_first32 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql32='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sql32_val=(last_month32,end_month32,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql32,sql32_val)
+                    mnt32=fbcursor.fetchone()
+
+                    today22 = date.today()
+                    first22 = today22.replace(day=1)
+                    last_month22 = first22 -relativedelta(months=2)
+                    
+                    end_today22 = last_month22
+                    end_first22 = end_today22.replace(day=1)
+                    end_month22 = end_first22 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql22='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sql22_val=(last_month22,end_month22,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql22,sql22_val)
+                    mnt22=fbcursor.fetchone()
+
+                    today21 = date.today()
+                    first21 = today21.replace(day=1)
+              
+
+                    end_today21 = date.today()
+                    end_first21 = end_today21.replace(day=1)
+                    end_month21 = end_first21 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql21='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Income","Income")'
+                    sql21_val=(first21,end_month21,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql21,sql21_val)
+                    mnt21=fbcursor.fetchone()
+
+                    
+                    
+                    if mnty_gt2[0] is None:
+                        val26=0.0
+                    else:
+                        val26=mnty_gt2[0] 
+                    r2c2.delete(0,END)
+                    r2c2.insert(0,"$"+str(val26))
+                    # r2c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt25[0] is None:
+                        val25="0.0"
+                    else:
+                        val25=mnt25[0] 
+                    r2c3.delete(0,END)
+                    r2c3.insert(0,"$"+str(val25))
+                    # r2c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt24[0] is None:
+                        val24="0.0"
+                    else:
+                        val24=mnt24[0] 
+                    r2c4.delete(0,END)
+                    r2c4.insert(0,"$"+str(val24))
+                    # r2c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt32[0] is None:
+                        val32="0.0"
+                    else:
+                        val32=mnt32[0] 
+                    r2c5.delete(0,END)
+                    r2c5.insert(0,"$"+str(val32))
+                    # r2c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt22[0] is None:
+                        val22="0.0"
+                    else:
+                        val22=mnt22[0] 
+                    r2c6.delete(0,END)
+                    r2c6.insert(0,"$"+str(val22))
+                    # r2c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt21[0] is None:
+                        val21="0.0"
+                    else:
+                        val21=mnt21[0] 
+                    r2c7.delete(0,END)
+                    r2c7.insert(0,"$"+str(val21))
+                    # r2c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    # if mnttt2[0] is None:
+                    #     valtt2="0.0"
+                    # else:
+                    #     valtt2=mnttt2[0] 
+                    sum_tt_2=round(float(mnty_gt2[0])+float(mnt25[0])+float(mnt24[0])+float(mnt32[0])+float(mnt22[0])+float(mnt21[0]),2)
+                    r2c8.delete(0,END)
+                    r2c8.insert(0,"$"+str(sum_tt_2))
+                    r2c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    
+
                     #----------------------------------------------------------3rd row
                     lv_name=Label(frm_analiz, text="Cash Inflows (Income):",bg="#506579", width=159, fg="white", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r3c1"))
@@ -6450,13 +6591,17 @@ def main_sign_in():
                     end_firsty_gt22 = end_todayy_gt22.replace(day=1)
                     end_monthy_gt22 = end_firsty_gt22 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sqly_gt22='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sqly_gt22_val=(last_monthy_gt22,end_monthy_gt22,dtl_cmp_pro[0],)
+                    sqly_gt22='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
+                    sqly_gt22_val=(last_monthy_gt22,end_monthy_gt22,dtl_cmp_pro[0], )
                     fbcursor.execute(sqly_gt22,sqly_gt22_val)
                     mnty_gt22=fbcursor.fetchone()
+
+                    sqly_gt22_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sqly_gt22_2val=(last_monthy_gt22,end_monthy_gt22,dtl_cmp_pro[0], )
+                    fbcursor.execute(sqly_gt22_2,sqly_gt22_2val)
+                    mnty_gt22_2=fbcursor.fetchone()
+
                     
-
-
                     today522 = date.today()
                     first522 = today522.replace(day=1)
                     last_month522 = first522 -relativedelta(months=4)
@@ -6465,10 +6610,18 @@ def main_sign_in():
                     end_first522 = end_today522.replace(day=1)
                     end_month522 = end_first522 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sql522='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql522='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
                     sql522_val=(last_month522,end_month522,dtl_cmp_pro[0],)
                     fbcursor.execute(sql522,sql522_val)
                     mnt522=fbcursor.fetchone()
+
+                    sql5_22_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sql5_22_2_val=(last_month522,end_month522,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql5_22_2,sql5_22_2_val)
+                    mnt5_22_2=fbcursor.fetchone()
+
+                    
+
 
                     today422 = date.today()
                     first422 = today422.replace(day=1)
@@ -6478,10 +6631,15 @@ def main_sign_in():
                     end_first422 = end_today422.replace(day=1)
                     end_month422 = end_first422 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sql422='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql422='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
                     sql422_val=(last_month422,end_month422,dtl_cmp_pro[0],)
                     fbcursor.execute(sql422,sql422_val)
                     mnt422=fbcursor.fetchone()
+
+                    sql422_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sql422_val_2=(last_month422,end_month422,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql422_2,sql422_val_2)
+                    mnt422__2=fbcursor.fetchone()
 
                     today322 = date.today()
                     first322 = today322.replace(day=1)
@@ -6491,10 +6649,15 @@ def main_sign_in():
                     end_first322 = end_today322.replace(day=1)
                     end_month322 = end_first322 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sql322='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql322='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
                     sql322_val=(last_month322,end_month322,dtl_cmp_pro[0],)
                     fbcursor.execute(sql322,sql322_val)
                     mnt322=fbcursor.fetchone()
+
+                    sql322_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sql322_val_2=(last_month322,end_month322,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql322_2,sql322_val_2)
+                    mnt322_2=fbcursor.fetchone()
 
                     today222 = date.today()
                     first222 = today222.replace(day=1)
@@ -6504,10 +6667,15 @@ def main_sign_in():
                     end_first222 = end_today222.replace(day=1)
                     end_month222 = end_first222 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sql222='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql222='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
                     sql222_val=(last_month222,end_month222,dtl_cmp_pro[0],)
                     fbcursor.execute(sql222,sql222_val)
                     mnt222=fbcursor.fetchone()
+
+                    sql222_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sql222_val_2=(last_month222,end_month222,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql222_2,sql222_val_2)
+                    mnt222_2=fbcursor.fetchone()
 
                     today221 = date.today()
                     first221 = today221.replace(day=1)
@@ -6517,70 +6685,145 @@ def main_sign_in():
                     end_first221 = end_today221.replace(day=1)
                     end_month221 = end_first221 -relativedelta(days=1)+relativedelta(months=1)
 
-                    sql221='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql221='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income"'
                     sql221_val=(first221,end_month221,dtl_cmp_pro[0],)
                     fbcursor.execute(sql221,sql221_val)
                     mnt221=fbcursor.fetchone()
 
-                    sqltt22='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
+                    sql221_2='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Other Income"'
+                    sql221_val_2=(first221,end_month221,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql221_2,sql221_val_2)
+                    mnt221_2=fbcursor.fetchone()
+
+                    sqltt22='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype="Income" and acctype="Other Income"'
                     sqltt_val22=(last_monthy_gt22,end_month221,dtl_cmp_pro[0],)
                     fbcursor.execute(sqltt22,sqltt_val22)
                     mnttt22=fbcursor.fetchone()
                     
-                    if mnty_gt22[0] is None:
+                    if mnty_gt22[0]==None and mnty_gt22_2[0]==None:
                         val622="0.0"
+                        sum6_22=0.0
                     else:
-                        val622=mnty_gt22[0] 
+                        if mnty_gt22[0] is None:
+                            in_vals22_6=0.0
+                        else:
+                            in_vals22_6=mnty_gt22[0]
+
+                        if mnty_gt22_2[0]is None:
+                            ot_vals22_6=0.0
+                        else:
+                            ot_vals22_6=mnty_gt22_2[0]
+
+                        sum6_22=round(float(in_vals22_6)+float(ot_vals22_6),2)
+                        val6_22=sum6_22
                     r22c2.delete(0,END)
-                    r22c2.insert(0,"$"+str(val622))
+                    r22c2.insert(0,"$"+str(val6_22))
                     r22c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt522[0] is None:
-                        val522="0.0"
+                    if mnt522[0]==None and mnt5_22_2[0]==None:
+                        val622="0.0"
+                        sum5_22=0.0
                     else:
-                        val522=mnt522[0] 
+                        if mnt522[0] is None:
+                            in_vals22_5=0.0
+                        else:
+                            in_vals22_5=mnt522[0]
+
+                        if mnt5_22_2[0]is None:
+                            ot_vals22_5=0.0
+                        else:
+                            ot_vals22_5=mnt5_22_2[0]
+
+                        sum5_22=round(float(in_vals22_5)+float(ot_vals22_5),2)
+                        val5_22=sum5_22
+
                     r22c3.delete(0,END)
-                    r22c3.insert(0,"$"+str(val522))
+                    r22c3.insert(0,"$"+str(val5_22))
                     r22c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt422[0] is None:
-                        val422="0.0"
+                    if mnt422[0]==None and mnt422__2[0]==None:
+                        val4_22="0.0"
+                        sum4_22=0.0
                     else:
-                        val422=mnt422[0] 
+                        if mnt422[0] is None:
+                            in_vals22_4=0.0
+                        else:
+                            in_vals22_4=mnt422[0]
+
+                        if mnt422__2[0]is None:
+                            ot_vals22_4=0.0
+                        else:
+                            ot_vals22_4=mnt422__2[0]
+
+                        sum4_22=round(float(in_vals22_4)+float(ot_vals22_4),2)
+                        val4_22=sum4_22
                     r22c4.delete(0,END)
-                    r22c4.insert(0,"$"+str(val422))
+                    r22c4.insert(0,"$"+str(val4_22))
                     r22c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt322[0] is None:
-                        val322="0.0"
+                    if mnt322[0]==None and mnt322_2[0]==None:
+                        val3_22="0.0"
+                        sum3_22=0.0
                     else:
-                        val322=mnt322[0] 
+                        if mnt322[0] is None:
+                            in_vals22_3=0.0
+                        else:
+                            in_vals22_3=mnt322[0]
+
+                        if mnt322_2[0]is None:
+                            ot_vals22_3=0.0
+                        else:
+                            ot_vals22_3=mnt322_2[0]
+
+                        sum3_22=round(float(in_vals22_3)+float(ot_vals22_3),2)
+                        val3_22=sum3_22
                     r22c5.delete(0,END)
-                    r22c5.insert(0,"$"+str(val322))
+                    r22c5.insert(0,"$"+str(val3_22))
                     r22c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    if mnt222[0] is None:
-                        val222="0.0"
+                    if mnt222[0]==None and mnt222_2[0]==None:
+                        val2_22="0.0"
+                        sum2_22=0.0
                     else:
-                        val222=mnt222[0] 
+                        if mnt222[0] is None:
+                            in_vals22_2=0.0
+                        else:
+                            in_vals22_2=mnt222[0]
+
+                        if mnt222_2[0]is None:
+                            ot_vals22_2=0.0
+                        else:
+                            ot_vals22_2=mnt222_2[0]
+
+                        sum2_22=round(float(in_vals22_2)+float(ot_vals22_2),2)
+                        val2_22=sum2_22 
                     r22c6.delete(0,END)
-                    r22c6.insert(0,"$"+str(val222))
+                    r22c6.insert(0,"$"+str(val2_22))
                     r22c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
-                    if mnt221[0] is None:
-                        val221="0.0"
+                    if mnt221[0]==None and mnt221_2[0]==None:
+                        val1_22="0.0"
+                        sum1_22=0.0
                     else:
-                        val221=mnt221[0] 
+                        if mnt221[0] is None:
+                            in_vals22_2=0.0
+                        else:
+                            in_vals22_2=mnt221[0]
+
+                        if mnt221_2[0]is None:
+                            ot_vals22_2=0.0
+                        else:
+                            ot_vals22_2=mnt221_2[0]
+
+                        sum1_22=round(float(in_vals22_2)+float(ot_vals22_2),2)
+                        val1_22=sum1_22 
                     r22c7.delete(0,END)
-                    r22c7.insert(0,"$"+str(val221))
+                    r22c7.insert(0,"$"+str(val1_22))
                     r22c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    if mnttt22[0] is None:
-                        valtt22="0.0"
-                    else:
-                        valtt22=mnttt22[0] 
+                    tt_sm_22=round(float(sum1_22)+float(sum2_22)+float(sum3_22)+float(sum4_22)+float(sum5_22)+float(sum6_22),2)
                     r22c8.delete(0,END)
-                    r22c8.insert(0,"$"+str(valtt22))
+                    r22c8.insert(0,"$"+str(tt_sm_22))
                     r22c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")   
 
                     #----------------------------------------------------------23 th row
@@ -6612,145 +6855,70 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r23c8, tag=("r23c8"))
 
                     #----------------------------------------------------------------------calcu
-                    today_gt23 = date.today()
-                    firsty_gt23= today_gt23.replace(day=1)
-                    last_monthy_gt23 = firsty_gt23 -relativedelta(months=5)
                     
-                    end_todayy_gt23 = last_monthy_gt23
-                    end_firsty_gt23 = end_todayy_gt23.replace(day=1)
-                    end_monthy_gt23 = end_firsty_gt23 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sqly_gt23='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sqly_gt23_val=(last_monthy_gt23,end_monthy_gt23,dtl_cmp_pro[0],)
-                    fbcursor.execute(sqly_gt23,sqly_gt23_val)
-                    mnty_gt23=fbcursor.fetchone()
                     
-
-
-                    today523 = date.today()
-                    first523 = today523.replace(day=1)
-                    last_month523 = first523 -relativedelta(months=4)
-                    
-                    end_today523 = last_month523
-                    end_first523 = end_today523.replace(day=1)
-                    end_month523 = end_first523 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sql523='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sql523_val=(last_month523,end_month523,dtl_cmp_pro[0],)
-                    fbcursor.execute(sql523,sql523_val)
-                    mnt523=fbcursor.fetchone()
-
-                    today423 = date.today()
-                    first423 = today423.replace(day=1)
-                    last_month423 = first423 -relativedelta(months=3)
-                    
-                    end_today423 = last_month423
-                    end_first423 = end_today423.replace(day=1)
-                    end_month423 = end_first423 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sql423='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sql423_val=(last_month423,end_month423,dtl_cmp_pro[0],)
-                    fbcursor.execute(sql423,sql423_val)
-                    mnt423=fbcursor.fetchone()
-
-                    today323 = date.today()
-                    first323 = today323.replace(day=1)
-                    last_month323 = first323 -relativedelta(months=2)
-                    
-                    end_today323 = last_month323
-                    end_first323 = end_today323.replace(day=1)
-                    end_month323 = end_first323 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sql323='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sql323_val=(last_month323,end_month323,dtl_cmp_pro[0],)
-                    fbcursor.execute(sql323,sql323_val)
-                    mnt323=fbcursor.fetchone()
-
-                    today232 = date.today()
-                    first232 = today232.replace(day=1)
-                    last_month232 = first232 -relativedelta(months=1)
-                    
-                    end_today232 = last_month232
-                    end_first232 = end_today232.replace(day=1)
-                    end_month232 = end_first232 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sql232='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sql232_val=(last_month232,end_month232,dtl_cmp_pro[0],)
-                    fbcursor.execute(sql232,sql232_val)
-                    mnt232=fbcursor.fetchone()
-
-                    today231 = date.today()
-                    first231 = today231.replace(day=1)
-              
-
-                    end_today231 = date.today()
-                    end_first231 = end_today231.replace(day=1)
-                    end_month231 = end_first231 -relativedelta(days=1)+relativedelta(months=1)
-
-                    sql231='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sql231_val=(first231,end_month231,dtl_cmp_pro[0],)
-                    fbcursor.execute(sql231,sql231_val)
-                    mnt231=fbcursor.fetchone()
-
-                    sqltt23='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Proceeds From Sale of Assets" and acctype="Other Income"'
-                    sqltt_val23=(last_monthy_gt23,end_month231,dtl_cmp_pro[0],)
-                    fbcursor.execute(sqltt23,sqltt_val23)
-                    mnttt23=fbcursor.fetchone()
-                    
-                    if mnty_gt23[0] is None:
-                        val623="0.0"
-                    else:
-                        val623=mnty_gt23[0] 
+                    # if mnty_gt23[0] is None:
+                    #     val623="0.0"
+                    # else:
+                    #     val623=mnty_gt23[0] 
+                    val623=round(float(sum6_22)+float(mnty_gt2[0]),2)
                     r23c2.delete(0,END)
                     r23c2.insert(0,"$"+str(val623))
                     r23c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt523[0] is None:
-                        val523="0.0"
-                    else:
-                        val523=mnt523[0] 
+                    # if mnt523[0] is None:
+                    #     val523="0.0"
+                    # else:
+                    #     val523=mnt523[0] 
+                    val523=round(float(sum5_22)+float(mnt25[0]),2)
                     r23c3.delete(0,END)
                     r23c3.insert(0,"$"+str(val523))
                     r23c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt423[0] is None:
-                        val423="0.0"
-                    else:
-                        val423=mnt423[0] 
+                    # if mnt423[0] is None:
+                    #     val423="0.0"
+                    # else:
+                    #     val423=mnt423[0] 
+                    val423=round(float(sum4_22)+float(mnt24[0]),2)
                     r23c4.delete(0,END)
                     r23c4.insert(0,"$"+str(val423))
                     r23c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    if mnt323[0] is None:
-                        val323="0.0"
-                    else:
-                        val323=mnt323[0] 
+                    # if mnt323[0] is None:
+                    #     val323="0.0"
+                    # else:
+                    #     val323=mnt323[0] 
+                    val323=round(float(sum3_22)+float(mnt32[0]),2)
                     r23c5.delete(0,END)
                     r23c5.insert(0,"$"+str(val323))
                     r23c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    if mnt232[0] is None:
-                        val232="0.0"
-                    else:
-                        val232=mnt232[0] 
+                    # if mnt232[0] is None:
+                    #     val232="0.0"
+                    # else:
+                    #     val232=mnt232[0] 
+                    val232=round(float(sum2_22)+float(mnt22[0]),2)
                     r23c6.delete(0,END)
                     r23c6.insert(0,"$"+str(val232))
                     r23c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
-                    if mnt231[0] is None:
-                        val231="0.0"
-                    else:
-                        val231=mnt231[0] 
+                    # if mnt231[0] is None:
+                    #     val231="0.0"
+                    # else:
+                    #     val231=mnt231[0] 
+                    val231=round(float(sum1_22)+float(mnt21[0]),2)
                     r23c7.delete(0,END)
                     r23c7.insert(0,"$"+str(val231))
                     r23c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    if mnttt23[0] is None:
-                        valtt23="0.0"
-                    else:
-                        valtt23=mnttt23[0] 
+                    # if mnttt23[0] is None:
+                    #     valtt23="0.0"
+                    # else:
+                    #     valtt23=mnttt23[0] 
+                    tt_sm_23=round(float(val623)+float(val523)+float(val423)+float(val323)+float(val232)+float(val231),2)
+
                     r23c8.delete(0,END)
-                    r23c8.insert(0,"$"+str(valtt23))
+                    r23c8.insert(0,"$"+str(tt_sm_23))
                     r23c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
                     # #----------------------------------------------------------24 th row
@@ -9373,6 +9541,148 @@ def main_sign_in():
                     r41c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r41c8, tag=("r41c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt41 = date.today()
+                    firsty_gt41= today_gt41.replace(day=1)
+                    last_monthy_gt41 = firsty_gt41 -relativedelta(months=5)
+                    
+                    end_todayy_gt41 = last_monthy_gt41
+                    end_firsty_gt41 = end_todayy_gt41.replace(day=1)
+                    end_monthy_gt41 = end_firsty_gt41 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt41='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sqly_gt41_val=(last_monthy_gt41,end_monthy_gt41,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt41,sqly_gt41_val)
+                    mnty_gt41=fbcursor.fetchone()
+                    
+
+
+                    today541 = date.today()
+                    first541 = today541.replace(day=1)
+                    last_month541 = first541 -relativedelta(months=4)
+                    
+                    end_today541 = last_month541
+                    end_first541 = end_today541.replace(day=1)
+                    end_month541 = end_first541 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql541='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sql541_val=(last_month541,end_month541,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql541,sql541_val)
+                    mnt541=fbcursor.fetchone()
+
+                    today441 = date.today()
+                    first441 = today441.replace(day=1)
+                    last_month441 = first441 -relativedelta(months=3)
+                    
+                    end_today441 = last_month441
+                    end_first441 = end_today441.replace(day=1)
+                    end_month441 = end_first441 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql441='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sql441_val=(last_month441,end_month441,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql441,sql441_val)
+                    mnt441=fbcursor.fetchone()
+
+                    today341 = date.today()
+                    first341 = today341.replace(day=1)
+                    last_month341 = first341 -relativedelta(months=2)
+                    
+                    end_today341 = last_month341
+                    end_first341 = end_today341.replace(day=1)
+                    end_month341 = end_first341 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql341='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sql341_val=(last_month341,end_month341,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql341,sql341_val)
+                    mnt341=fbcursor.fetchone()
+
+                    today241 = date.today()
+                    first241 = today241.replace(day=1)
+                    last_month241 = first241 -relativedelta(months=1)
+                    
+                    end_today241 = last_month241
+                    end_first241 = end_today241.replace(day=1)
+                    end_month241 = end_first241 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql241='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sql241_val=(last_month241,end_month241,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql241,sql241_val)
+                    mnt241=fbcursor.fetchone()
+
+                    today411 = date.today()
+                    first411 = today411.replace(day=1)
+              
+
+                    end_today411 = date.today()
+                    end_first411 = end_today411.replace(day=1)
+                    end_month411 = end_first411 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql411='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sql411_val=(first411,end_month411,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql411,sql411_val)
+                    mnt411=fbcursor.fetchone()
+
+                    sqltt41='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Meals and Entertainment" and acctype="Expenses"'
+                    sqltt_val41=(last_monthy_gt41,end_month411,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt41,sqltt_val41)
+                    mnttt41=fbcursor.fetchone()
+                    
+                    if mnty_gt41[0] is None:
+                        val641="0.0"
+                    else:
+                        val641=mnty_gt41[0] 
+                    r41c2.delete(0,END)
+                    r41c2.insert(0,"$"+str(val641))
+                    r41c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt541[0] is None:
+                        val541="0.0"
+                    else:
+                        val541=mnt541[0] 
+                    r41c3.delete(0,END)
+                    r41c3.insert(0,"$"+str(val541))
+                    r41c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt441[0] is None:
+                        val441="0.0"
+                    else:
+                        val441=mnt441[0] 
+                    r41c4.delete(0,END)
+                    r41c4.insert(0,"$"+str(val441))
+                    r41c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt341[0] is None:
+                        val341="0.0"
+                    else:
+                        val341=mnt341[0] 
+                    r41c5.delete(0,END)
+                    r41c5.insert(0,"$"+str(val341))
+                    r41c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt241[0] is None:
+                        val241="0.0"
+                    else:
+                        val241=mnt241[0] 
+                    r41c6.delete(0,END)
+                    r41c6.insert(0,"$"+str(val241))
+                    r41c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt411[0] is None:
+                        val411="0.0"
+                    else:
+                        val411=mnt411[0] 
+                    r41c7.delete(0,END)
+                    r41c7.insert(0,"$"+str(val411))
+                    r41c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt41[0] is None:
+                        valtt41="0.0"
+                    else:
+                        valtt41=mnttt41[0] 
+                    r41c8.delete(0,END)
+                    r41c8.insert(0,"$"+str(valtt41))
+                    r41c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------42 th row
                     lv_name=Label(frm_analiz, text="Office Supplies",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r42c1"))
@@ -9401,6 +9711,148 @@ def main_sign_in():
                     r42c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r42c8, tag=("r42c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt42 = date.today()
+                    firsty_gt42= today_gt42.replace(day=1)
+                    last_monthy_gt42 = firsty_gt42 -relativedelta(months=5)
+                    
+                    end_todayy_gt42 = last_monthy_gt42
+                    end_firsty_gt42 = end_todayy_gt42.replace(day=1)
+                    end_monthy_gt42 = end_firsty_gt42 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt42='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sqly_gt42_val=(last_monthy_gt42,end_monthy_gt42,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt42,sqly_gt42_val)
+                    mnty_gt42=fbcursor.fetchone()
+                    
+
+
+                    today542 = date.today()
+                    first542 = today542.replace(day=1)
+                    last_month542 = first542 -relativedelta(months=4)
+                    
+                    end_today542 = last_month542
+                    end_first542 = end_today542.replace(day=1)
+                    end_month542 = end_first542 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql542='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sql542_val=(last_month542,end_month542,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql542,sql542_val)
+                    mnt542=fbcursor.fetchone()
+
+                    today442 = date.today()
+                    first442 = today442.replace(day=1)
+                    last_month442 = first442 -relativedelta(months=3)
+                    
+                    end_today442 = last_month442
+                    end_first442 = end_today442.replace(day=1)
+                    end_month442 = end_first442 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql442='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sql442_val=(last_month442,end_month442,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql442,sql442_val)
+                    mnt442=fbcursor.fetchone()
+
+                    today342 = date.today()
+                    first342 = today342.replace(day=1)
+                    last_month342 = first342 -relativedelta(months=2)
+                    
+                    end_today342 = last_month342
+                    end_first342 = end_today342.replace(day=1)
+                    end_month342 = end_first342 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql342='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sql342_val=(last_month342,end_month342,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql342,sql342_val)
+                    mnt342=fbcursor.fetchone()
+
+                    today242 = date.today()
+                    first242 = today242.replace(day=1)
+                    last_month242 = first242 -relativedelta(months=1)
+                    
+                    end_today242 = last_month242
+                    end_first242 = end_today242.replace(day=1)
+                    end_month242 = end_first242 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql242='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sql242_val=(last_month242,end_month242,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql242,sql242_val)
+                    mnt242=fbcursor.fetchone()
+
+                    today421 = date.today()
+                    first421 = today421.replace(day=1)
+              
+
+                    end_today421 = date.today()
+                    end_first421 = end_today421.replace(day=1)
+                    end_month421 = end_first421 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql421='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sql421_val=(first421,end_month421,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql421,sql421_val)
+                    mnt421=fbcursor.fetchone()
+
+                    sqltt42='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Office Supplies" and acctype="Expenses"'
+                    sqltt_val42=(last_monthy_gt42,end_month421,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt42,sqltt_val42)
+                    mnttt42=fbcursor.fetchone()
+                    
+                    if mnty_gt42[0] is None:
+                        val642="0.0"
+                    else:
+                        val642=mnty_gt42[0] 
+                    r42c2.delete(0,END)
+                    r42c2.insert(0,"$"+str(val642))
+                    r42c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt542[0] is None:
+                        val542="0.0"
+                    else:
+                        val542=mnt542[0] 
+                    r42c3.delete(0,END)
+                    r42c3.insert(0,"$"+str(val542))
+                    r42c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt442[0] is None:
+                        val442="0.0"
+                    else:
+                        val442=mnt442[0] 
+                    r42c4.delete(0,END)
+                    r42c4.insert(0,"$"+str(val442))
+                    r42c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt342[0] is None:
+                        val342="0.0"
+                    else:
+                        val342=mnt342[0] 
+                    r42c5.delete(0,END)
+                    r42c5.insert(0,"$"+str(val342))
+                    r42c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt242[0] is None:
+                        val242="0.0"
+                    else:
+                        val242=mnt242[0] 
+                    r42c6.delete(0,END)
+                    r42c6.insert(0,"$"+str(val242))
+                    r42c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt421[0] is None:
+                        val421="0.0"
+                    else:
+                        val421=mnt421[0] 
+                    r42c7.delete(0,END)
+                    r42c7.insert(0,"$"+str(val421))
+                    r42c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt42[0] is None:
+                        valtt42="0.0"
+                    else:
+                        valtt42=mnttt42[0] 
+                    r42c8.delete(0,END)
+                    r42c8.insert(0,"$"+str(valtt42))
+                    r42c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------43 th row
                     lv_name=Label(frm_analiz, text="Postage and Delivery",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r43c1"))
@@ -9428,6 +9880,148 @@ def main_sign_in():
 
                     r43c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r43c8, tag=("r43c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt43 = date.today()
+                    firsty_gt43= today_gt43.replace(day=1)
+                    last_monthy_gt43 = firsty_gt43 -relativedelta(months=5)
+                    
+                    end_todayy_gt43 = last_monthy_gt43
+                    end_firsty_gt43 = end_todayy_gt43.replace(day=1)
+                    end_monthy_gt43 = end_firsty_gt43 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt43='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sqly_gt43_val=(last_monthy_gt43,end_monthy_gt43,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt43,sqly_gt43_val)
+                    mnty_gt43=fbcursor.fetchone()
+                    
+
+
+                    today543 = date.today()
+                    first543 = today543.replace(day=1)
+                    last_month543 = first543 -relativedelta(months=4)
+                    
+                    end_today543 = last_month543
+                    end_first543 = end_today543.replace(day=1)
+                    end_month543 = end_first543 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql543='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sql543_val=(last_month543,end_month543,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql543,sql543_val)
+                    mnt543=fbcursor.fetchone()
+
+                    today443 = date.today()
+                    first443 = today443.replace(day=1)
+                    last_month443 = first443 -relativedelta(months=3)
+                    
+                    end_today443 = last_month443
+                    end_first443 = end_today443.replace(day=1)
+                    end_month443 = end_first443 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql443='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sql443_val=(last_month443,end_month443,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql443,sql443_val)
+                    mnt443=fbcursor.fetchone()
+
+                    today343 = date.today()
+                    first343 = today343.replace(day=1)
+                    last_month343 = first343 -relativedelta(months=2)
+                    
+                    end_today343 = last_month343
+                    end_first343 = end_today343.replace(day=1)
+                    end_month343 = end_first343 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql343='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sql343_val=(last_month343,end_month343,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql343,sql343_val)
+                    mnt343=fbcursor.fetchone()
+
+                    today243 = date.today()
+                    first243 = today243.replace(day=1)
+                    last_month243 = first243 -relativedelta(months=1)
+                    
+                    end_today243 = last_month243
+                    end_first243 = end_today243.replace(day=1)
+                    end_month243 = end_first243 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql243='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sql243_val=(last_month243,end_month243,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql243,sql243_val)
+                    mnt243=fbcursor.fetchone()
+
+                    today431 = date.today()
+                    first431 = today431.replace(day=1)
+              
+
+                    end_today431 = date.today()
+                    end_first431 = end_today431.replace(day=1)
+                    end_month431 = end_first431 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql431='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sql431_val=(first431,end_month431,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql431,sql431_val)
+                    mnt431=fbcursor.fetchone()
+
+                    sqltt43='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Postage and Delivery" and acctype="Expenses"'
+                    sqltt_val43=(last_monthy_gt43,end_month431,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt43,sqltt_val43)
+                    mnttt43=fbcursor.fetchone()
+                    
+                    if mnty_gt43[0] is None:
+                        val643="0.0"
+                    else:
+                        val643=mnty_gt43[0] 
+                    r43c2.delete(0,END)
+                    r43c2.insert(0,"$"+str(val643))
+                    r43c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt543[0] is None:
+                        val543="0.0"
+                    else:
+                        val543=mnt543[0] 
+                    r43c3.delete(0,END)
+                    r43c3.insert(0,"$"+str(val543))
+                    r43c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt443[0] is None:
+                        val443="0.0"
+                    else:
+                        val443=mnt443[0] 
+                    r43c4.delete(0,END)
+                    r43c4.insert(0,"$"+str(val443))
+                    r43c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt343[0] is None:
+                        val343="0.0"
+                    else:
+                        val343=mnt343[0] 
+                    r43c5.delete(0,END)
+                    r43c5.insert(0,"$"+str(val343))
+                    r43c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt243[0] is None:
+                        val243="0.0"
+                    else:
+                        val243=mnt243[0] 
+                    r43c6.delete(0,END)
+                    r43c6.insert(0,"$"+str(val243))
+                    r43c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt431[0] is None:
+                        val431="0.0"
+                    else:
+                        val431=mnt431[0] 
+                    r43c7.delete(0,END)
+                    r43c7.insert(0,"$"+str(val431))
+                    r43c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt43[0] is None:
+                        valtt43="0.0"
+                    else:
+                        valtt43=mnttt43[0] 
+                    r43c8.delete(0,END)
+                    r43c8.insert(0,"$"+str(valtt43))
+                    r43c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     
 
                     #----------------------------------------------------------44 th row
@@ -9458,6 +10052,148 @@ def main_sign_in():
                     r44c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r44c8, tag=("r44c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt44 = date.today()
+                    firsty_gt44= today_gt44.replace(day=1)
+                    last_monthy_gt44 = firsty_gt44 -relativedelta(months=5)
+                    
+                    end_todayy_gt44 = last_monthy_gt44
+                    end_firsty_gt44 = end_todayy_gt44.replace(day=1)
+                    end_monthy_gt44 = end_firsty_gt44 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt44='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sqly_gt44_val=(last_monthy_gt44,end_monthy_gt44,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt44,sqly_gt44_val)
+                    mnty_gt44=fbcursor.fetchone()
+                    
+
+
+                    today544 = date.today()
+                    first544 = today544.replace(day=1)
+                    last_month544 = first544 -relativedelta(months=4)
+                    
+                    end_today544 = last_month544
+                    end_first544 = end_today544.replace(day=1)
+                    end_month544 = end_first544 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql544='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sql544_val=(last_month544,end_month544,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql544,sql544_val)
+                    mnt544=fbcursor.fetchone()
+
+                    today444 = date.today()
+                    first444 = today444.replace(day=1)
+                    last_month444 = first444 -relativedelta(months=3)
+                    
+                    end_today444 = last_month444
+                    end_first444 = end_today444.replace(day=1)
+                    end_month444 = end_first444 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql444='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sql444_val=(last_month444,end_month444,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql444,sql444_val)
+                    mnt444=fbcursor.fetchone()
+
+                    today344 = date.today()
+                    first344 = today344.replace(day=1)
+                    last_month344 = first344 -relativedelta(months=2)
+                    
+                    end_today344 = last_month344
+                    end_first344 = end_today344.replace(day=1)
+                    end_month344 = end_first344 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql344='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sql344_val=(last_month344,end_month344,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql344,sql344_val)
+                    mnt344=fbcursor.fetchone()
+
+                    today244 = date.today()
+                    first244 = today244.replace(day=1)
+                    last_month244 = first244 -relativedelta(months=1)
+                    
+                    end_today244 = last_month244
+                    end_first244 = end_today244.replace(day=1)
+                    end_month244 = end_first244 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql244='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sql244_val=(last_month244,end_month244,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql244,sql244_val)
+                    mnt244=fbcursor.fetchone()
+
+                    today441 = date.today()
+                    first441 = today441.replace(day=1)
+              
+
+                    end_today441 = date.today()
+                    end_first441 = end_today441.replace(day=1)
+                    end_month441 = end_first441 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql441='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sql441_val=(first441,end_month441,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql441,sql441_val)
+                    mnt441=fbcursor.fetchone()
+
+                    sqltt44='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Printing and Reproduction" and acctype="Expenses"'
+                    sqltt_val44=(last_monthy_gt44,end_month441,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt44,sqltt_val44)
+                    mnttt44=fbcursor.fetchone()
+                    
+                    if mnty_gt44[0] is None:
+                        val644="0.0"
+                    else:
+                        val644=mnty_gt44[0] 
+                    r44c2.delete(0,END)
+                    r44c2.insert(0,"$"+str(val644))
+                    r44c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt544[0] is None:
+                        val544="0.0"
+                    else:
+                        val544=mnt544[0] 
+                    r44c3.delete(0,END)
+                    r44c3.insert(0,"$"+str(val544))
+                    r44c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt444[0] is None:
+                        val444="0.0"
+                    else:
+                        val444=mnt444[0] 
+                    r44c4.delete(0,END)
+                    r44c4.insert(0,"$"+str(val444))
+                    r44c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt344[0] is None:
+                        val344="0.0"
+                    else:
+                        val344=mnt344[0] 
+                    r44c5.delete(0,END)
+                    r44c5.insert(0,"$"+str(val344))
+                    r44c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt244[0] is None:
+                        val244="0.0"
+                    else:
+                        val244=mnt244[0] 
+                    r44c6.delete(0,END)
+                    r44c6.insert(0,"$"+str(val244))
+                    r44c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt441[0] is None:
+                        val441="0.0"
+                    else:
+                        val441=mnt441[0] 
+                    r44c7.delete(0,END)
+                    r44c7.insert(0,"$"+str(val441))
+                    r44c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt44[0] is None:
+                        valtt44="0.0"
+                    else:
+                        valtt44=mnttt44[0] 
+                    r44c8.delete(0,END)
+                    r44c8.insert(0,"$"+str(valtt44))
+                    r44c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------45 th row
                     lv_name=Label(frm_analiz, text="Professional Fees",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r45c1"))
@@ -9485,6 +10221,148 @@ def main_sign_in():
 
                     r45c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r45c8, tag=("r45c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt45 = date.today()
+                    firsty_gt45= today_gt45.replace(day=1)
+                    last_monthy_gt45 = firsty_gt45 -relativedelta(months=5)
+                    
+                    end_todayy_gt45 = last_monthy_gt45
+                    end_firsty_gt45 = end_todayy_gt45.replace(day=1)
+                    end_monthy_gt45 = end_firsty_gt45 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt45='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sqly_gt45_val=(last_monthy_gt45,end_monthy_gt45,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt45,sqly_gt45_val)
+                    mnty_gt45=fbcursor.fetchone()
+                    
+
+
+                    today545 = date.today()
+                    first545 = today545.replace(day=1)
+                    last_month545 = first545 -relativedelta(months=4)
+                    
+                    end_today545 = last_month545
+                    end_first545 = end_today545.replace(day=1)
+                    end_month545 = end_first545 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql545='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sql545_val=(last_month545,end_month545,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql545,sql545_val)
+                    mnt545=fbcursor.fetchone()
+
+                    today454 = date.today()
+                    first454 = today454.replace(day=1)
+                    last_month454 = first454 -relativedelta(months=3)
+                    
+                    end_today454 = last_month454
+                    end_first454 = end_today454.replace(day=1)
+                    end_month454 = end_first454 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql454='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sql454_val=(last_month454,end_month454,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql454,sql454_val)
+                    mnt454=fbcursor.fetchone()
+
+                    today345 = date.today()
+                    first345 = today345.replace(day=1)
+                    last_month345 = first345 -relativedelta(months=2)
+                    
+                    end_today345 = last_month345
+                    end_first345 = end_today345.replace(day=1)
+                    end_month345 = end_first345 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql345='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sql345_val=(last_month345,end_month345,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql345,sql345_val)
+                    mnt345=fbcursor.fetchone()
+
+                    today245 = date.today()
+                    first245 = today245.replace(day=1)
+                    last_month245 = first245 -relativedelta(months=1)
+                    
+                    end_today245 = last_month245
+                    end_first245 = end_today245.replace(day=1)
+                    end_month245 = end_first245 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql245='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sql245_val=(last_month245,end_month245,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql245,sql245_val)
+                    mnt245=fbcursor.fetchone()
+
+                    today451 = date.today()
+                    first451 = today451.replace(day=1)
+              
+
+                    end_today451 = date.today()
+                    end_first451 = end_today451.replace(day=1)
+                    end_month451 = end_first451 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql451='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sql451_val=(first451,end_month451,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql451,sql451_val)
+                    mnt451=fbcursor.fetchone()
+
+                    sqltt45='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Professional Fees" and acctype="Expenses"'
+                    sqltt_val45=(last_monthy_gt45,end_month451,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt45,sqltt_val45)
+                    mnttt45=fbcursor.fetchone()
+                    
+                    if mnty_gt45[0] is None:
+                        val645="0.0"
+                    else:
+                        val645=mnty_gt45[0] 
+                    r45c2.delete(0,END)
+                    r45c2.insert(0,"$"+str(val645))
+                    r45c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt545[0] is None:
+                        val545="0.0"
+                    else:
+                        val545=mnt545[0] 
+                    r45c3.delete(0,END)
+                    r45c3.insert(0,"$"+str(val545))
+                    r45c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt454[0] is None:
+                        val454="0.0"
+                    else:
+                        val454=mnt454[0] 
+                    r45c4.delete(0,END)
+                    r45c4.insert(0,"$"+str(val454))
+                    r45c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt345[0] is None:
+                        val345="0.0"
+                    else:
+                        val345=mnt345[0] 
+                    r45c5.delete(0,END)
+                    r45c5.insert(0,"$"+str(val345))
+                    r45c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt245[0] is None:
+                        val245="0.0"
+                    else:
+                        val245=mnt245[0] 
+                    r45c6.delete(0,END)
+                    r45c6.insert(0,"$"+str(val245))
+                    r45c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt451[0] is None:
+                        val451="0.0"
+                    else:
+                        val451=mnt451[0] 
+                    r45c7.delete(0,END)
+                    r45c7.insert(0,"$"+str(val451))
+                    r45c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt45[0] is None:
+                        valtt45="0.0"
+                    else:
+                        valtt45=mnttt45[0] 
+                    r45c8.delete(0,END)
+                    r45c8.insert(0,"$"+str(valtt45))
+                    r45c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
                     #----------------------------------------------------------46 th row
                     lv_name=Label(frm_analiz, text="Purchases",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9514,6 +10392,148 @@ def main_sign_in():
                     r46c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r46c8, tag=("r46c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt46 = date.today()
+                    firsty_gt46= today_gt46.replace(day=1)
+                    last_monthy_gt46 = firsty_gt46 -relativedelta(months=5)
+                    
+                    end_todayy_gt46 = last_monthy_gt46
+                    end_firsty_gt46 = end_todayy_gt46.replace(day=1)
+                    end_monthy_gt46 = end_firsty_gt46 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt46='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sqly_gt46_val=(last_monthy_gt46,end_monthy_gt46,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt46,sqly_gt46_val)
+                    mnty_gt46=fbcursor.fetchone()
+                    
+
+
+                    today546 = date.today()
+                    first546 = today546.replace(day=1)
+                    last_month546 = first546 -relativedelta(months=4)
+                    
+                    end_today546 = last_month546
+                    end_first546 = end_today546.replace(day=1)
+                    end_month546 = end_first546 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql546='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sql546_val=(last_month546,end_month546,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql546,sql546_val)
+                    mnt546=fbcursor.fetchone()
+
+                    today464 = date.today()
+                    first464 = today464.replace(day=1)
+                    last_month464 = first464 -relativedelta(months=3)
+                    
+                    end_today464 = last_month464
+                    end_first464 = end_today464.replace(day=1)
+                    end_month464 = end_first464 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql464='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sql464_val=(last_month464,end_month464,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql464,sql464_val)
+                    mnt464=fbcursor.fetchone()
+
+                    today346 = date.today()
+                    first346 = today346.replace(day=1)
+                    last_month346 = first346 -relativedelta(months=2)
+                    
+                    end_today346 = last_month346
+                    end_first346 = end_today346.replace(day=1)
+                    end_month346 = end_first346 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql346='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sql346_val=(last_month346,end_month346,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql346,sql346_val)
+                    mnt346=fbcursor.fetchone()
+
+                    today246 = date.today()
+                    first246 = today246.replace(day=1)
+                    last_month246 = first246 -relativedelta(months=1)
+                    
+                    end_today246 = last_month246
+                    end_first246 = end_today246.replace(day=1)
+                    end_month246 = end_first246 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql246='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sql246_val=(last_month246,end_month246,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql246,sql246_val)
+                    mnt246=fbcursor.fetchone()
+
+                    today461 = date.today()
+                    first461 = today461.replace(day=1)
+              
+
+                    end_today461 = date.today()
+                    end_first461 = end_today461.replace(day=1)
+                    end_month461 = end_first461 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql461='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sql461_val=(first461,end_month461,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql461,sql461_val)
+                    mnt461=fbcursor.fetchone()
+
+                    sqltt46='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Purchases" and acctype="Expenses"'
+                    sqltt_val46=(last_monthy_gt46,end_month461,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt46,sqltt_val46)
+                    mnttt46=fbcursor.fetchone()
+                    
+                    if mnty_gt46[0] is None:
+                        val646="0.0"
+                    else:
+                        val646=mnty_gt46[0] 
+                    r46c2.delete(0,END)
+                    r46c2.insert(0,"$"+str(val646))
+                    r46c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt546[0] is None:
+                        val546="0.0"
+                    else:
+                        val546=mnt546[0] 
+                    r46c3.delete(0,END)
+                    r46c3.insert(0,"$"+str(val546))
+                    r46c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt464[0] is None:
+                        val464="0.0"
+                    else:
+                        val464=mnt464[0] 
+                    r46c4.delete(0,END)
+                    r46c4.insert(0,"$"+str(val464))
+                    r46c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt346[0] is None:
+                        val346="0.0"
+                    else:
+                        val346=mnt346[0] 
+                    r46c5.delete(0,END)
+                    r46c5.insert(0,"$"+str(val346))
+                    r46c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt246[0] is None:
+                        val246="0.0"
+                    else:
+                        val246=mnt246[0] 
+                    r46c6.delete(0,END)
+                    r46c6.insert(0,"$"+str(val246))
+                    r46c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt461[0] is None:
+                        val461="0.0"
+                    else:
+                        val461=mnt461[0] 
+                    r46c7.delete(0,END)
+                    r46c7.insert(0,"$"+str(val461))
+                    r46c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt46[0] is None:
+                        valtt46="0.0"
+                    else:
+                        valtt46=mnttt46[0] 
+                    r46c8.delete(0,END)
+                    r46c8.insert(0,"$"+str(valtt46))
+                    r46c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------47 th row
                     lv_name=Label(frm_analiz, text="Rent Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r47c1"))
@@ -9541,6 +10561,148 @@ def main_sign_in():
 
                     r47c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r47c8, tag=("r47c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt47 = date.today()
+                    firsty_gt47= today_gt47.replace(day=1)
+                    last_monthy_gt47 = firsty_gt47 -relativedelta(months=5)
+                    
+                    end_todayy_gt47 = last_monthy_gt47
+                    end_firsty_gt47 = end_todayy_gt47.replace(day=1)
+                    end_monthy_gt47 = end_firsty_gt47 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt47='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sqly_gt47_val=(last_monthy_gt47,end_monthy_gt47,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt47,sqly_gt47_val)
+                    mnty_gt47=fbcursor.fetchone()
+                    
+
+
+                    today547 = date.today()
+                    first547 = today547.replace(day=1)
+                    last_month547 = first547 -relativedelta(months=4)
+                    
+                    end_today547 = last_month547
+                    end_first547 = end_today547.replace(day=1)
+                    end_month547 = end_first547 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql547='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sql547_val=(last_month547,end_month547,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql547,sql547_val)
+                    mnt547=fbcursor.fetchone()
+
+                    today474 = date.today()
+                    first474 = today474.replace(day=1)
+                    last_month474 = first474 -relativedelta(months=3)
+                    
+                    end_today474 = last_month474
+                    end_first474 = end_today474.replace(day=1)
+                    end_month474 = end_first474 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql474='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sql474_val=(last_month474,end_month474,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql474,sql474_val)
+                    mnt474=fbcursor.fetchone()
+
+                    today347 = date.today()
+                    first347 = today347.replace(day=1)
+                    last_month347 = first347 -relativedelta(months=2)
+                    
+                    end_today347 = last_month347
+                    end_first347 = end_today347.replace(day=1)
+                    end_month347 = end_first347 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql347='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sql347_val=(last_month347,end_month347,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql347,sql347_val)
+                    mnt347=fbcursor.fetchone()
+
+                    today247 = date.today()
+                    first247 = today247.replace(day=1)
+                    last_month247 = first247 -relativedelta(months=1)
+                    
+                    end_today247 = last_month247
+                    end_first247 = end_today247.replace(day=1)
+                    end_month247 = end_first247 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql247='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sql247_val=(last_month247,end_month247,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql247,sql247_val)
+                    mnt247=fbcursor.fetchone()
+
+                    today471 = date.today()
+                    first471 = today471.replace(day=1)
+              
+
+                    end_today471 = date.today()
+                    end_first471 = end_today471.replace(day=1)
+                    end_month471 = end_first471 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql471='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sql471_val=(first471,end_month471,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql471,sql471_val)
+                    mnt471=fbcursor.fetchone()
+
+                    sqltt47='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Rent Expense" and acctype="Expenses"'
+                    sqltt_val47=(last_monthy_gt47,end_month471,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt47,sqltt_val47)
+                    mnttt47=fbcursor.fetchone()
+                    
+                    if mnty_gt47[0] is None:
+                        val647="0.0"
+                    else:
+                        val647=mnty_gt47[0] 
+                    r47c2.delete(0,END)
+                    r47c2.insert(0,"$"+str(val647))
+                    r47c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt547[0] is None:
+                        val547="0.0"
+                    else:
+                        val547=mnt547[0] 
+                    r47c3.delete(0,END)
+                    r47c3.insert(0,"$"+str(val547))
+                    r47c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt474[0] is None:
+                        val474="0.0"
+                    else:
+                        val474=mnt474[0] 
+                    r47c4.delete(0,END)
+                    r47c4.insert(0,"$"+str(val474))
+                    r47c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt347[0] is None:
+                        val347="0.0"
+                    else:
+                        val347=mnt347[0] 
+                    r47c5.delete(0,END)
+                    r47c5.insert(0,"$"+str(val347))
+                    r47c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt247[0] is None:
+                        val247="0.0"
+                    else:
+                        val247=mnt247[0] 
+                    r47c6.delete(0,END)
+                    r47c6.insert(0,"$"+str(val247))
+                    r47c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt471[0] is None:
+                        val471="0.0"
+                    else:
+                        val471=mnt471[0] 
+                    r47c7.delete(0,END)
+                    r47c7.insert(0,"$"+str(val471))
+                    r47c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt47[0] is None:
+                        valtt47="0.0"
+                    else:
+                        valtt47=mnttt47[0] 
+                    r47c8.delete(0,END)
+                    r47c8.insert(0,"$"+str(valtt47))
+                    r47c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
                     #----------------------------------------------------------48 th row
                     lv_name=Label(frm_analiz, text="Repair and Maintanance",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9570,6 +10732,148 @@ def main_sign_in():
                     r48c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r48c8, tag=("r48c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt48 = date.today()
+                    firsty_gt48= today_gt48.replace(day=1)
+                    last_monthy_gt48 = firsty_gt48 -relativedelta(months=5)
+                    
+                    end_todayy_gt48 = last_monthy_gt48
+                    end_firsty_gt48 = end_todayy_gt48.replace(day=1)
+                    end_monthy_gt48 = end_firsty_gt48 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt48='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sqly_gt48_val=(last_monthy_gt48,end_monthy_gt48,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt48,sqly_gt48_val)
+                    mnty_gt48=fbcursor.fetchone()
+                    
+
+
+                    today548 = date.today()
+                    first548 = today548.replace(day=1)
+                    last_month548 = first548 -relativedelta(months=4)
+                    
+                    end_today548 = last_month548
+                    end_first548 = end_today548.replace(day=1)
+                    end_month548 = end_first548 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql548='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sql548_val=(last_month548,end_month548,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql548,sql548_val)
+                    mnt548=fbcursor.fetchone()
+
+                    today484 = date.today()
+                    first484 = today484.replace(day=1)
+                    last_month484 = first484 -relativedelta(months=3)
+                    
+                    end_today484 = last_month484
+                    end_first484 = end_today484.replace(day=1)
+                    end_month484 = end_first484 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql484='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sql484_val=(last_month484,end_month484,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql484,sql484_val)
+                    mnt484=fbcursor.fetchone()
+
+                    today348 = date.today()
+                    first348 = today348.replace(day=1)
+                    last_month348 = first348 -relativedelta(months=2)
+                    
+                    end_today348 = last_month348
+                    end_first348 = end_today348.replace(day=1)
+                    end_month348 = end_first348 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql348='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sql348_val=(last_month348,end_month348,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql348,sql348_val)
+                    mnt348=fbcursor.fetchone()
+
+                    today248 = date.today()
+                    first248 = today248.replace(day=1)
+                    last_month248 = first248 -relativedelta(months=1)
+                    
+                    end_today248 = last_month248
+                    end_first248 = end_today248.replace(day=1)
+                    end_month248 = end_first248 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql248='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sql248_val=(last_month248,end_month248,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql248,sql248_val)
+                    mnt248=fbcursor.fetchone()
+
+                    today481 = date.today()
+                    first481 = today481.replace(day=1)
+              
+
+                    end_today481 = date.today()
+                    end_first481 = end_today481.replace(day=1)
+                    end_month481 = end_first481 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql481='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sql481_val=(first481,end_month481,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql481,sql481_val)
+                    mnt481=fbcursor.fetchone()
+
+                    sqltt48='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Repair and Maintanance" and acctype="Expenses"'
+                    sqltt_val48=(last_monthy_gt48,end_month481,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt48,sqltt_val48)
+                    mnttt48=fbcursor.fetchone()
+                    
+                    if mnty_gt48[0] is None:
+                        val648="0.0"
+                    else:
+                        val648=mnty_gt48[0] 
+                    r48c2.delete(0,END)
+                    r48c2.insert(0,"$"+str(val648))
+                    r48c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt548[0] is None:
+                        val548="0.0"
+                    else:
+                        val548=mnt548[0] 
+                    r48c3.delete(0,END)
+                    r48c3.insert(0,"$"+str(val548))
+                    r48c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt484[0] is None:
+                        val484="0.0"
+                    else:
+                        val484=mnt484[0] 
+                    r48c4.delete(0,END)
+                    r48c4.insert(0,"$"+str(val484))
+                    r48c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt348[0] is None:
+                        val348="0.0"
+                    else:
+                        val348=mnt348[0] 
+                    r48c5.delete(0,END)
+                    r48c5.insert(0,"$"+str(val348))
+                    r48c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt248[0] is None:
+                        val248="0.0"
+                    else:
+                        val248=mnt248[0] 
+                    r48c6.delete(0,END)
+                    r48c6.insert(0,"$"+str(val248))
+                    r48c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt481[0] is None:
+                        val481="0.0"
+                    else:
+                        val481=mnt481[0] 
+                    r48c7.delete(0,END)
+                    r48c7.insert(0,"$"+str(val481))
+                    r48c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt48[0] is None:
+                        valtt48="0.0"
+                    else:
+                        valtt48=mnttt48[0] 
+                    r48c8.delete(0,END)
+                    r48c8.insert(0,"$"+str(valtt48))
+                    r48c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------49 th row
                     lv_name=Label(frm_analiz, text="Small Tools and Equipments",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r49c1"))
@@ -9598,6 +10902,148 @@ def main_sign_in():
                     r49c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r49c8, tag=("r49c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt49 = date.today()
+                    firsty_gt49= today_gt49.replace(day=1)
+                    last_monthy_gt49 = firsty_gt49 -relativedelta(months=5)
+                    
+                    end_todayy_gt49 = last_monthy_gt49
+                    end_firsty_gt49 = end_todayy_gt49.replace(day=1)
+                    end_monthy_gt49 = end_firsty_gt49 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt49='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sqly_gt49_val=(last_monthy_gt49,end_monthy_gt49,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt49,sqly_gt49_val)
+                    mnty_gt49=fbcursor.fetchone()
+                    
+
+
+                    today549 = date.today()
+                    first549 = today549.replace(day=1)
+                    last_month549 = first549 -relativedelta(months=4)
+                    
+                    end_today549 = last_month549
+                    end_first549 = end_today549.replace(day=1)
+                    end_month549 = end_first549 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql549='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sql549_val=(last_month549,end_month549,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql549,sql549_val)
+                    mnt549=fbcursor.fetchone()
+
+                    today494 = date.today()
+                    first494 = today494.replace(day=1)
+                    last_month494 = first494 -relativedelta(months=3)
+                    
+                    end_today494 = last_month494
+                    end_first494 = end_today494.replace(day=1)
+                    end_month494 = end_first494 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql494='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sql494_val=(last_month494,end_month494,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql494,sql494_val)
+                    mnt494=fbcursor.fetchone()
+
+                    today349 = date.today()
+                    first349 = today349.replace(day=1)
+                    last_month349 = first349 -relativedelta(months=2)
+                    
+                    end_today349 = last_month349
+                    end_first349 = end_today349.replace(day=1)
+                    end_month349 = end_first349 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql349='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sql349_val=(last_month349,end_month349,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql349,sql349_val)
+                    mnt349=fbcursor.fetchone()
+
+                    today249 = date.today()
+                    first249 = today249.replace(day=1)
+                    last_month249 = first249 -relativedelta(months=1)
+                    
+                    end_today249 = last_month249
+                    end_first249 = end_today249.replace(day=1)
+                    end_month249 = end_first249 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql249='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sql249_val=(last_month249,end_month249,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql249,sql249_val)
+                    mnt249=fbcursor.fetchone()
+
+                    today491 = date.today()
+                    first491 = today491.replace(day=1)
+              
+
+                    end_today491 = date.today()
+                    end_first491 = end_today491.replace(day=1)
+                    end_month491 = end_first491 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql491='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sql491_val=(first491,end_month491,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql491,sql491_val)
+                    mnt491=fbcursor.fetchone()
+
+                    sqltt49='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Small Tools and Equipments" and acctype="Expenses"'
+                    sqltt_val49=(last_monthy_gt49,end_month491,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt49,sqltt_val49)
+                    mnttt49=fbcursor.fetchone()
+                    
+                    if mnty_gt49[0] is None:
+                        val649="0.0"
+                    else:
+                        val649=mnty_gt49[0] 
+                    r49c2.delete(0,END)
+                    r49c2.insert(0,"$"+str(val649))
+                    r49c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt549[0] is None:
+                        val549="0.0"
+                    else:
+                        val549=mnt549[0] 
+                    r49c3.delete(0,END)
+                    r49c3.insert(0,"$"+str(val549))
+                    r49c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt494[0] is None:
+                        val494="0.0"
+                    else:
+                        val494=mnt494[0] 
+                    r49c4.delete(0,END)
+                    r49c4.insert(0,"$"+str(val494))
+                    r49c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt349[0] is None:
+                        val349="0.0"
+                    else:
+                        val349=mnt349[0] 
+                    r49c5.delete(0,END)
+                    r49c5.insert(0,"$"+str(val349))
+                    r49c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt249[0] is None:
+                        val249="0.0"
+                    else:
+                        val249=mnt249[0] 
+                    r49c6.delete(0,END)
+                    r49c6.insert(0,"$"+str(val249))
+                    r49c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt491[0] is None:
+                        val491="0.0"
+                    else:
+                        val491=mnt491[0] 
+                    r49c7.delete(0,END)
+                    r49c7.insert(0,"$"+str(val491))
+                    r49c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt49[0] is None:
+                        valtt49="0.0"
+                    else:
+                        valtt49=mnttt49[0] 
+                    r49c8.delete(0,END)
+                    r49c8.insert(0,"$"+str(valtt49))
+                    r49c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------50 th row
                     lv_name=Label(frm_analiz, text="Swachh Barath Cess Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r50c1"))
@@ -9606,7 +11052,7 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r50c2, tag=("r50c2"))
 
                     r50c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r50c3.insert(0,"$11111111111")
+                    
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r50c3, tag=("r50c3"))
 
                     r50c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
@@ -9625,6 +11071,148 @@ def main_sign_in():
 
                     r50c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r50c8, tag=("r50c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt50 = date.today()
+                    firsty_gt50= today_gt50.replace(day=1)
+                    last_monthy_gt50 = firsty_gt50 -relativedelta(months=5)
+                    
+                    end_todayy_gt50 = last_monthy_gt50
+                    end_firsty_gt50 = end_todayy_gt50.replace(day=1)
+                    end_monthy_gt50 = end_firsty_gt50 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt50='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sqly_gt50_val=(last_monthy_gt50,end_monthy_gt50,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt50,sqly_gt50_val)
+                    mnty_gt50=fbcursor.fetchone()
+                    
+
+
+                    today550 = date.today()
+                    first550 = today550.replace(day=1)
+                    last_month550 = first550 -relativedelta(months=4)
+                    
+                    end_today550 = last_month550
+                    end_first550 = end_today550.replace(day=1)
+                    end_month550 = end_first550 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql550='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sql550_val=(last_month550,end_month550,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql550,sql550_val)
+                    mnt550=fbcursor.fetchone()
+
+                    today504 = date.today()
+                    first504 = today504.replace(day=1)
+                    last_month504 = first504 -relativedelta(months=3)
+                    
+                    end_today504 = last_month504
+                    end_first504 = end_today504.replace(day=1)
+                    end_month504 = end_first504 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql504='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sql504_val=(last_month504,end_month504,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql504,sql504_val)
+                    mnt504=fbcursor.fetchone()
+
+                    today350 = date.today()
+                    first350 = today350.replace(day=1)
+                    last_month350 = first350 -relativedelta(months=2)
+                    
+                    end_today350 = last_month350
+                    end_first350 = end_today350.replace(day=1)
+                    end_month350 = end_first350 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql350='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sql350_val=(last_month350,end_month350,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql350,sql350_val)
+                    mnt350=fbcursor.fetchone()
+
+                    today250 = date.today()
+                    first250 = today250.replace(day=1)
+                    last_month250 = first250 -relativedelta(months=1)
+                    
+                    end_today250 = last_month250
+                    end_first250 = end_today250.replace(day=1)
+                    end_month250 = end_first250 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql250='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sql250_val=(last_month250,end_month250,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql250,sql250_val)
+                    mnt250=fbcursor.fetchone()
+
+                    today501 = date.today()
+                    first501 = today501.replace(day=1)
+              
+
+                    end_today501 = date.today()
+                    end_first501 = end_today501.replace(day=1)
+                    end_month501 = end_first501 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql501='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sql501_val=(first501,end_month501,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql501,sql501_val)
+                    mnt501=fbcursor.fetchone()
+
+                    sqltt50='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Swachh Barath Cess Expense" and acctype="Expenses"'
+                    sqltt_val50=(last_monthy_gt50,end_month501,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt50,sqltt_val50)
+                    mnttt50=fbcursor.fetchone()
+                    
+                    if mnty_gt50[0] is None:
+                        val650="0.0"
+                    else:
+                        val650=mnty_gt50[0] 
+                    r50c2.delete(0,END)
+                    r50c2.insert(0,"$"+str(val650))
+                    r50c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt550[0] is None:
+                        val550="0.0"
+                    else:
+                        val550=mnt550[0] 
+                    r50c3.delete(0,END)
+                    r50c3.insert(0,"$"+str(val550))
+                    r50c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt504[0] is None:
+                        val504="0.0"
+                    else:
+                        val504=mnt504[0] 
+                    r50c4.delete(0,END)
+                    r50c4.insert(0,"$"+str(val504))
+                    r50c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt350[0] is None:
+                        val350="0.0"
+                    else:
+                        val350=mnt350[0] 
+                    r50c5.delete(0,END)
+                    r50c5.insert(0,"$"+str(val350))
+                    r50c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt250[0] is None:
+                        val250="0.0"
+                    else:
+                        val250=mnt250[0] 
+                    r50c6.delete(0,END)
+                    r50c6.insert(0,"$"+str(val250))
+                    r50c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt501[0] is None:
+                        val501="0.0"
+                    else:
+                        val501=mnt501[0] 
+                    r50c7.delete(0,END)
+                    r50c7.insert(0,"$"+str(val501))
+                    r50c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt50[0] is None:
+                        valtt50="0.0"
+                    else:
+                        valtt50=mnttt50[0] 
+                    r50c8.delete(0,END)
+                    r50c8.insert(0,"$"+str(valtt50))
+                    r50c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     #----------------------------------------------------------51 th row
                     lv_name=Label(frm_analiz, text="Taxes-Property",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r51c1"))
@@ -9652,6 +11240,149 @@ def main_sign_in():
 
                     r51c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r51c8, tag=("r51c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt51 = date.today()
+                    firsty_gt51= today_gt51.replace(day=1)
+                    last_monthy_gt51 = firsty_gt51 -relativedelta(months=5)
+                    
+                    end_todayy_gt51 = last_monthy_gt51
+                    end_firsty_gt51 = end_todayy_gt51.replace(day=1)
+                    end_monthy_gt51 = end_firsty_gt51 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt51='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sqly_gt51_val=(last_monthy_gt51,end_monthy_gt51,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt51,sqly_gt51_val)
+                    mnty_gt51=fbcursor.fetchone()
+                    
+
+
+                    today551 = date.today()
+                    first551 = today551.replace(day=1)
+                    last_month551 = first551 -relativedelta(months=4)
+                    
+                    end_today551 = last_month551
+                    end_first551 = end_today551.replace(day=1)
+                    end_month551 = end_first551 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql551='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sql551_val=(last_month551,end_month551,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql551,sql551_val)
+                    mnt551=fbcursor.fetchone()
+
+                    today514 = date.today()
+                    first514 = today514.replace(day=1)
+                    last_month514 = first514 -relativedelta(months=3)
+                    
+                    end_today514 = last_month514
+                    end_first514 = end_today514.replace(day=1)
+                    end_month514 = end_first514 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql514='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sql514_val=(last_month514,end_month514,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql514,sql514_val)
+                    mnt514=fbcursor.fetchone()
+
+                    today351 = date.today()
+                    first351 = today351.replace(day=1)
+                    last_month351 = first351 -relativedelta(months=2)
+                    
+                    end_today351 = last_month351
+                    end_first351 = end_today351.replace(day=1)
+                    end_month351 = end_first351 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql351='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sql351_val=(last_month351,end_month351,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql351,sql351_val)
+                    mnt351=fbcursor.fetchone()
+
+                    today251 = date.today()
+                    first251 = today251.replace(day=1)
+                    last_month251 = first251 -relativedelta(months=1)
+                    
+                    end_today251 = last_month251
+                    end_first251 = end_today251.replace(day=1)
+                    end_month251 = end_first251 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql251='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sql251_val=(last_month251,end_month251,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql251,sql251_val)
+                    mnt251=fbcursor.fetchone()
+
+                    today511 = date.today()
+                    first511 = today511.replace(day=1)
+              
+
+                    end_today511 = date.today()
+                    end_first511 = end_today511.replace(day=1)
+                    end_month511 = end_first511 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql511='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sql511_val=(first511,end_month511,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql511,sql511_val)
+                    mnt511=fbcursor.fetchone()
+
+                    sqltt51='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Taxes-Property" and acctype="Expenses"'
+                    sqltt_val51=(last_monthy_gt51,end_month511,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt51,sqltt_val51)
+                    mnttt51=fbcursor.fetchone()
+                    
+                    if mnty_gt51[0] is None:
+                        val651="0.0"
+                    else:
+                        val651=mnty_gt51[0] 
+                    r51c2.delete(0,END)
+                    r51c2.insert(0,"$"+str(val651))
+                    r51c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt551[0] is None:
+                        val551="0.0"
+                    else:
+                        val551=mnt551[0] 
+                    r51c3.delete(0,END)
+                    r51c3.insert(0,"$"+str(val551))
+                    r51c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt514[0] is None:
+                        val514="0.0"
+                    else:
+                        val514=mnt514[0] 
+                    r51c4.delete(0,END)
+                    r51c4.insert(0,"$"+str(val514))
+                    r51c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt351[0] is None:
+                        val351="0.0"
+                    else:
+                        val351=mnt351[0] 
+                    r51c5.delete(0,END)
+                    r51c5.insert(0,"$"+str(val351))
+                    r51c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt251[0] is None:
+                        val251="0.0"
+                    else:
+                        val251=mnt251[0] 
+                    r51c6.delete(0,END)
+                    r51c6.insert(0,"$"+str(val251))
+                    r51c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt511[0] is None:
+                        val511="0.0"
+                    else:
+                        val511=mnt511[0] 
+                    r51c7.delete(0,END)
+                    r51c7.insert(0,"$"+str(val511))
+                    r51c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt51[0] is None:
+                        valtt51="0.0"
+                    else:
+                        valtt51=mnttt51[0] 
+                    r51c8.delete(0,END)
+                    r51c8.insert(0,"$"+str(valtt51))
+                    r51c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
 
                     #----------------------------------------------------------52 th row
                     lv_name=Label(frm_analiz, text="Telephone Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9681,6 +11412,149 @@ def main_sign_in():
                     r52c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r52c8, tag=("r52c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt52 = date.today()
+                    firsty_gt52= today_gt52.replace(day=1)
+                    last_monthy_gt52 = firsty_gt52 -relativedelta(months=5)
+                    
+                    end_todayy_gt52 = last_monthy_gt52
+                    end_firsty_gt52 = end_todayy_gt52.replace(day=1)
+                    end_monthy_gt52 = end_firsty_gt52 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt52='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sqly_gt52_val=(last_monthy_gt52,end_monthy_gt52,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt52,sqly_gt52_val)
+                    mnty_gt52=fbcursor.fetchone()
+                    
+
+
+                    today552 = date.today()
+                    first552 = today552.replace(day=1)
+                    last_month552 = first552 -relativedelta(months=4)
+                    
+                    end_today552 = last_month552
+                    end_first552 = end_today552.replace(day=1)
+                    end_month552 = end_first552 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql552='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sql552_val=(last_month552,end_month552,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql552,sql552_val)
+                    mnt552=fbcursor.fetchone()
+
+                    today524 = date.today()
+                    first524 = today524.replace(day=1)
+                    last_month524 = first524 -relativedelta(months=3)
+                    
+                    end_today524 = last_month524
+                    end_first524 = end_today524.replace(day=1)
+                    end_month524 = end_first524 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql524='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sql524_val=(last_month524,end_month524,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql524,sql524_val)
+                    mnt524=fbcursor.fetchone()
+
+                    today352 = date.today()
+                    first352 = today352.replace(day=1)
+                    last_month352 = first352 -relativedelta(months=2)
+                    
+                    end_today352 = last_month352
+                    end_first352 = end_today352.replace(day=1)
+                    end_month352 = end_first352 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql352='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sql352_val=(last_month352,end_month352,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql352,sql352_val)
+                    mnt352=fbcursor.fetchone()
+
+                    today252 = date.today()
+                    first252 = today252.replace(day=1)
+                    last_month252 = first252 -relativedelta(months=1)
+                    
+                    end_today252 = last_month252
+                    end_first252 = end_today252.replace(day=1)
+                    end_month252 = end_first252 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql252='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sql252_val=(last_month252,end_month252,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql252,sql252_val)
+                    mnt252=fbcursor.fetchone()
+
+                    today521 = date.today()
+                    first521 = today521.replace(day=1)
+              
+
+                    end_today521 = date.today()
+                    end_first521 = end_today521.replace(day=1)
+                    end_month521 = end_first521 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql521='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sql521_val=(first521,end_month521,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql521,sql521_val)
+                    mnt521=fbcursor.fetchone()
+
+                    sqltt52='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Telephone Expense" and acctype="Expenses"'
+                    sqltt_val52=(last_monthy_gt52,end_month521,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt52,sqltt_val52)
+                    mnttt52=fbcursor.fetchone()
+                    
+                    if mnty_gt52[0] is None:
+                        val652="0.0"
+                    else:
+                        val652=mnty_gt52[0] 
+                    r52c2.delete(0,END)
+                    r52c2.insert(0,"$"+str(val652))
+                    r52c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt552[0] is None:
+                        val552="0.0"
+                    else:
+                        val552=mnt552[0] 
+                    r52c3.delete(0,END)
+                    r52c3.insert(0,"$"+str(val552))
+                    r52c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt524[0] is None:
+                        val524="0.0"
+                    else:
+                        val524=mnt524[0] 
+                    r52c4.delete(0,END)
+                    r52c4.insert(0,"$"+str(val524))
+                    r52c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt352[0] is None:
+                        val352="0.0"
+                    else:
+                        val352=mnt352[0] 
+                    r52c5.delete(0,END)
+                    r52c5.insert(0,"$"+str(val352))
+                    r52c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt252[0] is None:
+                        val252="0.0"
+                    else:
+                        val252=mnt252[0] 
+                    r52c6.delete(0,END)
+                    r52c6.insert(0,"$"+str(val252))
+                    r52c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt521[0] is None:
+                        val521="0.0"
+                    else:
+                        val521=mnt521[0] 
+                    r52c7.delete(0,END)
+                    r52c7.insert(0,"$"+str(val521))
+                    r52c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt52[0] is None:
+                        valtt52="0.0"
+                    else:
+                        valtt52=mnttt52[0] 
+                    r52c8.delete(0,END)
+                    r52c8.insert(0,"$"+str(valtt52))
+                    r52c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+
                     #----------------------------------------------------------53 th row
                     lv_name=Label(frm_analiz, text="Travel Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r53c1"))
@@ -9708,6 +11582,149 @@ def main_sign_in():
 
                     r53c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r53c8, tag=("r53c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt53 = date.today()
+                    firsty_gt53= today_gt53.replace(day=1)
+                    last_monthy_gt53 = firsty_gt53 -relativedelta(months=5)
+                    
+                    end_todayy_gt53 = last_monthy_gt53
+                    end_firsty_gt53 = end_todayy_gt53.replace(day=1)
+                    end_monthy_gt53 = end_firsty_gt53 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt53='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sqly_gt53_val=(last_monthy_gt53,end_monthy_gt53,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt53,sqly_gt53_val)
+                    mnty_gt53=fbcursor.fetchone()
+                    
+
+
+                    today553 = date.today()
+                    first553 = today553.replace(day=1)
+                    last_month553 = first553 -relativedelta(months=4)
+                    
+                    end_today553 = last_month553
+                    end_first553 = end_today553.replace(day=1)
+                    end_month553 = end_first553 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql553='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sql553_val=(last_month553,end_month553,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql553,sql553_val)
+                    mnt553=fbcursor.fetchone()
+
+                    today534 = date.today()
+                    first534 = today534.replace(day=1)
+                    last_month534 = first534 -relativedelta(months=3)
+                    
+                    end_today534 = last_month534
+                    end_first534 = end_today534.replace(day=1)
+                    end_month534 = end_first534 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql534='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sql534_val=(last_month534,end_month534,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql534,sql534_val)
+                    mnt534=fbcursor.fetchone()
+
+                    today353 = date.today()
+                    first353 = today353.replace(day=1)
+                    last_month353 = first353 -relativedelta(months=2)
+                    
+                    end_today353 = last_month353
+                    end_first353 = end_today353.replace(day=1)
+                    end_month353 = end_first353 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql353='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sql353_val=(last_month353,end_month353,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql353,sql353_val)
+                    mnt353=fbcursor.fetchone()
+
+                    today253 = date.today()
+                    first253 = today253.replace(day=1)
+                    last_month253 = first253 -relativedelta(months=1)
+                    
+                    end_today253 = last_month253
+                    end_first253 = end_today253.replace(day=1)
+                    end_month253 = end_first253 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql253='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sql253_val=(last_month253,end_month253,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql253,sql253_val)
+                    mnt253=fbcursor.fetchone()
+
+                    today531 = date.today()
+                    first531 = today531.replace(day=1)
+              
+
+                    end_today531 = date.today()
+                    end_first531 = end_today531.replace(day=1)
+                    end_month531 = end_first531 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql531='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sql531_val=(first531,end_month531,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql531,sql531_val)
+                    mnt531=fbcursor.fetchone()
+
+                    sqltt53='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Travel Expense" and acctype="Expenses"'
+                    sqltt_val53=(last_monthy_gt53,end_month531,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt53,sqltt_val53)
+                    mnttt53=fbcursor.fetchone()
+                    
+                    if mnty_gt53[0] is None:
+                        val653="0.0"
+                    else:
+                        val653=mnty_gt53[0] 
+                    r53c2.delete(0,END)
+                    r53c2.insert(0,"$"+str(val653))
+                    r53c2.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white")  
+
+                    if mnt553[0] is None:
+                        val553="0.0"
+                    else:
+                        val553=mnt553[0] 
+                    r53c3.delete(0,END)
+                    r53c3.insert(0,"$"+str(val553))
+                    r53c3.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white")  
+
+                    if mnt534[0] is None:
+                        val534="0.0"
+                    else:
+                        val534=mnt534[0] 
+                    r53c4.delete(0,END)
+                    r53c4.insert(0,"$"+str(val534))
+                    r53c4.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white")  
+
+                    if mnt353[0] is None:
+                        val353="0.0"
+                    else:
+                        val353=mnt353[0] 
+                    r53c5.delete(0,END)
+                    r53c5.insert(0,"$"+str(val353))
+                    r53c5.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white") 
+
+                    if mnt253[0] is None:
+                        val253="0.0"
+                    else:
+                        val253=mnt253[0] 
+                    r53c6.delete(0,END)
+                    r53c6.insert(0,"$"+str(val253))
+                    r53c6.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white")
+
+                    if mnt531[0] is None:
+                        val531="0.0"
+                    else:
+                        val531=mnt531[0] 
+                    r53c7.delete(0,END)
+                    r53c7.insert(0,"$"+str(val531))
+                    r53c7.config(state=DISABLED,disabledbackground="#213b53",disabledforeground="white") 
+
+                    if mnttt53[0] is None:
+                        valtt53="0.0"
+                    else:
+                        valtt53=mnttt53[0] 
+                    r53c8.delete(0,END)
+                    r53c8.insert(0,"$"+str(valtt53))
+                    r53c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
 
                     #----------------------------------------------------------54 th row
                     lv_name=Label(frm_analiz, text="Uncategorised Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9737,6 +11754,149 @@ def main_sign_in():
                     r54c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r54c8, tag=("r54c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt54 = date.today()
+                    firsty_gt54= today_gt54.replace(day=1)
+                    last_monthy_gt54 = firsty_gt54 -relativedelta(months=5)
+                    
+                    end_todayy_gt54 = last_monthy_gt54
+                    end_firsty_gt54 = end_todayy_gt54.replace(day=1)
+                    end_monthy_gt54 = end_firsty_gt54 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt54='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sqly_gt54_val=(last_monthy_gt54,end_monthy_gt54,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt54,sqly_gt54_val)
+                    mnty_gt54=fbcursor.fetchone()
+                    
+
+
+                    today554 = date.today()
+                    first554 = today554.replace(day=1)
+                    last_month554 = first554 -relativedelta(months=4)
+                    
+                    end_today554 = last_month554
+                    end_first554 = end_today554.replace(day=1)
+                    end_month554 = end_first554 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql554='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sql554_val=(last_month554,end_month554,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql554,sql554_val)
+                    mnt554=fbcursor.fetchone()
+
+                    today544 = date.today()
+                    first544 = today544.replace(day=1)
+                    last_month544 = first544 -relativedelta(months=3)
+                    
+                    end_today544 = last_month544
+                    end_first544 = end_today544.replace(day=1)
+                    end_month544 = end_first544 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql544='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sql544_val=(last_month544,end_month544,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql544,sql544_val)
+                    mnt544=fbcursor.fetchone()
+
+                    today354 = date.today()
+                    first354 = today354.replace(day=1)
+                    last_month354 = first354 -relativedelta(months=2)
+                    
+                    end_today354 = last_month354
+                    end_first354 = end_today354.replace(day=1)
+                    end_month354 = end_first354 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql354='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sql354_val=(last_month354,end_month354,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql354,sql354_val)
+                    mnt354=fbcursor.fetchone()
+
+                    today254 = date.today()
+                    first254 = today254.replace(day=1)
+                    last_month254 = first254 -relativedelta(months=1)
+                    
+                    end_today254 = last_month254
+                    end_first254 = end_today254.replace(day=1)
+                    end_month254 = end_first254 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql254='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sql254_val=(last_month254,end_month254,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql254,sql254_val)
+                    mnt254=fbcursor.fetchone()
+
+                    today541 = date.today()
+                    first541 = today541.replace(day=1)
+              
+
+                    end_today541 = date.today()
+                    end_first541 = end_today541.replace(day=1)
+                    end_month541 = end_first541 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql541='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sql541_val=(first541,end_month541,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql541,sql541_val)
+                    mnt541=fbcursor.fetchone()
+
+                    sqltt54='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Uncategorised Expense" and acctype="Expenses"'
+                    sqltt_val54=(last_monthy_gt54,end_month541,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt54,sqltt_val54)
+                    mnttt54=fbcursor.fetchone()
+                    
+                    if mnty_gt54[0] is None:
+                        val654="0.0"
+                    else:
+                        val654=mnty_gt54[0] 
+                    r54c2.delete(0,END)
+                    r54c2.insert(0,"$"+str(val654))
+                    r54c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt554[0] is None:
+                        val554="0.0"
+                    else:
+                        val554=mnt554[0] 
+                    r54c3.delete(0,END)
+                    r54c3.insert(0,"$"+str(val554))
+                    r54c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt544[0] is None:
+                        val544="0.0"
+                    else:
+                        val544=mnt544[0] 
+                    r54c4.delete(0,END)
+                    r54c4.insert(0,"$"+str(val544))
+                    r54c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt354[0] is None:
+                        val354="0.0"
+                    else:
+                        val354=mnt354[0] 
+                    r54c5.delete(0,END)
+                    r54c5.insert(0,"$"+str(val354))
+                    r54c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt254[0] is None:
+                        val254="0.0"
+                    else:
+                        val254=mnt254[0] 
+                    r54c6.delete(0,END)
+                    r54c6.insert(0,"$"+str(val254))
+                    r54c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt541[0] is None:
+                        val541="0.0"
+                    else:
+                        val541=mnt541[0] 
+                    r54c7.delete(0,END)
+                    r54c7.insert(0,"$"+str(val541))
+                    r54c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt54[0] is None:
+                        valtt54="0.0"
+                    else:
+                        valtt54=mnttt54[0] 
+                    r54c8.delete(0,END)
+                    r54c8.insert(0,"$"+str(valtt54))
+                    r54c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+
                     #----------------------------------------------------------55 th row
                     lv_name=Label(frm_analiz, text="Utilities",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r55c1"))
@@ -9745,7 +11905,6 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r55c2, tag=("r55c2"))
 
                     r55c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r55c3.insert(0,"$11111111111")
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r55c3, tag=("r55c3"))
 
                     r55c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
@@ -9764,6 +11923,148 @@ def main_sign_in():
 
                     r55c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r55c8, tag=("r55c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt55 = date.today()
+                    firsty_gt55= today_gt55.replace(day=1)
+                    last_monthy_gt55 = firsty_gt55 -relativedelta(months=5)
+                    
+                    end_todayy_gt55 = last_monthy_gt55
+                    end_firsty_gt55 = end_todayy_gt55.replace(day=1)
+                    end_monthy_gt55 = end_firsty_gt55 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt55='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sqly_gt55_val=(last_monthy_gt55,end_monthy_gt55,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt55,sqly_gt55_val)
+                    mnty_gt55=fbcursor.fetchone()
+                    
+
+
+                    today555 = date.today()
+                    first555 = today555.replace(day=1)
+                    last_month555 = first555 -relativedelta(months=4)
+                    
+                    end_today555 = last_month555
+                    end_first555 = end_today555.replace(day=1)
+                    end_month555 = end_first555 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql555='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sql555_val=(last_month555,end_month555,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql555,sql555_val)
+                    mnt555=fbcursor.fetchone()
+
+                    today554 = date.today()
+                    first554 = today554.replace(day=1)
+                    last_month554 = first554 -relativedelta(months=3)
+                    
+                    end_today554 = last_month554
+                    end_first554 = end_today554.replace(day=1)
+                    end_month554 = end_first554 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql554='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sql554_val=(last_month554,end_month554,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql554,sql554_val)
+                    mnt554=fbcursor.fetchone()
+
+                    today355 = date.today()
+                    first355 = today355.replace(day=1)
+                    last_month355 = first355 -relativedelta(months=2)
+                    
+                    end_today355 = last_month355
+                    end_first355 = end_today355.replace(day=1)
+                    end_month355 = end_first355 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql355='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sql355_val=(last_month355,end_month355,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql355,sql355_val)
+                    mnt355=fbcursor.fetchone()
+
+                    today255 = date.today()
+                    first255 = today255.replace(day=1)
+                    last_month255 = first255 -relativedelta(months=1)
+                    
+                    end_today255 = last_month255
+                    end_first255 = end_today255.replace(day=1)
+                    end_month255 = end_first255 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql255='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sql255_val=(last_month255,end_month255,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql255,sql255_val)
+                    mnt255=fbcursor.fetchone()
+
+                    today551 = date.today()
+                    first551 = today551.replace(day=1)
+              
+
+                    end_today551 = date.today()
+                    end_first551 = end_today551.replace(day=1)
+                    end_month551 = end_first551 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql551='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sql551_val=(first551,end_month551,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql551,sql551_val)
+                    mnt551=fbcursor.fetchone()
+
+                    sqltt55='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Utilities" and acctype="Expenses"'
+                    sqltt_val55=(last_monthy_gt55,end_month551,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt55,sqltt_val55)
+                    mnttt55=fbcursor.fetchone()
+                    
+                    if mnty_gt55[0] is None:
+                        val655="0.0"
+                    else:
+                        val655=mnty_gt55[0] 
+                    r55c2.delete(0,END)
+                    r55c2.insert(0,"$"+str(val655))
+                    r55c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt555[0] is None:
+                        val555="0.0"
+                    else:
+                        val555=mnt555[0] 
+                    r55c3.delete(0,END)
+                    r55c3.insert(0,"$"+str(val555))
+                    r55c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt554[0] is None:
+                        val554="0.0"
+                    else:
+                        val554=mnt554[0] 
+                    r55c4.delete(0,END)
+                    r55c4.insert(0,"$"+str(val554))
+                    r55c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt355[0] is None:
+                        val355="0.0"
+                    else:
+                        val355=mnt355[0] 
+                    r55c5.delete(0,END)
+                    r55c5.insert(0,"$"+str(val355))
+                    r55c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt255[0] is None:
+                        val255="0.0"
+                    else:
+                        val255=mnt255[0] 
+                    r55c6.delete(0,END)
+                    r55c6.insert(0,"$"+str(val255))
+                    r55c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt551[0] is None:
+                        val551="0.0"
+                    else:
+                        val551=mnt551[0] 
+                    r55c7.delete(0,END)
+                    r55c7.insert(0,"$"+str(val551))
+                    r55c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt55[0] is None:
+                        valtt55="0.0"
+                    else:
+                        valtt55=mnttt55[0] 
+                    r55c8.delete(0,END)
+                    r55c8.insert(0,"$"+str(valtt55))
+                    r55c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
                     #----------------------------------------------------------56 th row
                     lv_name=Label(frm_analiz, text="Other:",bg="#506579", width=159, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9800,6 +12101,149 @@ def main_sign_in():
                     r57c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r57c8, tag=("r57c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt57 = date.today()
+                    firsty_gt57= today_gt57.replace(day=1)
+                    last_monthy_gt57 = firsty_gt57 -relativedelta(months=5)
+                    
+                    end_todayy_gt57 = last_monthy_gt57
+                    end_firsty_gt57 = end_todayy_gt57.replace(day=1)
+                    end_monthy_gt57 = end_firsty_gt57 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt57='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sqly_gt57_val=(last_monthy_gt57,end_monthy_gt57,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt57,sqly_gt57_val)
+                    mnty_gt57=fbcursor.fetchone()
+                    
+
+
+                    today575 = date.today()
+                    first575 = today575.replace(day=1)
+                    last_month575 = first575 -relativedelta(months=4)
+                    
+                    end_today575 = last_month575
+                    end_first575 = end_today575.replace(day=1)
+                    end_month575 = end_first575 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql575='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sql575_val=(last_month575,end_month575,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql575,sql575_val)
+                    mnt575=fbcursor.fetchone()
+
+                    today574 = date.today()
+                    first574 = today574.replace(day=1)
+                    last_month574 = first574 -relativedelta(months=3)
+                    
+                    end_today574 = last_month574
+                    end_first574 = end_today574.replace(day=1)
+                    end_month574 = end_first574 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql574='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sql574_val=(last_month574,end_month574,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql574,sql574_val)
+                    mnt574=fbcursor.fetchone()
+
+                    today357 = date.today()
+                    first357 = today357.replace(day=1)
+                    last_month357 = first357 -relativedelta(months=2)
+                    
+                    end_today357 = last_month357
+                    end_first357 = end_today357.replace(day=1)
+                    end_month357 = end_first357 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql357='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sql357_val=(last_month357,end_month357,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql357,sql357_val)
+                    mnt357=fbcursor.fetchone()
+
+                    today257 = date.today()
+                    first257 = today257.replace(day=1)
+                    last_month257 = first257 -relativedelta(months=1)
+                    
+                    end_today257 = last_month257
+                    end_first257 = end_today257.replace(day=1)
+                    end_month257 = end_first257 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql257='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sql257_val=(last_month257,end_month257,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql257,sql257_val)
+                    mnt257=fbcursor.fetchone()
+
+                    today571 = date.today()
+                    first571 = today571.replace(day=1)
+              
+
+                    end_today571 = date.today()
+                    end_first571 = end_today571.replace(day=1)
+                    end_month571 = end_first571 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql571='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sql571_val=(first571,end_month571,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql571,sql571_val)
+                    mnt571=fbcursor.fetchone()
+
+                    sqltt57='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Ask My Accountant" and acctype="Other Expenses"'
+                    sqltt_val57=(last_monthy_gt57,end_month571,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt57,sqltt_val57)
+                    mnttt57=fbcursor.fetchone()
+                    
+                    if mnty_gt57[0] is None:
+                        val657="0.0"
+                    else:
+                        val657=mnty_gt57[0] 
+                    r57c2.delete(0,END)
+                    r57c2.insert(0,"$"+str(val657))
+                    r57c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt575[0] is None:
+                        val575="0.0"
+                    else:
+                        val575=mnt575[0] 
+                    r57c3.delete(0,END)
+                    r57c3.insert(0,"$"+str(val575))
+                    r57c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt574[0] is None:
+                        val574="0.0"
+                    else:
+                        val574=mnt574[0] 
+                    r57c4.delete(0,END)
+                    r57c4.insert(0,"$"+str(val574))
+                    r57c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt357[0] is None:
+                        val357="0.0"
+                    else:
+                        val357=mnt357[0] 
+                    r57c5.delete(0,END)
+                    r57c5.insert(0,"$"+str(val357))
+                    r57c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt257[0] is None:
+                        val257="0.0"
+                    else:
+                        val257=mnt257[0] 
+                    r57c6.delete(0,END)
+                    r57c6.insert(0,"$"+str(val257))
+                    r57c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt571[0] is None:
+                        val571="0.0"
+                    else:
+                        val571=mnt571[0] 
+                    r57c7.delete(0,END)
+                    r57c7.insert(0,"$"+str(val571))
+                    r57c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt57[0] is None:
+                        valtt57="0.0"
+                    else:
+                        valtt57=mnttt57[0] 
+                    r57c8.delete(0,END)
+                    r57c8.insert(0,"$"+str(valtt57))
+                    r57c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+
                     #----------------------------------------------------------58 th row
                     lv_name=Label(frm_analiz, text="CGST Write-Off",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r58c1"))
@@ -9827,6 +12271,149 @@ def main_sign_in():
 
                     r58c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r58c8, tag=("r58c8"))
+
+                    #----------------------------------------------------------------------calcu
+                    today_gt58 = date.today()
+                    firsty_gt58= today_gt58.replace(day=1)
+                    last_monthy_gt58 = firsty_gt58 -relativedelta(months=5)
+                    
+                    end_todayy_gt58 = last_monthy_gt58
+                    end_firsty_gt58 = end_todayy_gt58.replace(day=1)
+                    end_monthy_gt58 = end_firsty_gt58 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt58='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sqly_gt58_val=(last_monthy_gt58,end_monthy_gt58,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt58,sqly_gt58_val)
+                    mnty_gt58=fbcursor.fetchone()
+                    
+
+
+                    today585 = date.today()
+                    first585 = today585.replace(day=1)
+                    last_month585 = first585 -relativedelta(months=4)
+                    
+                    end_today585 = last_month585
+                    end_first585 = end_today585.replace(day=1)
+                    end_month585 = end_first585 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql585='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sql585_val=(last_month585,end_month585,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql585,sql585_val)
+                    mnt585=fbcursor.fetchone()
+
+                    today584 = date.today()
+                    first584 = today584.replace(day=1)
+                    last_month584 = first584 -relativedelta(months=3)
+                    
+                    end_today584 = last_month584
+                    end_first584 = end_today584.replace(day=1)
+                    end_month584 = end_first584 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql584='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sql584_val=(last_month584,end_month584,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql584,sql584_val)
+                    mnt584=fbcursor.fetchone()
+
+                    today358 = date.today()
+                    first358 = today358.replace(day=1)
+                    last_month358 = first358 -relativedelta(months=2)
+                    
+                    end_today358 = last_month358
+                    end_first358 = end_today358.replace(day=1)
+                    end_month358 = end_first358 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql358='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sql358_val=(last_month358,end_month358,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql358,sql358_val)
+                    mnt358=fbcursor.fetchone()
+
+                    today258 = date.today()
+                    first258 = today258.replace(day=1)
+                    last_month258 = first258 -relativedelta(months=1)
+                    
+                    end_today258 = last_month258
+                    end_first258 = end_today258.replace(day=1)
+                    end_month258 = end_first258 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql258='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sql258_val=(last_month258,end_month258,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql258,sql258_val)
+                    mnt258=fbcursor.fetchone()
+
+                    today581 = date.today()
+                    first581 = today581.replace(day=1)
+              
+
+                    end_today581 = date.today()
+                    end_first581 = end_today581.replace(day=1)
+                    end_month581 = end_first581 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql581='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sql581_val=(first581,end_month581,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql581,sql581_val)
+                    mnt581=fbcursor.fetchone()
+
+                    sqltt58='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="CGST Write-Off" and acctype="Other Expenses"'
+                    sqltt_val58=(last_monthy_gt58,end_month581,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt58,sqltt_val58)
+                    mnttt58=fbcursor.fetchone()
+                    
+                    if mnty_gt58[0] is None:
+                        val658="0.0"
+                    else:
+                        val658=mnty_gt58[0] 
+                    r58c2.delete(0,END)
+                    r58c2.insert(0,"$"+str(val658))
+                    r58c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt585[0] is None:
+                        val585="0.0"
+                    else:
+                        val585=mnt585[0] 
+                    r58c3.delete(0,END)
+                    r58c3.insert(0,"$"+str(val585))
+                    r58c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt584[0] is None:
+                        val584="0.0"
+                    else:
+                        val584=mnt584[0] 
+                    r58c4.delete(0,END)
+                    r58c4.insert(0,"$"+str(val584))
+                    r58c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt358[0] is None:
+                        val358="0.0"
+                    else:
+                        val358=mnt358[0] 
+                    r58c5.delete(0,END)
+                    r58c5.insert(0,"$"+str(val358))
+                    r58c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt258[0] is None:
+                        val258="0.0"
+                    else:
+                        val258=mnt258[0] 
+                    r58c6.delete(0,END)
+                    r58c6.insert(0,"$"+str(val258))
+                    r58c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt581[0] is None:
+                        val581="0.0"
+                    else:
+                        val581=mnt581[0] 
+                    r58c7.delete(0,END)
+                    r58c7.insert(0,"$"+str(val581))
+                    r58c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt58[0] is None:
+                        valtt58="0.0"
+                    else:
+                        valtt58=mnttt58[0] 
+                    r58c8.delete(0,END)
+                    r58c8.insert(0,"$"+str(valtt58))
+                    r58c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
 
                     #----------------------------------------------------------59 th row
                     lv_name=Label(frm_analiz, text="GST Write-Off",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9856,6 +12443,148 @@ def main_sign_in():
                     r59c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r59c8, tag=("r59c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt59 = date.today()
+                    firsty_gt59= today_gt59.replace(day=1)
+                    last_monthy_gt59 = firsty_gt59 -relativedelta(months=5)
+                    
+                    end_todayy_gt59 = last_monthy_gt59
+                    end_firsty_gt59 = end_todayy_gt59.replace(day=1)
+                    end_monthy_gt59 = end_firsty_gt59 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt59='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sqly_gt59_val=(last_monthy_gt59,end_monthy_gt59,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt59,sqly_gt59_val)
+                    mnty_gt59=fbcursor.fetchone()
+                    
+
+
+                    today595 = date.today()
+                    first595 = today595.replace(day=1)
+                    last_month595 = first595 -relativedelta(months=4)
+                    
+                    end_today595 = last_month595
+                    end_first595 = end_today595.replace(day=1)
+                    end_month595 = end_first595 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql595='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sql595_val=(last_month595,end_month595,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql595,sql595_val)
+                    mnt595=fbcursor.fetchone()
+
+                    today594 = date.today()
+                    first594 = today594.replace(day=1)
+                    last_month594 = first594 -relativedelta(months=3)
+                    
+                    end_today594 = last_month594
+                    end_first594 = end_today594.replace(day=1)
+                    end_month594 = end_first594 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql594='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sql594_val=(last_month594,end_month594,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql594,sql594_val)
+                    mnt594=fbcursor.fetchone()
+
+                    today359 = date.today()
+                    first359 = today359.replace(day=1)
+                    last_month359 = first359 -relativedelta(months=2)
+                    
+                    end_today359 = last_month359
+                    end_first359 = end_today359.replace(day=1)
+                    end_month359 = end_first359 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql359='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sql359_val=(last_month359,end_month359,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql359,sql359_val)
+                    mnt359=fbcursor.fetchone()
+
+                    today259 = date.today()
+                    first259 = today259.replace(day=1)
+                    last_month259 = first259 -relativedelta(months=1)
+                    
+                    end_today259 = last_month259
+                    end_first259 = end_today259.replace(day=1)
+                    end_month259 = end_first259 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql259='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sql259_val=(last_month259,end_month259,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql259,sql259_val)
+                    mnt259=fbcursor.fetchone()
+
+                    today591 = date.today()
+                    first591 = today591.replace(day=1)
+              
+
+                    end_today591 = date.today()
+                    end_first591 = end_today591.replace(day=1)
+                    end_month591 = end_first591 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql591='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sql591_val=(first591,end_month591,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql591,sql591_val)
+                    mnt591=fbcursor.fetchone()
+
+                    sqltt59='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="GST Write-Off" and acctype="Other Expenses"'
+                    sqltt_val59=(last_monthy_gt59,end_month591,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt59,sqltt_val59)
+                    mnttt59=fbcursor.fetchone()
+                    
+                    if mnty_gt59[0] is None:
+                        val659="0.0"
+                    else:
+                        val659=mnty_gt59[0] 
+                    r59c2.delete(0,END)
+                    r59c2.insert(0,"$"+str(val659))
+                    r59c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt595[0] is None:
+                        val595="0.0"
+                    else:
+                        val595=mnt595[0] 
+                    r59c3.delete(0,END)
+                    r59c3.insert(0,"$"+str(val595))
+                    r59c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt594[0] is None:
+                        val594="0.0"
+                    else:
+                        val594=mnt594[0] 
+                    r59c4.delete(0,END)
+                    r59c4.insert(0,"$"+str(val594))
+                    r59c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt359[0] is None:
+                        val359="0.0"
+                    else:
+                        val359=mnt359[0] 
+                    r59c5.delete(0,END)
+                    r59c5.insert(0,"$"+str(val359))
+                    r59c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt259[0] is None:
+                        val259="0.0"
+                    else:
+                        val259=mnt259[0] 
+                    r59c6.delete(0,END)
+                    r59c6.insert(0,"$"+str(val259))
+                    r59c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt591[0] is None:
+                        val591="0.0"
+                    else:
+                        val591=mnt591[0] 
+                    r59c7.delete(0,END)
+                    r59c7.insert(0,"$"+str(val591))
+                    r59c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt59[0] is None:
+                        valtt59="0.0"
+                    else:
+                        valtt59=mnttt59[0] 
+                    r59c8.delete(0,END)
+                    r59c8.insert(0,"$"+str(valtt59))
+                    r59c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------60 th row
                     lv_name=Label(frm_analiz, text="IGST Write-Off",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r60c1"))
@@ -9884,6 +12613,148 @@ def main_sign_in():
                     r60c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r60c8, tag=("r60c8"))
 
+                    #----------------------------------------------------------------------calcu
+                    today_gt60 = date.today()
+                    firsty_gt60= today_gt60.replace(day=1)
+                    last_monthy_gt60 = firsty_gt60 -relativedelta(months=5)
+                    
+                    end_todayy_gt60 = last_monthy_gt60
+                    end_firsty_gt60 = end_todayy_gt60.replace(day=1)
+                    end_monthy_gt60 = end_firsty_gt60 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt60='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sqly_gt60_val=(last_monthy_gt60,end_monthy_gt60,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt60,sqly_gt60_val)
+                    mnty_gt60=fbcursor.fetchone()
+                    
+
+
+                    today605 = date.today()
+                    first605 = today605.replace(day=1)
+                    last_month605 = first605 -relativedelta(months=4)
+                    
+                    end_today605 = last_month605
+                    end_first605 = end_today605.replace(day=1)
+                    end_month605 = end_first605 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql605='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sql605_val=(last_month605,end_month605,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql605,sql605_val)
+                    mnt605=fbcursor.fetchone()
+
+                    today604 = date.today()
+                    first604 = today604.replace(day=1)
+                    last_month604 = first604 -relativedelta(months=3)
+                    
+                    end_today604 = last_month604
+                    end_first604 = end_today604.replace(day=1)
+                    end_month604 = end_first604 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql604='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sql604_val=(last_month604,end_month604,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql604,sql604_val)
+                    mnt604=fbcursor.fetchone()
+
+                    today360 = date.today()
+                    first360 = today360.replace(day=1)
+                    last_month360 = first360 -relativedelta(months=2)
+                    
+                    end_today360 = last_month360
+                    end_first360 = end_today360.replace(day=1)
+                    end_month360 = end_first360 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql360='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sql360_val=(last_month360,end_month360,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql360,sql360_val)
+                    mnt360=fbcursor.fetchone()
+
+                    today260 = date.today()
+                    first260 = today260.replace(day=1)
+                    last_month260 = first260 -relativedelta(months=1)
+                    
+                    end_today260 = last_month260
+                    end_first260 = end_today260.replace(day=1)
+                    end_month260 = end_first260 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql260='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sql260_val=(last_month260,end_month260,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql260,sql260_val)
+                    mnt260=fbcursor.fetchone()
+
+                    today601 = date.today()
+                    first601 = today601.replace(day=1)
+              
+
+                    end_today601 = date.today()
+                    end_first601 = end_today601.replace(day=1)
+                    end_month601 = end_first601 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql601='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sql601_val=(first601,end_month601,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql601,sql601_val)
+                    mnt601=fbcursor.fetchone()
+
+                    sqltt60='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="IGST Write-Off" and acctype="Other Expenses"'
+                    sqltt_val60=(last_monthy_gt60,end_month601,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt60,sqltt_val60)
+                    mnttt60=fbcursor.fetchone()
+                    
+                    if mnty_gt60[0] is None:
+                        val660="0.0"
+                    else:
+                        val660=mnty_gt60[0] 
+                    r60c2.delete(0,END)
+                    r60c2.insert(0,"$"+str(val660))
+                    r60c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt605[0] is None:
+                        val605="0.0"
+                    else:
+                        val605=mnt605[0] 
+                    r60c3.delete(0,END)
+                    r60c3.insert(0,"$"+str(val605))
+                    r60c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt604[0] is None:
+                        val604="0.0"
+                    else:
+                        val604=mnt604[0] 
+                    r60c4.delete(0,END)
+                    r60c4.insert(0,"$"+str(val604))
+                    r60c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt360[0] is None:
+                        val360="0.0"
+                    else:
+                        val360=mnt360[0] 
+                    r60c5.delete(0,END)
+                    r60c5.insert(0,"$"+str(val360))
+                    r60c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt260[0] is None:
+                        val260="0.0"
+                    else:
+                        val260=mnt260[0] 
+                    r60c6.delete(0,END)
+                    r60c6.insert(0,"$"+str(val260))
+                    r60c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt601[0] is None:
+                        val601="0.0"
+                    else:
+                        val601=mnt601[0] 
+                    r60c7.delete(0,END)
+                    r60c7.insert(0,"$"+str(val601))
+                    r60c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt60[0] is None:
+                        valtt60="0.0"
+                    else:
+                        valtt60=mnttt60[0] 
+                    r60c8.delete(0,END)
+                    r60c8.insert(0,"$"+str(valtt60))
+                    r60c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------61 th row
                     lv_name=Label(frm_analiz, text="Miscellaneous Expense",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r61c1"))
@@ -9911,6 +12782,147 @@ def main_sign_in():
 
                     r61c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r61c8, tag=("r61c8"))
+                    #----------------------------------------------------------------------
+                    today_gt61 = date.today()
+                    firsty_gt61= today_gt61.replace(day=1)
+                    last_monthy_gt61 = firsty_gt61 -relativedelta(months=5)
+                    
+                    end_todayy_gt61 = last_monthy_gt61
+                    end_firsty_gt61 = end_todayy_gt61.replace(day=1)
+                    end_monthy_gt61 = end_firsty_gt61 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt61='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sqly_gt61_val=(last_monthy_gt61,end_monthy_gt61,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt61,sqly_gt61_val)
+                    mnty_gt61=fbcursor.fetchone()
+                    
+
+
+                    today615 = date.today()
+                    first615 = today615.replace(day=1)
+                    last_month615 = first615 -relativedelta(months=4)
+                    
+                    end_today615 = last_month615
+                    end_first615 = end_today615.replace(day=1)
+                    end_month615 = end_first615 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql615='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sql615_val=(last_month615,end_month615,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql615,sql615_val)
+                    mnt615=fbcursor.fetchone()
+
+                    today614 = date.today()
+                    first614 = today614.replace(day=1)
+                    last_month614 = first614 -relativedelta(months=3)
+                    
+                    end_today614 = last_month614
+                    end_first614 = end_today614.replace(day=1)
+                    end_month614 = end_first614 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql614='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sql614_val=(last_month614,end_month614,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql614,sql614_val)
+                    mnt614=fbcursor.fetchone()
+
+                    today361 = date.today()
+                    first361 = today361.replace(day=1)
+                    last_month361 = first361 -relativedelta(months=2)
+                    
+                    end_today361 = last_month361
+                    end_first361 = end_today361.replace(day=1)
+                    end_month361 = end_first361 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql361='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sql361_val=(last_month361,end_month361,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql361,sql361_val)
+                    mnt361=fbcursor.fetchone()
+
+                    today261 = date.today()
+                    first261 = today261.replace(day=1)
+                    last_month261 = first261 -relativedelta(months=1)
+                    
+                    end_today261 = last_month261
+                    end_first261 = end_today261.replace(day=1)
+                    end_month261 = end_first261 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql261='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sql261_val=(last_month261,end_month261,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql261,sql261_val)
+                    mnt261=fbcursor.fetchone()
+
+                    today611 = date.today()
+                    first611 = today611.replace(day=1)
+              
+
+                    end_today611 = date.today()
+                    end_first611 = end_today611.replace(day=1)
+                    end_month611 = end_first611 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql611='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sql611_val=(first611,end_month611,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql611,sql611_val)
+                    mnt611=fbcursor.fetchone()
+
+                    sqltt61='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Miscellaneous Expense" and acctype="Other Expenses"'
+                    sqltt_val61=(last_monthy_gt61,end_month611,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt61,sqltt_val61)
+                    mnttt61=fbcursor.fetchone()
+                    
+                    if mnty_gt61[0] is None:
+                        val661="0.0"
+                    else:
+                        val661=mnty_gt61[0] 
+                    r61c2.delete(0,END)
+                    r61c2.insert(0,"$"+str(val661))
+                    r61c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt615[0] is None:
+                        val615="0.0"
+                    else:
+                        val615=mnt615[0] 
+                    r61c3.delete(0,END)
+                    r61c3.insert(0,"$"+str(val615))
+                    r61c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt614[0] is None:
+                        val614="0.0"
+                    else:
+                        val614=mnt614[0] 
+                    r61c4.delete(0,END)
+                    r61c4.insert(0,"$"+str(val614))
+                    r61c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt361[0] is None:
+                        val361="0.0"
+                    else:
+                        val361=mnt361[0] 
+                    r61c5.delete(0,END)
+                    r61c5.insert(0,"$"+str(val361))
+                    r61c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt261[0] is None:
+                        val261="0.0"
+                    else:
+                        val261=mnt261[0] 
+                    r61c6.delete(0,END)
+                    r61c6.insert(0,"$"+str(val261))
+                    r61c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt611[0] is None:
+                        val611="0.0"
+                    else:
+                        val611=mnt611[0] 
+                    r61c7.delete(0,END)
+                    r61c7.insert(0,"$"+str(val611))
+                    r61c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt61[0] is None:
+                        valtt61="0.0"
+                    else:
+                        valtt61=mnttt61[0] 
+                    r61c8.delete(0,END)
+                    r61c8.insert(0,"$"+str(valtt61))
+                    r61c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
                     #----------------------------------------------------------62 th row
                     lv_name=Label(frm_analiz, text="Political Contributions",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -9940,6 +12952,149 @@ def main_sign_in():
                     r62c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r62c8, tag=("r62c8"))
 
+                    #----------------------------------------------------------------------
+                    today_gt62 = date.today()
+                    firsty_gt62= today_gt62.replace(day=1)
+                    last_monthy_gt62 = firsty_gt62 -relativedelta(months=5)
+                    
+                    end_todayy_gt62 = last_monthy_gt62
+                    end_firsty_gt62 = end_todayy_gt62.replace(day=1)
+                    end_monthy_gt62 = end_firsty_gt62 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt62='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sqly_gt62_val=(last_monthy_gt62,end_monthy_gt62,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt62,sqly_gt62_val)
+                    mnty_gt62=fbcursor.fetchone()
+                    
+
+
+                    today625 = date.today()
+                    first625 = today625.replace(day=1)
+                    last_month625 = first625 -relativedelta(months=4)
+                    
+                    end_today625 = last_month625
+                    end_first625 = end_today625.replace(day=1)
+                    end_month625 = end_first625 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql625='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sql625_val=(last_month625,end_month625,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql625,sql625_val)
+                    mnt625=fbcursor.fetchone()
+
+                    today624 = date.today()
+                    first624 = today624.replace(day=1)
+                    last_month624 = first624 -relativedelta(months=3)
+                    
+                    end_today624 = last_month624
+                    end_first624 = end_today624.replace(day=1)
+                    end_month624 = end_first624 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql624='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sql624_val=(last_month624,end_month624,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql624,sql624_val)
+                    mnt624=fbcursor.fetchone()
+
+                    today362 = date.today()
+                    first362 = today362.replace(day=1)
+                    last_month362 = first362 -relativedelta(months=2)
+                    
+                    end_today362 = last_month362
+                    end_first362 = end_today362.replace(day=1)
+                    end_month362 = end_first362 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql362='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sql362_val=(last_month362,end_month362,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql362,sql362_val)
+                    mnt362=fbcursor.fetchone()
+
+                    today262 = date.today()
+                    first262 = today262.replace(day=1)
+                    last_month262 = first262 -relativedelta(months=1)
+                    
+                    end_today262 = last_month262
+                    end_first262 = end_today262.replace(day=1)
+                    end_month262 = end_first262 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql262='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sql262_val=(last_month262,end_month262,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql262,sql262_val)
+                    mnt262=fbcursor.fetchone()
+
+                    today621 = date.today()
+                    first621 = today621.replace(day=1)
+              
+
+                    end_today621 = date.today()
+                    end_first621 = end_today621.replace(day=1)
+                    end_month621 = end_first621 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql621='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sql621_val=(first621,end_month621,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql621,sql621_val)
+                    mnt621=fbcursor.fetchone()
+
+                    sqltt62='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Political Contributions" and acctype="Other Expenses"'
+                    sqltt_val62=(last_monthy_gt62,end_month621,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt62,sqltt_val62)
+                    mnttt62=fbcursor.fetchone()
+                    
+                    if mnty_gt62[0] is None:
+                        val662="0.0"
+                    else:
+                        val662=mnty_gt62[0] 
+                    r62c2.delete(0,END)
+                    r62c2.insert(0,"$"+str(val662))
+                    r62c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt625[0] is None:
+                        val625="0.0"
+                    else:
+                        val625=mnt625[0] 
+                    r62c3.delete(0,END)
+                    r62c3.insert(0,"$"+str(val625))
+                    r62c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt624[0] is None:
+                        val624="0.0"
+                    else:
+                        val624=mnt624[0] 
+                    r62c4.delete(0,END)
+                    r62c4.insert(0,"$"+str(val624))
+                    r62c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt362[0] is None:
+                        val362="0.0"
+                    else:
+                        val362=mnt362[0] 
+                    r62c5.delete(0,END)
+                    r62c5.insert(0,"$"+str(val362))
+                    r62c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt262[0] is None:
+                        val262="0.0"
+                    else:
+                        val262=mnt262[0] 
+                    r62c6.delete(0,END)
+                    r62c6.insert(0,"$"+str(val262))
+                    r62c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt621[0] is None:
+                        val621="0.0"
+                    else:
+                        val621=mnt621[0] 
+                    r62c7.delete(0,END)
+                    r62c7.insert(0,"$"+str(val621))
+                    r62c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt62[0] is None:
+                        valtt62="0.0"
+                    else:
+                        valtt62=mnttt62[0] 
+                    r62c8.delete(0,END)
+                    r62c8.insert(0,"$"+str(valtt62))
+                    r62c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+
                     #----------------------------------------------------------63th row
                     lv_name=Label(frm_analiz, text="Reconciliation Discrepancies",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r63c1"))
@@ -9948,7 +13103,7 @@ def main_sign_in():
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r63c2, tag=("r63c2"))
 
                     r63c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r63c3.insert(0,"$11111111111")
+                   
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r63c3, tag=("r63c3"))
 
                     r63c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
@@ -9967,6 +13122,149 @@ def main_sign_in():
 
                     r63c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r63c8, tag=("r63c8"))
+
+                    #----------------------------------------------------------------------
+                    today_gt63 = date.today()
+                    firsty_gt63= today_gt63.replace(day=1)
+                    last_monthy_gt63 = firsty_gt63 -relativedelta(months=5)
+                    
+                    end_todayy_gt63 = last_monthy_gt63
+                    end_firsty_gt63 = end_todayy_gt63.replace(day=1)
+                    end_monthy_gt63 = end_firsty_gt63 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt63='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sqly_gt63_val=(last_monthy_gt63,end_monthy_gt63,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt63,sqly_gt63_val)
+                    mnty_gt63=fbcursor.fetchone()
+                    
+
+
+                    today635 = date.today()
+                    first635 = today635.replace(day=1)
+                    last_month635 = first635 -relativedelta(months=4)
+                    
+                    end_today635 = last_month635
+                    end_first635 = end_today635.replace(day=1)
+                    end_month635 = end_first635 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql635='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sql635_val=(last_month635,end_month635,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql635,sql635_val)
+                    mnt635=fbcursor.fetchone()
+
+                    today634 = date.today()
+                    first634 = today634.replace(day=1)
+                    last_month634 = first634 -relativedelta(months=3)
+                    
+                    end_today634 = last_month634
+                    end_first634 = end_today634.replace(day=1)
+                    end_month634 = end_first634 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql634='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sql634_val=(last_month634,end_month634,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql634,sql634_val)
+                    mnt634=fbcursor.fetchone()
+
+                    today363 = date.today()
+                    first363 = today363.replace(day=1)
+                    last_month363 = first363 -relativedelta(months=2)
+                    
+                    end_today363 = last_month363
+                    end_first363 = end_today363.replace(day=1)
+                    end_month363 = end_first363 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql363='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sql363_val=(last_month363,end_month363,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql363,sql363_val)
+                    mnt363=fbcursor.fetchone()
+
+                    today263 = date.today()
+                    first263 = today263.replace(day=1)
+                    last_month263 = first263 -relativedelta(months=1)
+                    
+                    end_today263 = last_month263
+                    end_first263 = end_today263.replace(day=1)
+                    end_month263 = end_first263 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql263='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sql263_val=(last_month263,end_month263,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql263,sql263_val)
+                    mnt263=fbcursor.fetchone()
+
+                    today631 = date.today()
+                    first631 = today631.replace(day=1)
+              
+
+                    end_today631 = date.today()
+                    end_first631 = end_today631.replace(day=1)
+                    end_month631 = end_first631 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql631='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sql631_val=(first631,end_month631,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql631,sql631_val)
+                    mnt631=fbcursor.fetchone()
+
+                    sqltt63='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Reconciliation Discrepancies" and acctype="Other Expenses"'
+                    sqltt_val63=(last_monthy_gt63,end_month631,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt63,sqltt_val63)
+                    mnttt63=fbcursor.fetchone()
+                    
+                    if mnty_gt63[0] is None:
+                        val663="0.0"
+                    else:
+                        val663=mnty_gt63[0] 
+                    r63c2.delete(0,END)
+                    r63c2.insert(0,"$"+str(val663))
+                    r63c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt635[0] is None:
+                        val635="0.0"
+                    else:
+                        val635=mnt635[0] 
+                    r63c3.delete(0,END)
+                    r63c3.insert(0,"$"+str(val635))
+                    r63c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt634[0] is None:
+                        val634="0.0"
+                    else:
+                        val634=mnt634[0] 
+                    r63c4.delete(0,END)
+                    r63c4.insert(0,"$"+str(val634))
+                    r63c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt363[0] is None:
+                        val363="0.0"
+                    else:
+                        val363=mnt363[0] 
+                    r63c5.delete(0,END)
+                    r63c5.insert(0,"$"+str(val363))
+                    r63c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt263[0] is None:
+                        val263="0.0"
+                    else:
+                        val263=mnt263[0] 
+                    r63c6.delete(0,END)
+                    r63c6.insert(0,"$"+str(val263))
+                    r63c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt631[0] is None:
+                        val631="0.0"
+                    else:
+                        val631=mnt631[0] 
+                    r63c7.delete(0,END)
+                    r63c7.insert(0,"$"+str(val631))
+                    r63c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt63[0] is None:
+                        valtt63="0.0"
+                    else:
+                        valtt63=mnttt63[0] 
+                    r63c8.delete(0,END)
+                    r63c8.insert(0,"$"+str(valtt63))
+                    r63c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------64 th row
                     lv_name=Label(frm_analiz, text="SGST Write-Off",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r64c1"))
@@ -9994,6 +13292,148 @@ def main_sign_in():
 
                     r64c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r64c8, tag=("r64c8"))
+
+                    #----------------------------------------------------------------------
+                    today_gt64 = date.today()
+                    firsty_gt64= today_gt64.replace(day=1)
+                    last_monthy_gt64 = firsty_gt64 -relativedelta(months=5)
+                    
+                    end_todayy_gt64 = last_monthy_gt64
+                    end_firsty_gt64 = end_todayy_gt64.replace(day=1)
+                    end_monthy_gt64 = end_firsty_gt64 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt64='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sqly_gt64_val=(last_monthy_gt64,end_monthy_gt64,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt64,sqly_gt64_val)
+                    mnty_gt64=fbcursor.fetchone()
+                    
+
+
+                    today645 = date.today()
+                    first645 = today645.replace(day=1)
+                    last_month645 = first645 -relativedelta(months=4)
+                    
+                    end_today645 = last_month645
+                    end_first645 = end_today645.replace(day=1)
+                    end_month645 = end_first645 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql645='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sql645_val=(last_month645,end_month645,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql645,sql645_val)
+                    mnt645=fbcursor.fetchone()
+
+                    today644 = date.today()
+                    first644 = today644.replace(day=1)
+                    last_month644 = first644 -relativedelta(months=3)
+                    
+                    end_today644 = last_month644
+                    end_first644 = end_today644.replace(day=1)
+                    end_month644 = end_first644 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql644='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sql644_val=(last_month644,end_month644,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql644,sql644_val)
+                    mnt644=fbcursor.fetchone()
+
+                    today364 = date.today()
+                    first364 = today364.replace(day=1)
+                    last_month364 = first364 -relativedelta(months=2)
+                    
+                    end_today364 = last_month364
+                    end_first364 = end_today364.replace(day=1)
+                    end_month364 = end_first364 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql364='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sql364_val=(last_month364,end_month364,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql364,sql364_val)
+                    mnt364=fbcursor.fetchone()
+
+                    today264 = date.today()
+                    first264 = today264.replace(day=1)
+                    last_month264 = first264 -relativedelta(months=1)
+                    
+                    end_today264 = last_month264
+                    end_first264 = end_today264.replace(day=1)
+                    end_month264 = end_first264 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql264='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sql264_val=(last_month264,end_month264,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql264,sql264_val)
+                    mnt264=fbcursor.fetchone()
+
+                    today641 = date.today()
+                    first641 = today641.replace(day=1)
+              
+
+                    end_today641 = date.today()
+                    end_first641 = end_today641.replace(day=1)
+                    end_month641 = end_first641 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql641='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sql641_val=(first641,end_month641,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql641,sql641_val)
+                    mnt641=fbcursor.fetchone()
+
+                    sqltt64='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="SGST Write-Off" and acctype="Other Expenses"'
+                    sqltt_val64=(last_monthy_gt64,end_month641,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt64,sqltt_val64)
+                    mnttt64=fbcursor.fetchone()
+                    
+                    if mnty_gt64[0] is None:
+                        val664="0.0"
+                    else:
+                        val664=mnty_gt64[0] 
+                    r64c2.delete(0,END)
+                    r64c2.insert(0,"$"+str(val664))
+                    r64c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt645[0] is None:
+                        val645="0.0"
+                    else:
+                        val645=mnt645[0] 
+                    r64c3.delete(0,END)
+                    r64c3.insert(0,"$"+str(val645))
+                    r64c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt644[0] is None:
+                        val644="0.0"
+                    else:
+                        val644=mnt644[0] 
+                    r64c4.delete(0,END)
+                    r64c4.insert(0,"$"+str(val644))
+                    r64c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt364[0] is None:
+                        val364="0.0"
+                    else:
+                        val364=mnt364[0] 
+                    r64c5.delete(0,END)
+                    r64c5.insert(0,"$"+str(val364))
+                    r64c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt264[0] is None:
+                        val264="0.0"
+                    else:
+                        val264=mnt264[0] 
+                    r64c6.delete(0,END)
+                    r64c6.insert(0,"$"+str(val264))
+                    r64c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt641[0] is None:
+                        val641="0.0"
+                    else:
+                        val641=mnt641[0] 
+                    r64c7.delete(0,END)
+                    r64c7.insert(0,"$"+str(val641))
+                    r64c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt64[0] is None:
+                        valtt64="0.0"
+                    else:
+                        valtt64=mnttt64[0] 
+                    r64c8.delete(0,END)
+                    r64c8.insert(0,"$"+str(valtt64))
+                    r64c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
                     #----------------------------------------------------------65 th row
                     lv_name=Label(frm_analiz, text="Tax Write-Off",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
@@ -10023,6 +13463,148 @@ def main_sign_in():
                     r65c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r65c8, tag=("r65c8"))
 
+                    #----------------------------------------------------------------------
+                    today_gt65 = date.today()
+                    firsty_gt65= today_gt65.replace(day=1)
+                    last_monthy_gt65 = firsty_gt65 -relativedelta(months=5)
+                    
+                    end_todayy_gt65 = last_monthy_gt65
+                    end_firsty_gt65 = end_todayy_gt65.replace(day=1)
+                    end_monthy_gt65 = end_firsty_gt65 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt65='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sqly_gt65_val=(last_monthy_gt65,end_monthy_gt65,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt65,sqly_gt65_val)
+                    mnty_gt65=fbcursor.fetchone()
+                    
+
+
+                    today655 = date.today()
+                    first655 = today655.replace(day=1)
+                    last_month655 = first655 -relativedelta(months=4)
+                    
+                    end_today655 = last_month655
+                    end_first655 = end_today655.replace(day=1)
+                    end_month655 = end_first655 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql655='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sql655_val=(last_month655,end_month655,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql655,sql655_val)
+                    mnt655=fbcursor.fetchone()
+
+                    today654 = date.today()
+                    first654 = today654.replace(day=1)
+                    last_month654 = first654 -relativedelta(months=3)
+                    
+                    end_today654 = last_month654
+                    end_first654 = end_today654.replace(day=1)
+                    end_month654 = end_first654 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql654='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sql654_val=(last_month654,end_month654,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql654,sql654_val)
+                    mnt654=fbcursor.fetchone()
+
+                    today365 = date.today()
+                    first365 = today365.replace(day=1)
+                    last_month365 = first365 -relativedelta(months=2)
+                    
+                    end_today365 = last_month365
+                    end_first365 = end_today365.replace(day=1)
+                    end_month365 = end_first365 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql365='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sql365_val=(last_month365,end_month365,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql365,sql365_val)
+                    mnt365=fbcursor.fetchone()
+
+                    today265 = date.today()
+                    first265 = today265.replace(day=1)
+                    last_month265 = first265 -relativedelta(months=1)
+                    
+                    end_today265 = last_month265
+                    end_first265 = end_today265.replace(day=1)
+                    end_month265 = end_first265 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql265='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sql265_val=(last_month265,end_month265,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql265,sql265_val)
+                    mnt265=fbcursor.fetchone()
+
+                    today651 = date.today()
+                    first651 = today651.replace(day=1)
+              
+
+                    end_today651 = date.today()
+                    end_first651 = end_today651.replace(day=1)
+                    end_month651 = end_first651 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql651='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sql651_val=(first651,end_month651,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql651,sql651_val)
+                    mnt651=fbcursor.fetchone()
+
+                    sqltt65='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Tax Write-Off" and acctype="Other Expenses"'
+                    sqltt_val65=(last_monthy_gt65,end_month651,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt65,sqltt_val65)
+                    mnttt65=fbcursor.fetchone()
+                    
+                    if mnty_gt65[0] is None:
+                        val665="0.0"
+                    else:
+                        val665=mnty_gt65[0] 
+                    r65c2.delete(0,END)
+                    r65c2.insert(0,"$"+str(val665))
+                    r65c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt655[0] is None:
+                        val655="0.0"
+                    else:
+                        val655=mnt655[0] 
+                    r65c3.delete(0,END)
+                    r65c3.insert(0,"$"+str(val655))
+                    r65c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt654[0] is None:
+                        val654="0.0"
+                    else:
+                        val654=mnt654[0] 
+                    r65c4.delete(0,END)
+                    r65c4.insert(0,"$"+str(val654))
+                    r65c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt365[0] is None:
+                        val365="0.0"
+                    else:
+                        val365=mnt365[0] 
+                    r65c5.delete(0,END)
+                    r65c5.insert(0,"$"+str(val365))
+                    r65c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt265[0] is None:
+                        val265="0.0"
+                    else:
+                        val265=mnt265[0] 
+                    r65c6.delete(0,END)
+                    r65c6.insert(0,"$"+str(val265))
+                    r65c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt651[0] is None:
+                        val651="0.0"
+                    else:
+                        val651=mnt651[0] 
+                    r65c7.delete(0,END)
+                    r65c7.insert(0,"$"+str(val651))
+                    r65c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt65[0] is None:
+                        valtt65="0.0"
+                    else:
+                        valtt65=mnttt65[0] 
+                    r65c8.delete(0,END)
+                    r65c8.insert(0,"$"+str(valtt65))
+                    r65c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------66 th row
                     lv_name=Label(frm_analiz, text="Vehicle Expenses",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r66c1"))
@@ -10051,8 +13633,150 @@ def main_sign_in():
                     r66c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r66c8, tag=("r66c8"))
 
+                    #----------------------------------------------------------------------
+                    today_gt66 = date.today()
+                    firsty_gt66= today_gt66.replace(day=1)
+                    last_monthy_gt66 = firsty_gt66 -relativedelta(months=5)
+                    
+                    end_todayy_gt66 = last_monthy_gt66
+                    end_firsty_gt66 = end_todayy_gt66.replace(day=1)
+                    end_monthy_gt66 = end_firsty_gt66 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt66='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sqly_gt66_val=(last_monthy_gt66,end_monthy_gt66,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt66,sqly_gt66_val)
+                    mnty_gt66=fbcursor.fetchone()
+                    
+
+
+                    today665 = date.today()
+                    first665 = today665.replace(day=1)
+                    last_month665 = first665 -relativedelta(months=4)
+                    
+                    end_today665 = last_month665
+                    end_first665 = end_today665.replace(day=1)
+                    end_month665 = end_first665 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql665='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sql665_val=(last_month665,end_month665,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql665,sql665_val)
+                    mnt665=fbcursor.fetchone()
+
+                    today664 = date.today()
+                    first664 = today664.replace(day=1)
+                    last_month664 = first664 -relativedelta(months=3)
+                    
+                    end_today664 = last_month664
+                    end_first664 = end_today664.replace(day=1)
+                    end_month664 = end_first664 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql664='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sql664_val=(last_month664,end_month664,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql664,sql664_val)
+                    mnt664=fbcursor.fetchone()
+
+                    today366 = date.today()
+                    first366 = today366.replace(day=1)
+                    last_month366 = first366 -relativedelta(months=2)
+                    
+                    end_today366 = last_month366
+                    end_first366 = end_today366.replace(day=1)
+                    end_month366 = end_first366 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql366='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sql366_val=(last_month366,end_month366,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql366,sql366_val)
+                    mnt366=fbcursor.fetchone()
+
+                    today266 = date.today()
+                    first266 = today266.replace(day=1)
+                    last_month266 = first266 -relativedelta(months=1)
+                    
+                    end_today266 = last_month266
+                    end_first266 = end_today266.replace(day=1)
+                    end_month266 = end_first266 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql266='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sql266_val=(last_month266,end_month266,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql266,sql266_val)
+                    mnt266=fbcursor.fetchone()
+
+                    today661 = date.today()
+                    first661 = today661.replace(day=1)
+              
+
+                    end_today661 = date.today()
+                    end_first661 = end_today661.replace(day=1)
+                    end_month661 = end_first661 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql661='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sql661_val=(first661,end_month661,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql661,sql661_val)
+                    mnt661=fbcursor.fetchone()
+
+                    sqltt66='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and name="Vehicle Expenses" and acctype="Other Expenses"'
+                    sqltt_val66=(last_monthy_gt66,end_month661,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqltt66,sqltt_val66)
+                    mnttt66=fbcursor.fetchone()
+                    
+                    if mnty_gt66[0] is None:
+                        val666="0.0"
+                    else:
+                        val666=mnty_gt66[0] 
+                    r66c2.delete(0,END)
+                    r66c2.insert(0,"$"+str(val666))
+                    r66c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt665[0] is None:
+                        val665="0.0"
+                    else:
+                        val665=mnt665[0] 
+                    r66c3.delete(0,END)
+                    r66c3.insert(0,"$"+str(val665))
+                    r66c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt664[0] is None:
+                        val664="0.0"
+                    else:
+                        val664=mnt664[0] 
+                    r66c4.delete(0,END)
+                    r66c4.insert(0,"$"+str(val664))
+                    r66c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt366[0] is None:
+                        val366="0.0"
+                    else:
+                        val366=mnt366[0] 
+                    r66c5.delete(0,END)
+                    r66c5.insert(0,"$"+str(val366))
+                    r66c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt266[0] is None:
+                        val266="0.0"
+                    else:
+                        val266=mnt266[0] 
+                    r66c6.delete(0,END)
+                    r66c6.insert(0,"$"+str(val266))
+                    r66c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt661[0] is None:
+                        val661="0.0"
+                    else:
+                        val661=mnt661[0] 
+                    r66c7.delete(0,END)
+                    r66c7.insert(0,"$"+str(val661))
+                    r66c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnttt66[0] is None:
+                        valtt66="0.0"
+                    else:
+                        valtt66=mnttt66[0] 
+                    r66c8.delete(0,END)
+                    r66c8.insert(0,"$"+str(valtt66))
+                    r66c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
                     #----------------------------------------------------------67 th row
-                    lv_name=Label(frm_analiz, text="Subtotal",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
+                    lv_name=Label(frm_analiz, text="Total Cash Outflows",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r67c1"))
 
                     r67c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
@@ -10079,8 +13803,147 @@ def main_sign_in():
                     r67c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r67c8, tag=("r67c8"))
 
+                    #-----------------------------------------------------------------------------
+                    today_gt67 = date.today()
+                    firsty_gt67= today_gt67.replace(day=1)
+                    last_monthy_gt67 = firsty_gt67 -relativedelta(months=5)
+                    
+                    end_todayy_gt67 = last_monthy_gt67
+                    end_firsty_gt67 = end_todayy_gt67.replace(day=1)
+                    end_monthy_gt67 = end_firsty_gt67 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sqly_gt67='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sqly_gt67_val=(last_monthy_gt67,end_monthy_gt67,dtl_cmp_pro[0],)
+                    fbcursor.execute(sqly_gt67,sqly_gt67_val)
+                    mnty_gt67=fbcursor.fetchone()
+                    
+
+
+                    today675 = date.today()
+                    first675 = today675.replace(day=1)
+                    last_month675 = first675 -relativedelta(months=4)
+                    
+                    end_today675 = last_month675
+                    end_first675 = end_today675.replace(day=1)
+                    end_month675 = end_first675 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql675='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sql675_val=(last_month675,end_month675,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql675,sql675_val)
+                    mnt675=fbcursor.fetchone()
+
+                    today674 = date.today()
+                    first674 = today674.replace(day=1)
+                    last_month674 = first674 -relativedelta(months=3)
+                    
+                    end_today674 = last_month674
+                    end_first674 = end_today674.replace(day=1)
+                    end_month674 = end_first674 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql674='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sql674_val=(last_month674,end_month674,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql674,sql674_val)
+                    mnt674=fbcursor.fetchone()
+
+                    today367 = date.today()
+                    first367 = today367.replace(day=1)
+                    last_month367 = first367 -relativedelta(months=2)
+                    
+                    end_today367 = last_month367
+                    end_first367 = end_today367.replace(day=1)
+                    end_month367 = end_first367 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql367='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sql367_val=(last_month367,end_month367,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql367,sql367_val)
+                    mnt367=fbcursor.fetchone()
+
+                    today267 = date.today()
+                    first267 = today267.replace(day=1)
+                    last_month267 = first267 -relativedelta(months=1)
+                    
+                    end_today267 = last_month267
+                    end_first267 = end_today267.replace(day=1)
+                    end_month267 = end_first267 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql267='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sql267_val=(last_month267,end_month267,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql267,sql267_val)
+                    mnt267=fbcursor.fetchone()
+
+                    today671 = date.today()
+                    first671 = today671.replace(day=1)
+              
+
+                    end_today671 = date.today()
+                    end_first671 = end_today671.replace(day=1)
+                    end_month671 = end_first671 -relativedelta(days=1)+relativedelta(months=1)
+
+                    sql671='select sum(balance) from app1_accounts1 where asof between %s and %s and cid_id=%s and acctype in ("Other Expenses","Expenses")'
+                    sql671_val=(first671,end_month671,dtl_cmp_pro[0],)
+                    fbcursor.execute(sql671,sql671_val)
+                    mnt671=fbcursor.fetchone()
+
+                    
+                    
+                    if mnty_gt67[0] is None:
+                        val676=0.0
+                    else:
+                        val676=mnty_gt67[0] 
+                    r67c2.delete(0,END)
+                    r67c2.insert(0,"$"+str(val676))
+                    r67c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt675[0] is None:
+                        val675="0.0"
+                    else:
+                        val675=mnt675[0] 
+                    r67c3.delete(0,END)
+                    r67c3.insert(0,"$"+str(val675))
+                    r67c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt674[0] is None:
+                        val674="0.0"
+                    else:
+                        val674=mnt674[0] 
+                    r67c4.delete(0,END)
+                    r67c4.insert(0,"$"+str(val674))
+                    r67c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
+
+                    if mnt367[0] is None:
+                        val367="0.0"
+                    else:
+                        val367=mnt367[0] 
+                    r67c5.delete(0,END)
+                    r67c5.insert(0,"$"+str(val367))
+                    r67c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    if mnt267[0] is None:
+                        val267="0.0"
+                    else:
+                        val267=mnt267[0] 
+                    r67c6.delete(0,END)
+                    r67c6.insert(0,"$"+str(val267))
+                    r67c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    if mnt671[0] is None:
+                        val671="0.0"
+                    else:
+                        val671=mnt671[0] 
+                    r67c7.delete(0,END)
+                    r67c7.insert(0,"$"+str(val671))
+                    r67c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
+
+                    # if mnttt67[0] is None:
+                    #     valtt67="0.0"
+                    # else:
+                    #     valtt67=mnttt67[0] 
+                    sum_tt_67=round(float(mnty_gt67[0])+float(mnt675[0])+float(mnt674[0])+float(mnt367[0])+float(mnt267[0])+float(mnt671[0]),2)
+                    r67c8.delete(0,END)
+                    r67c8.insert(0,"$"+str(sum_tt_67))
+                    r67c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
                     #----------------------------------------------------------68 th row
-                    lv_name=Label(frm_analiz, text="Total Cash Outflows",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
+                    lv_name=Label(frm_analiz, text="Ending Cash Balance",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r68c1"))
 
                     r68c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
@@ -10107,88 +13970,179 @@ def main_sign_in():
                     r68c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
                     win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r68c8, tag=("r68c8"))
 
-                    #----------------------------------------------------------69th row
-                    lv_name=Label(frm_analiz, text="Ending Cash Balance",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r69c1"))
+                    #----------------------------------------------------------------------
+                    
+                    
+                    # if mnty_gt68[0] is None:
+                    #     val686="0.0"
+                    # else:
+                    #     val686=mnty_gt68[0] 
+                    val686=round(float(val623)-float(mnty_gt67[0]))
+                    r68c2.delete(0,END)
+                    r68c2.insert(0,"$"+str(val686))
+                    r68c2.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    r69c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c2, tag=("r69c2"))
+                    # if mnt685[0] is None:
+                    #     val685="0.0"
+                    # else:
+                    #     val685=mnt685[0] 
+                    val685=round(float(val523)-float(mnt675[0]))
+                    r68c3.delete(0,END)
+                    r68c3.insert(0,"$"+str(val685))
+                    r68c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    r69c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r69c3.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c3, tag=("r69c3"))
+                    # if mnt684[0] is None:
+                    #     val684="0.0"
+                    # else:
+                    #     val684=mnt684[0] 
+                    val684=round(float(val423)-float(mnt674[0]))
+                    r68c4.delete(0,END)
+                    r68c4.insert(0,"$"+str(val684))
+                    r68c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")  
 
-                    r69c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c4, tag=("r69c4"))
+                    # if mnt368[0] is None:
+                    #     val368="0.0"
+                    # else:
+                    #     val368=mnt368[0] 
+                    val368=round(float(val323)-float(mnt367[0]))
+                    r68c5.delete(0,END)
+                    r68c5.insert(0,"$"+str(val368))
+                    r68c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
+                    # if mnt268[0] is None:
+                    #     val268="0.0"
+                    # else:
+                    #     val268=mnt268[0] 
+                    val268=round(float(val232)-float(mnt267[0]))
+                    r68c6.delete(0,END)
+                    r68c6.insert(0,"$"+str(val268))
+                    r68c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
-                    r69c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c5, tag=("r69c5"))
+                    # if mnt681[0] is None:
+                    #     val681="0.0"
+                    # else:
+                    #     val681=mnt681[0] 
+                    val681=round(float(val231)-float(mnt671[0]))
+                    r68c7.delete(0,END)
+                    r68c7.insert(0,"$"+str(val681))
+                    r68c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    r69c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c6, tag=("r69c6"))
-
-
-                    r69c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c7, tag=("r69c7"))
-
-                    r69c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c8, tag=("r69c8"))
-                    #----------------------------------------------------------70 th row
-                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r70c1"))
-
-                    r70c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c2, tag=("r70c2"))
-
-                    r70c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r70c3.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c3, tag=("r70c3"))
-
-                    r70c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c4, tag=("r70c4"))
-
-
-                    r70c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c5, tag=("r70c5"))
-
-                    r70c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c6, tag=("r70c6"))
-
-
-                    r70c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c7, tag=("r70c7"))
-
-                    r70c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c8, tag=("r70c8"))
-
-                    #----------------------------------------------------------71 th row
-                    lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r71c1"))
-
-                    r71c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c2, tag=("r71c2"))
-
-                    r71c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
-                    r71c3.insert(0,"$11111111111")
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c3, tag=("r71c3"))
-
-                    r71c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c4, tag=("r71c4"))
+                    # if mnttt68[0] is None:
+                    #     valtt68="0.0"
+                    # else:
+                    #     valtt68=mnttt68[0] 
+                    tt_sm_68=round(float(val686)+float(val685)+float(val684)+float(val368)+float(val268)+float(val681),2)
+                    r68c8.delete(0,END)
+                    r68c8.insert(0,"$"+str(tt_sm_68))
+                    r68c8.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
 
 
-                    r71c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c5, tag=("r71c5"))
+                    #*********************************************************************************************beginning balance
+                    
+                    # r2c3.delete(0,END)
+                    # r2c3.insert(0,"$"+str(val686))
+                    # r2c3.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white") 
 
-                    r71c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c6, tag=("r71c6"))
+                    # r2c4.delete(0,END)
+                    # r2c4.insert(0,"$"+str(val685))
+                    # r2c4.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    # r2c5.delete(0,END)
+                    # r2c5.insert(0,"$"+str(val684))
+                    # r2c5.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    # r2c6.delete(0,END)
+                    # r2c6.insert(0,"$"+str(val368))
+                    # r2c6.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+
+                    # r2c7.delete(0,END)
+                    # r2c6.insert(0,"$"+str(val268))
+                    # r2c7.config(state=DISABLED,disabledbackground="#213b52",disabledforeground="white")
+                    
+                    # tt_sm_23=round(float(val623)+float(val523)+float(val423)+float(val323)+float(val232)+float(val231),2)
+
+                    # #----------------------------------------------------------69th row
+                    # lv_name=Label(frm_analiz, text="Ending Cash Balance",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r69c1"))
+
+                    # r69c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c2, tag=("r69c2"))
+
+                    # r69c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # r69c3.insert(0,"$11111111111")
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c3, tag=("r69c3"))
+
+                    # r69c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c4, tag=("r69c4"))
 
 
-                    r71c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c7, tag=("r71c7"))
+                    # r69c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c5, tag=("r69c5"))
 
-                    r71c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
-                    win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c8, tag=("r71c8"))
+                    # r69c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c6, tag=("r69c6"))
+
+
+                    # r69c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c7, tag=("r69c7"))
+
+                    # r69c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r69c8, tag=("r69c8"))
+                    # #----------------------------------------------------------70 th row
+                    # lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r70c1"))
+
+                    # r70c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c2, tag=("r70c2"))
+
+                    # r70c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # r70c3.insert(0,"$11111111111")
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c3, tag=("r70c3"))
+
+                    # r70c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c4, tag=("r70c4"))
+
+
+                    # r70c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c5, tag=("r70c5"))
+
+                    # r70c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c6, tag=("r70c6"))
+
+
+                    # r70c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c7, tag=("r70c7"))
+
+                    # r70c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r70c8, tag=("r70c8"))
+
+                    # #----------------------------------------------------------71 th row
+                    # lv_name=Label(frm_analiz, text="January",bg="#213b52", width=42, fg="White", anchor="nw",font=('Calibri 12 bold'))
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="center", window=lv_name,tag=("r71c1"))
+
+                    # r71c2 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c2, tag=("r71c2"))
+
+                    # r71c3 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)
+                    # r71c3.insert(0,"$11111111111")
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c3, tag=("r71c3"))
+
+                    # r71c4 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                    
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c4, tag=("r71c4"))
+
+
+                    # r71c5 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c5, tag=("r71c5"))
+
+                    # r71c6 = Entry(frm_analiz, width=13 ,font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c6, tag=("r71c6"))
+
+
+                    # r71c7 = Entry(frm_analiz, width=13, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                   
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c7, tag=("r71c7"))
+
+                    # r71c8 = Entry(frm_analiz, width=18, font=('Calibri 13'), bg="#213b52",fg="white", bd=1)                  
+                    # win_inv1 = frm_analiz.create_window(0, 0, anchor="nw", window=r71c8, tag=("r71c8"))
 
                     
 
@@ -10280,15 +14234,14 @@ def main_sign_in():
                         dcanvas.coords("hd_fl_hds",dwidth/1.35 ,dheight/1.5) 
                         dcanvas.coords("hd_fl_hrs",dwidth/2 ,dheight/1.4,dwidth/1.03 ,dheight/1.4) 
 
-                        dcanvas.coords("nm_nm21",dwidth/2 ,dheight/1.25) 
-                        dcanvas.coords("hd_lb_hds",dwidth/1.87 ,dheight/1.3) 
+                        dcanvas.coords("nm_nm21",dwidth/1.75 ,dheight/1.25) 
+                        dcanvas.coords("hd_lb_hds",dwidth/1.64  ,dheight/1.3) 
 
-                        dcanvas.coords("nm_nm251",dwidth/1.5 ,dheight/1.25) 
-                        dcanvas.coords("hd_fl_lb",dwidth/1.392 ,dheight/1.3) 
+                         
                         
 
-                        dcanvas.coords("nm_nm241",dwidth/1.2 ,dheight/1.25)
-                        dcanvas.coords("lb_nm241",dwidth/1.138 ,dheight/1.3)
+                        dcanvas.coords("nm_nm241",dwidth/1.3 ,dheight/1.25)
+                        dcanvas.coords("lb_nm241",dwidth/1.230 ,dheight/1.3)
 
                         
 
@@ -10303,11 +14256,13 @@ def main_sign_in():
 
                     frm_flow = Canvas(fin_cash_flow,height=700,bg='#2f516f',scrollregion=(0,0,700,1500))
                     flow_scrl = Scrollbar(fin_cash_flow,orient=VERTICAL)
-                    flow_scrl.grid(row=0,column=1,sticky='ns')
+                    flow_scrl.grid(row=0,column=2,sticky='ns')
                     flow_scrl.config(command=frm_flow.yview)
                     frm_flow.bind("<Configure>", res_wid_flow)
                     frm_flow.config(yscrollcommand=flow_scrl.set)
                     frm_flow.grid(row=0,column=0,sticky='nsew')
+
+                    scrollbary = Scrollbar(fin_cash_flow, orient=VERTICAL)
 
                     #----------------------------------------------------------------------------------heder 1
                     rth2 = frm_flow.create_polygon(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, fill="#213b52",tags=("bg_polygen_flow"),smooth=True,)
@@ -10333,15 +14288,10 @@ def main_sign_in():
 
                     def qry_run():
 
-                        sql_qryent='select sum(balance) from app1_accounts1 where cid_id =%s and acctype=%s and asof <= %s'
-                        sql_qryent_val=(dtl_cmp_pro[0],date_frt.get(),dt_entry.get_date(),)
-                        fbcursor.execute(sql_qryent,sql_qryent_val)
-                        flow_ent_val=fbcursor.fetchone() 
-                        end_bal.delete(0,END)
-                        end_bal.insert(0,"$"+str(flow_ent_val[0]))
                         
-                        sql_qryrn='select * from app1_accounts1 where cid_id =%s and acctype=%s and asof <= %s'
-                        sql_qryrn_val=(dtl_cmp_pro[0],date_frt.get(),dt_entry.get_date(),)
+                        
+                        sql_qryrn='select * from app1_accounts1 where cid_id =%s and acctype=%s and asof between %s and %s'
+                        sql_qryrn_val=(dtl_cmp_pro[0],date_frt.get(),dt_entry_bg.get_date(),dt_entry_ent.get_date(),)
                         fbcursor.execute(sql_qryrn,sql_qryrn_val)
                         flow_tb_val=fbcursor.fetchall()
                         
@@ -10384,25 +14334,6 @@ def main_sign_in():
 
                     frm_flow.create_line(0, 0, 0, 0,fill="gray", tag=("hd_fl_hrs") )
 
-                    lv_name=Label(frm_flow, text="Beginning balance",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_fl_lb")) 
-                    
-                    bg_bal= Spinbox(frm_flow, width=15 ,from_=0,to=1000000, font=('Calibri 16'),borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=bg_bal, tag=("nm_nm251")) 
-
-                    
-
-                    lv_name=Label(frm_flow, text="Ending balance",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("lb_nm241"))
-
-                    end_bal = Spinbox(frm_flow, width=15 ,from_=0,to=1000000, font=('Calibri 16'),borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=end_bal, tag=("nm_nm241"))
-                    
-                    lv_name=Label(frm_flow, text="Ending date",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_lb_hds"))
-                    
-
-
                     but_gl = customtkinter.CTkButton(master=frm_flow,command=qry_run,text="Run",bg="#213b52")
                     win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=but_gl, tag=("btn_flow"))
 
@@ -10411,7 +14342,7 @@ def main_sign_in():
                     win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("cash_hd"))
                     #table
             
-                    scrollbary = Scrollbar(frm_flow, orient=VERTICAL)
+                    
                     fgth = ttk.Style()
                     fgth.theme_use("default")
                     fgth.configure("Treeview", background="#2f516f", foreground="white",fieldbackground="#2f516f",rowheight=25,font=(None,11),)
@@ -10434,12 +14365,23 @@ def main_sign_in():
                     flow_tree.column(6, width =200)
                     
                     scrollbary.config(command=flow_tree.yview)
+                    scrollbary.grid(row=0,column=1,sticky='ns')
                     
-                    window_label_4 = frm_flow.create_window(0, 0, anchor="nw", window=scrollbary,tags=('scrollbary'))
                     window_label_4 = frm_flow.create_window(0, 0, anchor="nw", window=flow_tree,tags=('tree_flow'))
 
-                    dt_entry = DateEntry(frm_flow,width=15 , font=('Calibri 16'),date_pattern='Y-mm-dd',borderwidth=2)
-                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=dt_entry, tag=("nm_nm21"))
+                    lv_name=Label(frm_flow, text="Ending Balance",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("lb_nm241"))
+
+                    
+                    
+                    lv_name=Label(frm_flow, text="Bigining Date",bg="#213b52", fg="White", anchor="center",font=('Calibri 14 bold'))
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="center", window=lv_name,tag=("hd_lb_hds"))
+
+                    dt_entry_bg = DateEntry(frm_flow,width=15 , font=('Calibri 16'),date_pattern='Y-mm-dd',borderwidth=2)
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=dt_entry_bg, tag=("nm_nm21"))
+
+                    dt_entry_ent = DateEntry(frm_flow,width=15 , font=('Calibri 16'),date_pattern='Y-mm-dd',borderwidth=2)
+                    win_inv1 = frm_flow.create_window(0, 0, anchor="nw", window=dt_entry_ent, tag=("nm_nm241"))
 
 
                     
